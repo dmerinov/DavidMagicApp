@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/deckManager"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="10dp"
+        android:text="deck Manager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/dices"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/dices"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="10dp"
+        android:text="Dices"
+        app:layout_constraintLeft_toRightOf="@id/deckManager"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <Button
+        android:id="@+id/searchCard"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        android:text="search card"
+        app:layout_constraintLeft_toLeftOf="@id/deckManager"
+        app:layout_constraintRight_toRightOf="@id/deckManager"
+        app:layout_constraintTop_toBottomOf="@id/deckManager" />
+
+    <Button
+        android:id="@+id/deckTracker"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        android:text="deck Tracker"
+        app:layout_constraintLeft_toLeftOf="@id/dices"
+        app:layout_constraintRight_toRightOf="@id/dices"
+        app:layout_constraintTop_toBottomOf="@id/dices" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

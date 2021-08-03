@@ -16,7 +16,8 @@ import org.kodein.di.android.subKodein
 /**
  * RootActivity
  */
-abstract class RootActivity<out V : Presenter.View> : AppCompatActivity(), KodeinAware, Presenter.View {
+abstract class RootActivity<out V : Presenter.View> : AppCompatActivity(), KodeinAware,
+    Presenter.View {
 
     abstract val progress: View
 
@@ -70,4 +71,9 @@ abstract class RootActivity<out V : Presenter.View> : AppCompatActivity(), Kodei
     override fun showProgress() = progress.showMe()
 
     override fun hideProgress() = progress.hideMe()
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }

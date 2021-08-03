@@ -11,11 +11,18 @@
         android:theme="@style/AppTheme">
 
 
-        <!-- Add the following lines to launcher activity -->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.MAIN" />-->
-        <!--<category android:name="android.intent.category.LAUNCHER" />-->
-        <!--</intent-filter>-->
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:label="@string/app_name">
+            <!-- Add the following lines to launcher activity -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.activity.MenuActivity" />
+
 
     </application>
 </manifest>
