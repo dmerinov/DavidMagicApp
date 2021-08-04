@@ -41,11 +41,11 @@
         app:layout_constraintTop_toBottomOf="@id/deckManager" />
 
     <Button
-        android:id="@+id/deckTracker"
+        android:id="@+id/boosterPack"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:layout_marginTop="20dp"
-        android:text="deck Tracker"
+        android:text="mock booster pack"
         app:layout_constraintLeft_toLeftOf="@id/dices"
         app:layout_constraintRight_toRightOf="@id/dices"
         app:layout_constraintTop_toBottomOf="@id/dices" />

@@ -1,9 +1,11 @@
 package com.davidmerino.davidmagicapp.view.activity
 
+import android.content.Intent
 import android.view.View
 import com.davidmerino.davidmagicapp.R
+import com.davidmerino.davidmagicapp.presenter.ControlPanelView
 import com.davidmerino.davidmagicapp.presenter.MenuPresenter
-import com.davidmerino.davidmagicapp.presenter.controlPanelView
+import kotlinx.android.synthetic.main.activity_main_menu.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -11,7 +13,7 @@ import org.kodein.di.generic.provider
 
 
 class MenuActivity(
-) : RootActivity<controlPanelView>(), controlPanelView {
+) : RootActivity<ControlPanelView>(), ControlPanelView {
 
     override val progress: View
         get() = TODO("Not yet implemented")
@@ -35,7 +37,12 @@ class MenuActivity(
     }
 
     override fun registerListeners() {
-        //register the buttons listeners
+        boosterPack.setOnClickListener { presenter.onBoosterClick() }
+    }
+
+    override fun navigateToBoosterScreen() {
+        val intent = Intent(this, BoosterActivity::class.java)
+        startActivity(intent)
     }
 
 }

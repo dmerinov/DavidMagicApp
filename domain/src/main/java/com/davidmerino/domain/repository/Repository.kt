@@ -1,5 +1,8 @@
 package com.davidmerino.domain.repository
 
-/**
- * Repository.
- */
+import com.davidmerino.domain.model.Card
+
+
+interface Repository {
+    fun getCards(success: (List<Card>) -> Unit, error: () -> Unit)
+}

@@ -2,10 +2,14 @@ package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 
-class MenuPresenter (errorHandler: ErrorHandler, view: controlPanelView) :
-    Presenter<controlPanelView>(errorHandler, view) {
+class MenuPresenter (errorHandler: ErrorHandler, view: ControlPanelView) :
+    Presenter<ControlPanelView>(errorHandler, view) {
     override fun initialize() {
 
+    }
+
+    fun onBoosterClick(){
+        view.navigateToBoosterScreen()
     }
 
     override fun resume() {
@@ -18,6 +22,6 @@ class MenuPresenter (errorHandler: ErrorHandler, view: controlPanelView) :
     }
 
 }
-interface controlPanelView : Presenter.View{
-
+interface ControlPanelView : Presenter.View{
+    fun navigateToBoosterScreen()
 }

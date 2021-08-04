@@ -25,7 +25,7 @@ class LoginPresenter(errorHandler: ErrorHandler, view: LoginView) :
         if (validateUser(view.getUser(), view.getPassword()))
             view.navigateToMenuScreen()
         else
-            view.showError("Eeither user or password are wrong")
+            view.showError("Either user or password are wrong")
     }
 
     private fun validateUser(user: String, password: String): Boolean {
