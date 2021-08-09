@@ -51,7 +51,6 @@ dependencies {
 
     implementation appDependencies.rxJava
     implementation appDependencies.rxAndroid
-    implementation 'io.magicthegathering:kotlinsdk:1.0.4'
 
 
     testImplementation appTestDependencies.jUnit

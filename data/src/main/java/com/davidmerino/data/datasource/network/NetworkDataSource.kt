@@ -1,9 +1,9 @@
-package com.davidmerino.data.network
+package com.davidmerino.data.datasource.network
 
+import com.davidmerino.data.api.ApiClientBuilder
 import com.davidmerino.data.api.ApiService
 import com.davidmerino.data.model.card.CardDto
 import com.davidmerino.data.model.card.CardResponseDto
-import io.magicthegathering.kotlinsdk.api.ApiClientBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.davidmerino.data.network
+package com.davidmerino.data.datasource.network
 
 import com.davidmerino.data.model.card.CardDto
 

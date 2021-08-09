@@ -37,11 +37,11 @@ class MenuActivity(
     }
 
     override fun registerListeners() {
-        boosterPack.setOnClickListener { presenter.onBoosterClick() }
+        showCards.setOnClickListener { presenter.onListCardClick() }
     }
 
-    override fun navigateToBoosterScreen() {
-        val intent = Intent(this, BoosterActivity::class.java)
+    override fun navigateToCardListScreen() {
+        val intent = Intent(this, CardListActivity::class.java)
         startActivity(intent)
     }
 

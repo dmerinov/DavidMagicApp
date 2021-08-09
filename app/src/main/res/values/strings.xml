@@ -2,4 +2,6 @@
     <string name="app_name">DavidMagicApp</string>
 
     <string name="default_error">There was an application error</string>
+    <string name="tv_cardTitle">Card: </string>
+    <string name="expansion">Expansion: </string>
 </resources>

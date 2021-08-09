@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.davidmerino.davidmagicapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".view.app.App"
         android:allowBackup="true"
@@ -8,11 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".view.activity.LoginActivity"
+            android:name=".view.activity.MenuActivity"
             android:label="@string/app_name">
             <!-- Add the following lines to launcher activity -->
             <intent-filter>
@@ -21,7 +23,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activity.MenuActivity" />
+        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.CardListActivity" />
 
 
     </application>

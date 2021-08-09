@@ -8,8 +8,8 @@ class MenuPresenter (errorHandler: ErrorHandler, view: ControlPanelView) :
 
     }
 
-    fun onBoosterClick(){
-        view.navigateToBoosterScreen()
+    fun onListCardClick(){
+        view.navigateToCardListScreen()
     }
 
     override fun resume() {
@@ -23,5 +23,5 @@ class MenuPresenter (errorHandler: ErrorHandler, view: ControlPanelView) :
 
 }
 interface ControlPanelView : Presenter.View{
-    fun navigateToBoosterScreen()
+    fun navigateToCardListScreen()
 }

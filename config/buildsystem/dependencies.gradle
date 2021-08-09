@@ -18,9 +18,9 @@ ext {
     //Libraries
     androidxVersion = '1.6.0'
     appCompatVersion = '1.3.0'
-    materialVersion =  '1.4.0'
+    materialVersion = '1.4.0'
     cardViewVersion = '1.0.0'
-    glideVersion = '4.7.1'
+    glideVersion = '4.12.0'
     permissionsVersion = '3.0.0'
 
     //Frameworks

@@ -1,4 +1,4 @@
-package io.magicthegathering.kotlinsdk.api
+package com.davidmerino.data.api
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
