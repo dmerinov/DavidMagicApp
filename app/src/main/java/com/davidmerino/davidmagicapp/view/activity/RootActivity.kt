@@ -34,7 +34,6 @@ abstract class RootActivity<out V : Presenter.View> : AppCompatActivity(), Kodei
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResourceId)
-
         initializeUI()
         registerListeners()
 

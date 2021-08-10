@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidmerino.data.datasource.CommonRepository
+import com.davidmerino.data.datasource.local.RealmDatabase
 import com.davidmerino.data.datasource.network.NetworkDataSource
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.model.CardDetailView
@@ -30,7 +31,7 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
             CardListPresenter(
                 view = this@CardListActivity,
                 errorHandler = instance(),
-                repository = CommonRepository(network = NetworkDataSource())
+                repository = CommonRepository(network = NetworkDataSource(), realm = RealmDatabase(this@CardListActivity))
             )
         }
     }
