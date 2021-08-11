@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import com.davidmerino.davidmagicapp.R
+import com.davidmerino.davidmagicapp.navigator.navigateToMenuActivity
 import com.davidmerino.davidmagicapp.presenter.LoginPresenter
 import com.davidmerino.davidmagicapp.presenter.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
@@ -53,8 +54,7 @@ class LoginActivity() : RootActivity<LoginView>(), LoginView {
     }
 
     override fun navigateToMenuScreen() {
-        val intent = Intent(this, MenuActivity::class.java)
-        startActivity(intent)
+        navigateToMenuActivity(this)
     }
 
     override fun showError(string: String) {

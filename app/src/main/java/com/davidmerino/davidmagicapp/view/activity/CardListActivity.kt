@@ -1,14 +1,13 @@
 package com.davidmerino.davidmagicapp.view.activity
 
-import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidmerino.data.datasource.CommonRepository
 import com.davidmerino.data.datasource.local.RealmDatabase
 import com.davidmerino.data.datasource.network.NetworkDataSource
 import com.davidmerino.davidmagicapp.R
-import com.davidmerino.davidmagicapp.model.CardDetailView
 import com.davidmerino.davidmagicapp.model.CardView
+import com.davidmerino.davidmagicapp.navigator.navigateToDetailCardActivity
 import com.davidmerino.davidmagicapp.presenter.CardListPresenter
 import com.davidmerino.davidmagicapp.presenter.CardListView
 import com.davidmerino.davidmagicapp.view.adapter.CardsAdapter
@@ -31,12 +30,15 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
             CardListPresenter(
                 view = this@CardListActivity,
                 errorHandler = instance(),
-                repository = CommonRepository(network = NetworkDataSource(), realm = RealmDatabase(this@CardListActivity))
+                repository = CommonRepository(
+                    network = NetworkDataSource(),
+                    realm = RealmDatabase(this@CardListActivity)
+                )
             )
         }
     }
 
-    private val cardsAdapter: CardsAdapter = CardsAdapter()
+    private val cardsAdapter: CardsAdapter = CardsAdapter() { presenter.onCardClick(it) }
 
     override fun initializeUI() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -53,9 +55,8 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
         //nothing to do
     }
 
-    override fun navigateToCardDetailScreen(card: CardDetailView) {
-        val intent = Intent(this, CardDetailActivity::class.java)
-        //intent.putExtra("RECEIVING_CARD",card)
+    override fun navigateToCardDetailScreen(id: String) {
+        navigateToDetailCardActivity(this, id)
     }
 
     override fun showCards(cards: List<CardView>) {

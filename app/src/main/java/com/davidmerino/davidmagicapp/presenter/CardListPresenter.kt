@@ -1,34 +1,34 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
-import com.davidmerino.davidmagicapp.mapper.toCardDetailView
 import com.davidmerino.davidmagicapp.mapper.toCardView
-import com.davidmerino.davidmagicapp.model.CardDetailView
 import com.davidmerino.davidmagicapp.model.CardView
-import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.repository.Repository
 
 class CardListPresenter(
+    private val repository: Repository,
     errorHandler: ErrorHandler,
-    view: CardListView,
-    private val repository: Repository
-) :
-    Presenter<CardListView>(errorHandler, view) {
+    view: CardListView
+) : Presenter<CardListView>(errorHandler, view) {
+
     override fun initialize() {
         getCards()
     }
 
     override fun resume() {
+        //nothing to do
     }
 
     override fun stop() {
+        //nothing to do
     }
 
     override fun destroy() {
+        //nothing to do
     }
 
-    fun onCardClick(card: Card) {
-        view.navigateToCardDetailScreen(card.toCardDetailView())
+    fun onCardClick(card: CardView) {
+        view.navigateToCardDetailScreen(card.id)
     }
 
     private fun getCards() {
@@ -44,7 +44,7 @@ class CardListPresenter(
 }
 
 interface CardListView : Presenter.View {
-    fun navigateToCardDetailScreen(card: CardDetailView)
+    fun navigateToCardDetailScreen(id: String)
     fun showCards(cards: List<CardView>)
 
 }

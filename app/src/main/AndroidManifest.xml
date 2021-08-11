@@ -25,6 +25,8 @@
 
         <activity android:name=".view.activity.LoginActivity" />
         <activity android:name=".view.activity.CardListActivity" />
+        <activity android:name=".view.activity.DiceActivity" />
+        <activity android:name=".view.activity.DetailCardActivity" />
 
 
     </application>

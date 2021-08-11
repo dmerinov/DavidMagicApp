@@ -2,14 +2,9 @@ package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 
-class MenuPresenter (errorHandler: ErrorHandler, view: ControlPanelView) :
-    Presenter<ControlPanelView>(errorHandler, view) {
+class DicePresenter(errorHandler: ErrorHandler, view: DiceView) : Presenter<DiceView>(errorHandler, view) {
     override fun initialize() {
         //nothing to do
-    }
-
-    fun onListCardClick(){
-        view.navigateToCardListScreen()
     }
 
     override fun resume() {
@@ -23,8 +18,8 @@ class MenuPresenter (errorHandler: ErrorHandler, view: ControlPanelView) :
     override fun destroy() {
         //nothing to do
     }
-
 }
-interface ControlPanelView : Presenter.View{
-    fun navigateToCardListScreen()
+interface DiceView: Presenter.View {
+    fun incrementCounter(id: Int)
+    fun decrementCounter(id: Int)
 }

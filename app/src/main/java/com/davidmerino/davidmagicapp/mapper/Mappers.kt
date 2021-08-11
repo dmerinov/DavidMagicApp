@@ -13,6 +13,7 @@ fun Card.toCardDetailView() = toughness?.let {
 }
 
 fun Card.toCardView() = CardView(
+    id = id,
     image = imageUrl,
     title = name,
     expansion = set

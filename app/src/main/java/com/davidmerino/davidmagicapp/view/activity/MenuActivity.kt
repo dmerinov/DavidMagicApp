@@ -1,5 +1,6 @@
 package com.davidmerino.davidmagicapp.view.activity
 
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import com.davidmerino.davidmagicapp.R
@@ -14,6 +15,20 @@ import org.kodein.di.generic.provider
 
 class MenuActivity(
 ) : RootActivity<ControlPanelView>(), ControlPanelView {
+
+    companion object {
+
+        private const val MENU_ACTIVITY_KEY = "MENU_ACTIVITY_KEY"
+
+        fun getCallingIntent(context: Context, id: String): Intent {
+            val intent = Intent(context, MenuActivity::class.java).apply {
+                putExtra(MENU_ACTIVITY_KEY, id)
+            }
+            return intent
+        }
+
+        fun getCallingIntent2(context: Context) = Intent(context, MenuActivity::class.java)
+    }
 
     override val progress: View
         get() = TODO("Not yet implemented")

@@ -4,4 +4,10 @@
     <string name="default_error">There was an application error</string>
     <string name="tv_cardTitle">Card: </string>
     <string name="expansion">Expansion: </string>
+    <string name="cost">cost</string>
+    <string name="name">name</string>
+    <string name="set">set</string>
+    <string name="toughness">toughness</string>
+    <string name="power">power</string>
+    <string name="description">description</string>
 </resources>
