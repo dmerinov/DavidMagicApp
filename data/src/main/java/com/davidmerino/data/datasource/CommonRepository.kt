@@ -12,7 +12,7 @@ class CommonRepository(private val network: Network, private val realm: RealmDat
         network.getCards(
             success = {
                 realm.setCards(it)
-                success(it.map { it.toCard() })
+                success(it)
             },
             error = {
                 if (realm.hasCards()) {
@@ -22,6 +22,10 @@ class CommonRepository(private val network: Network, private val realm: RealmDat
                 }
             }
         )
+    }
+
+    override fun getCardByID(success: (Card) -> Unit, error: () -> Unit) {
+       //to be done
     }
 
 }

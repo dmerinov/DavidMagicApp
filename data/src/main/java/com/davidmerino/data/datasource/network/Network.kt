@@ -1,7 +1,7 @@
 package com.davidmerino.data.datasource.network
 
-import com.davidmerino.data.model.card.CardDto
+import com.davidmerino.domain.model.Card
 
 interface Network {
-    fun getCards(success: (List<CardDto>) -> Unit, error: () -> Unit)
+    fun getCards(success: (List<Card>) -> Unit, error: () -> Unit)
 }

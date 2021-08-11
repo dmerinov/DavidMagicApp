@@ -1,13 +1,11 @@
 package com.davidmerino.data.mapper
 
-import com.davidmerino.data.model.card.CardDto
 import com.davidmerino.data.model.cardVO.CardVO
 import com.davidmerino.domain.model.Card
 
-fun CardDto.toCard() = Card(
+fun CardVO.toCard() = Card(
     id = id,
-    imageUrl = imageUrl
-        ?: "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg",
+    imageUrl = imageUrl,
     manaCost = manaCost,
     multiverseid = multiverseid ?: "",
     name = name,
@@ -17,3 +15,6 @@ fun CardDto.toCard() = Card(
     power = power ?: ""
 )
 
+fun Card.toCardVO() = CardVO(
+
+)

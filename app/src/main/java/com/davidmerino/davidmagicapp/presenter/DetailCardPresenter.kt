@@ -1,13 +1,19 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.domain.repository.Repository
 
 
-class DetailCardPresenter(errorHandler: ErrorHandler, view: DetailCardView) :
+class DetailCardPresenter(
+    private val repository: Repository,
+    errorHandler: ErrorHandler,
+    view: DetailCardView
+) :
     Presenter<DetailCardView>(errorHandler, view) {
 
     override fun initialize() {
         println(view.getCardId())
+        loadCard(view.getCardId())
     }
 
     override fun resume() {
@@ -20,6 +26,10 @@ class DetailCardPresenter(errorHandler: ErrorHandler, view: DetailCardView) :
 
     override fun destroy() {
         //nothing to do
+    }
+
+    private fun loadCard(id: String) {
+        //repository.
     }
 }
 

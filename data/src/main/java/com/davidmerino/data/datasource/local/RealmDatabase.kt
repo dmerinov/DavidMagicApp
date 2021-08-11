@@ -1,9 +1,10 @@
 package com.davidmerino.data.datasource.local
 
 import android.content.Context
+import com.davidmerino.data.mapper.toCard
 import com.davidmerino.data.mapper.toCardVO
-import com.davidmerino.data.model.card.CardDto
 import com.davidmerino.data.model.cardVO.CardVO
+import com.davidmerino.domain.model.Card
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
@@ -31,36 +32,24 @@ class RealmDatabase(context: Context) : Local {
         return realmList != null
     }
 
-    override fun getCards(): List<CardVO> {
+    override fun getCards(): List<Card> =
+        backgroundThreadRealm.where(CardVO::class.java)
+            .findAll().map {
+                it.toCard()
+            }
 
-        val returnableObject = mutableListOf<CardVO>()
-        val realmList = backgroundThreadRealm.where(CardVO::class.java)
-            .findAll()
-
-        if (realmList != null) {
-            returnableObject.addAll(backgroundThreadRealm.copyFromRealm(realmList))
-
-        } else {
-            returnableObject.addAll(
-                listOf(
-                    CardVO(
-                        "-1", "-1", "-1", "-1", "-1", "-1",
-                        "-1", "-1", "-1"
-                    )
-                )
-            )
-        }
-        return returnableObject
-    }
-
-    override fun setCards(cards: List<CardDto>) {
-        val it = cards.iterator()
+    override fun setCards(cards: List<Card>) {
+        val it = cards.map { it.toCardVO() }.iterator()
         while (it.hasNext()) {
             backgroundThreadRealm.executeTransaction { transactionRealm ->
-                transactionRealm.copyToRealmOrUpdate(it.next().toCardVO())
+                transactionRealm.copyToRealmOrUpdate(it.next())
             }
         }
 
+    }
+
+    override fun getCardByID(id: String): Card {
+        //todo
     }
 
 }
