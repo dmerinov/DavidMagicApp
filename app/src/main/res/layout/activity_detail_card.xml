@@ -4,15 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/cardPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="150dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -21,7 +12,7 @@
         android:text="@string/name"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardPhoto" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nameValue"
@@ -37,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         android:text="@string/cost"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="@id/name"
@@ -47,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@id/manaCost"
         app:layout_constraintTop_toTopOf="@id/manaCost" />
@@ -57,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         android:text="@string/set"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,70 +61,95 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@id/set"
-        app:layout_constraintTop_toTopOf="@id/set"/>
+        app:layout_constraintTop_toTopOf="@id/set" />
 
     <TextView
         android:id="@+id/toughness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
-        android:textSize="22sp"
+        android:paddingEnd="0dp"
         android:text="@string/toughness"
-        app:layout_constraintTop_toBottomOf="@id/set"
-        app:layout_constraintStart_toStartOf="@id/set" />
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@id/set"
+        app:layout_constraintTop_toBottomOf="@id/set" />
 
     <TextView
         android:id="@+id/toughnessValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@id/toughness"
-        app:layout_constraintTop_toTopOf="@id/toughness"/>
+        app:layout_constraintTop_toTopOf="@id/toughness" />
 
     <TextView
         android:id="@+id/power"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
-        android:textSize="22sp"
+        android:paddingEnd="0dp"
         android:text="@string/power"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="@id/toughness"
-        app:layout_constraintTop_toBottomOf="@id/toughness"/>
+        app:layout_constraintTop_toBottomOf="@id/toughness" />
 
     <TextView
         android:id="@+id/powerValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
+        android:paddingEnd="0dp"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@id/power"
-        app:layout_constraintTop_toTopOf="@id/power"/>
+        app:layout_constraintTop_toTopOf="@id/power" />
+
+    <Button
+        android:id="@+id/showCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/power" />
+
 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
         android:text="@string/description"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/power"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/showCard" />
 
     <TextView
         android:id="@+id/descriptionText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:autoSizeTextType="none"
         android:scrollbars="vertical"
         android:textSize="18sp"
-        android:autoSizeTextType="none"
-        app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/power"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="0"/>
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_constraintStart_toStartOf="@id/power"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <ImageView
+        android:id="@+id/cardPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

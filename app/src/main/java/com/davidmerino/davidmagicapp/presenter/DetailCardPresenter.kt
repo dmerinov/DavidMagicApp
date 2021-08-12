@@ -37,10 +37,18 @@ class DetailCardPresenter(
             error = { error("could not retrieve card from bd") }
         )
     }
+
+    fun onShowCardClick() {
+        view.showImage(true)
+    }
+    fun onImageClick() {
+        view.showImage(false)
+    }
 }
 
 interface DetailCardView : Presenter.View {
     fun getCardId(): String
     fun showCard(card: CardDetailView)
+    fun showImage(isVisible: Boolean)
 
 }

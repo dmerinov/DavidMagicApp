@@ -3,11 +3,11 @@ package com.davidmerino.davidmagicapp.view.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
-import com.davidmerino.data.datasource.CommonRepository
-import com.davidmerino.data.datasource.local.RealmDatabase
-import com.davidmerino.data.datasource.network.NetworkDataSource
+import android.view.View.*
 import com.davidmerino.davidmagicapp.R
+import com.davidmerino.davidmagicapp.extension.hideMe
 import com.davidmerino.davidmagicapp.extension.load
+import com.davidmerino.davidmagicapp.extension.showMe
 import com.davidmerino.davidmagicapp.model.CardDetailView
 import com.davidmerino.davidmagicapp.presenter.DetailCardPresenter
 import com.davidmerino.davidmagicapp.presenter.DetailCardView
@@ -50,7 +50,9 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
     }
 
     override fun registerListeners() {
-        // nothing to do
+        cardPhoto.setOnClickListener { presenter.onImageClick() }
+        showCard.setOnClickListener { presenter.onShowCardClick() }
+
     }
 
     override fun getCardId(): String {
@@ -66,6 +68,39 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
         toughnessValue.text = card.toughness
         powerValue.text = card.power
         description.text = card.text
+    }
+
+    override fun showImage(isVisible: Boolean) {
+        when (isVisible) {
+            true -> {
+                cardPhoto.showMe()
+                name.hideMe()
+                manaCost.hideMe()
+                set.hideMe()
+                toughness.hideMe()
+                power.hideMe()
+                nameValue.hideMe()
+                costValue.hideMe()
+                setValue.hideMe()
+                toughnessValue.hideMe()
+                powerValue.hideMe()
+                description.hideMe()
+            }
+            false -> {
+                cardPhoto.hideMe()
+                name.showMe()
+                manaCost.showMe()
+                set.showMe()
+                toughness.showMe()
+                power.showMe()
+                nameValue.showMe()
+                costValue.showMe()
+                setValue.showMe()
+                toughnessValue.showMe()
+                powerValue.showMe()
+                description.showMe()
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
