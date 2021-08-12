@@ -11,7 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="200dp"
         android:layout_marginRight="10dp"
-        android:text="Cards"
+        android:text="@string/cards"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/dices"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,31 +23,19 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="200dp"
         android:layout_marginRight="10dp"
-        android:text="Dices"
+        android:text="@string/dices"
         app:layout_constraintLeft_toRightOf="@id/showCards"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/searchCard"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:layout_marginTop="20dp"
-        android:text="search card"
+        android:text="@string/search_card"
         app:layout_constraintLeft_toLeftOf="@id/showCards"
-        app:layout_constraintRight_toRightOf="@id/showCards"
-        app:layout_constraintTop_toBottomOf="@id/showCards" />
-
-    <Button
-        android:id="@+id/boosterPack"
-        android:layout_width="0dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="20dp"
-        android:text="mock booster pack"
-        app:layout_constraintLeft_toLeftOf="@id/dices"
         app:layout_constraintRight_toRightOf="@id/dices"
-        app:layout_constraintTop_toBottomOf="@id/dices" />
+        app:layout_constraintTop_toBottomOf="@id/showCards" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

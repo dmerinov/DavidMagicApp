@@ -12,4 +12,7 @@
     <string name="description">description</string>
     <string name="show_card">show card</string>
     <string name="hide_card">hide card</string>
+    <string name="search_card">search card</string>
+    <string name="dices">Dices</string>
+    <string name="cards">Cards</string>
 </resources>
