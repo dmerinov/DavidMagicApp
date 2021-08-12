@@ -10,4 +10,6 @@
     <string name="toughness">toughness</string>
     <string name="power">power</string>
     <string name="description">description</string>
+    <string name="show_card">show card</string>
+    <string name="hide_card">hide card</string>
 </resources>

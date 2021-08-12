@@ -66,13 +66,13 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
         setValue.text = card.set
         toughnessValue.text = card.toughness
         powerValue.text = card.power
-        description.text = card.text
+        descriptionText.text = card.text
     }
 
     override fun showImage(isVisible: Boolean) {
         when (isVisible) {
             true -> {
-                showCard.text = "HIDE CARD"
+                showCard.text = resources.getString(R.string.hide_card)
                 cardPhoto.showMe()
                 name.hideMe()
                 manaCost.hideMe()
@@ -85,9 +85,10 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
                 toughnessValue.hideMe()
                 powerValue.hideMe()
                 description.hideMe()
+                descriptionText.hideMe()
             }
             false -> {
-                showCard.text = "SHOW CARD"
+                showCard.text = resources.getString(R.string.show_card)
                 cardPhoto.hideMe()
                 name.showMe()
                 manaCost.showMe()
@@ -100,6 +101,7 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
                 toughnessValue.showMe()
                 powerValue.showMe()
                 description.showMe()
+                descriptionText.showMe()
             }
         }
     }

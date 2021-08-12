@@ -112,11 +112,11 @@
         android:id="@+id/showCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="show card"
+        android:layout_marginBottom="20dp"
+        android:text="@string/show_card"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/power" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/description"
@@ -126,7 +126,7 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/showCard" />
+        app:layout_constraintTop_toBottomOf="@id/power" />
 
     <TextView
         android:id="@+id/descriptionText"
@@ -137,6 +137,7 @@
         android:scrollbars="vertical"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/showCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="0"
         app:layout_constraintStart_toStartOf="@id/power"
@@ -147,7 +148,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/showCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
