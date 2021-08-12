@@ -1,6 +1,8 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.davidmagicapp.mapper.toCardDetailView
+import com.davidmerino.davidmagicapp.model.CardDetailView
 import com.davidmerino.domain.repository.Repository
 
 
@@ -13,7 +15,7 @@ class DetailCardPresenter(
 
     override fun initialize() {
         println(view.getCardId())
-        loadCard(view.getCardId())
+        getCardByID(view.getCardId())
     }
 
     override fun resume() {
@@ -28,12 +30,17 @@ class DetailCardPresenter(
         //nothing to do
     }
 
-    private fun loadCard(id: String) {
-        //repository.
+    private fun getCardByID(id: String) {
+        repository.getCardByID(
+            id,
+            success = { view.showCard(it.toCardDetailView()) },
+            error = { error("could not retrieve card from bd") }
+        )
     }
 }
 
 interface DetailCardView : Presenter.View {
     fun getCardId(): String
+    fun showCard(card: CardDetailView)
 
 }

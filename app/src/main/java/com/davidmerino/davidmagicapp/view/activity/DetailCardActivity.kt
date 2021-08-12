@@ -3,9 +3,15 @@ package com.davidmerino.davidmagicapp.view.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import com.davidmerino.data.datasource.CommonRepository
+import com.davidmerino.data.datasource.local.RealmDatabase
+import com.davidmerino.data.datasource.network.NetworkDataSource
 import com.davidmerino.davidmagicapp.R
+import com.davidmerino.davidmagicapp.extension.load
+import com.davidmerino.davidmagicapp.model.CardDetailView
 import com.davidmerino.davidmagicapp.presenter.DetailCardPresenter
 import com.davidmerino.davidmagicapp.presenter.DetailCardView
+import kotlinx.android.synthetic.main.activity_detail_card.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -32,7 +38,8 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
         bind<DetailCardPresenter>() with provider {
             DetailCardPresenter(
                 errorHandler = instance(),
-                view = this@DetailCardActivity
+                view = this@DetailCardActivity,
+                repository = instance()
             )
         }
     }
@@ -49,6 +56,16 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
     override fun getCardId(): String {
         return intent.getStringExtra(CARD_DETAIL_ID_KEY)
             ?: throw IllegalArgumentException("This activity needs a card ID")
+    }
+
+    override fun showCard(card: CardDetailView) {
+        nameValue.text = card.name
+        cardPhoto.load(card.imageUrl)
+        costValue.text = card.manaCost
+        setValue.text = card.set
+        toughnessValue.text = card.toughness
+        powerValue.text = card.power
+        description.text = card.text
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -49,7 +49,13 @@ class RealmDatabase(context: Context) : Local {
     }
 
     override fun getCardByID(id: String): Card {
-        //todo
+        val fetchedCard = backgroundThreadRealm.where(CardVO::class.java)
+            .equalTo("id", id).findFirst()
+        var returnCard = CardVO()
+        if (fetchedCard != null) {
+            returnCard = backgroundThreadRealm.copyFromRealm(fetchedCard)
+        }
+        return returnCard.toCard()
     }
 
 }

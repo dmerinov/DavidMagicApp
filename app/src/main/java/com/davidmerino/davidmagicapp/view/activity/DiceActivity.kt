@@ -4,7 +4,6 @@ import android.view.View
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.presenter.DicePresenter
 import com.davidmerino.davidmagicapp.presenter.DiceView
-import com.davidmerino.davidmagicapp.presenter.Presenter
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -22,8 +21,9 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
         bind<DicePresenter>() with provider {
             DicePresenter(
                 errorHandler = instance(),
-                this@DiceActivity
+                view = this@DiceActivity
             )
+            
         }
     }
 
@@ -33,7 +33,7 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
     }
 
     override fun registerListeners() {
-        TODO("Not yet implemented")
+
     }
 
     override fun incrementCounter(id: Int) {
@@ -43,6 +43,7 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
     override fun decrementCounter(id: Int) {
         TODO("Not yet implemented")
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

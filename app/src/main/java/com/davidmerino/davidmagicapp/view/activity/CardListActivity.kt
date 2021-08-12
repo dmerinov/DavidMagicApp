@@ -32,7 +32,7 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
                 errorHandler = instance(),
                 repository = CommonRepository(
                     network = NetworkDataSource(),
-                    realm = RealmDatabase(this@CardListActivity)
+                    local = RealmDatabase(this@CardListActivity)
                 )
             )
         }

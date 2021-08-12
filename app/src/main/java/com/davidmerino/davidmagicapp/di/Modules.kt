@@ -1,12 +1,19 @@
 package com.davidmerino.davidmagicapp.di
 
 import android.content.Context
-import org.kodein.di.Kodein
-import com.davidmerino.domain.executor.Executor
+import com.davidmerino.data.datasource.CommonRepository
+import com.davidmerino.data.datasource.local.Local
+import com.davidmerino.data.datasource.local.RealmDatabase
+import com.davidmerino.data.datasource.network.Network
+import com.davidmerino.data.datasource.network.NetworkDataSource
 import com.davidmerino.davidmagicapp.error.AndroidErrorHandler
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.executor.RxExecutor
+import com.davidmerino.domain.executor.Executor
+import com.davidmerino.domain.repository.Repository
+import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
 /**
@@ -23,5 +30,12 @@ val domainModule = Kodein.Module("domainModule") {
 }
 
 val dataModule = Kodein.Module("dataModule") {
-    // Add here data dependencies
+    bind<Repository>() with singleton {
+        CommonRepository(
+            network = instance(),
+            local = instance()
+        )
+    }
+    bind<Network>() with singleton { NetworkDataSource() }
+    bind<Local>() with singleton { RealmDatabase(context = instance()) }
 }

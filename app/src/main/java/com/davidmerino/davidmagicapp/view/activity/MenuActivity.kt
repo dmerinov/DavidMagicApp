@@ -53,10 +53,16 @@ class MenuActivity(
 
     override fun registerListeners() {
         showCards.setOnClickListener { presenter.onListCardClick() }
+        dices.setOnClickListener { presenter.onDiceClick() }
     }
 
     override fun navigateToCardListScreen() {
         val intent = Intent(this, CardListActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun navigateToDiceScreen() {
+        val intent = Intent(this, DiceActivity::class.java)
         startActivity(intent)
     }
 

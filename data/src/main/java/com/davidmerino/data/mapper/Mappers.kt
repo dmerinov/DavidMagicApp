@@ -1,7 +1,6 @@
 package com.davidmerino.data.mapper
 
 import com.davidmerino.data.model.card.CardDto
-import com.davidmerino.data.model.cardVO.CardVO
 import com.davidmerino.domain.model.Card
 
 fun CardDto.toCard() = Card(
