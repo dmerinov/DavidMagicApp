@@ -10,8 +10,9 @@ class DetailCardPresenter(
     private val repository: Repository,
     errorHandler: ErrorHandler,
     view: DetailCardView
-) :
-    Presenter<DetailCardView>(errorHandler, view) {
+) : Presenter<DetailCardView>(errorHandler, view) {
+
+    private var isShowingImage = false
 
     override fun initialize() {
         println(view.getCardId())
@@ -39,10 +40,8 @@ class DetailCardPresenter(
     }
 
     fun onShowCardClick() {
-        view.showImage(true)
-    }
-    fun onImageClick() {
-        view.showImage(false)
+        isShowingImage = !isShowingImage
+        view.showImage(isShowingImage)
     }
 }
 

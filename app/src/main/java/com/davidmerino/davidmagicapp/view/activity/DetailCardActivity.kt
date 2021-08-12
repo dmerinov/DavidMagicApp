@@ -50,7 +50,6 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
     }
 
     override fun registerListeners() {
-        cardPhoto.setOnClickListener { presenter.onImageClick() }
         showCard.setOnClickListener { presenter.onShowCardClick() }
 
     }
@@ -73,6 +72,7 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
     override fun showImage(isVisible: Boolean) {
         when (isVisible) {
             true -> {
+                showCard.text = "HIDE CARD"
                 cardPhoto.showMe()
                 name.hideMe()
                 manaCost.hideMe()
@@ -87,6 +87,7 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
                 description.hideMe()
             }
             false -> {
+                showCard.text = "SHOW CARD"
                 cardPhoto.hideMe()
                 name.showMe()
                 manaCost.showMe()
