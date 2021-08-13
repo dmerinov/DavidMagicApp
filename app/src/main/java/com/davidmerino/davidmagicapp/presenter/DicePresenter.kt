@@ -1,30 +1,44 @@
 package com.davidmerino.davidmagicapp.presenter
 
+import android.app.KeyguardManager
+import android.content.Context
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 
 class DicePresenter(
     errorHandler: ErrorHandler,
-    view: DiceView
+    view: DiceView,
+    context: Context
 ) : Presenter<DiceView>(errorHandler, view) {
 
     companion object {
         private const val DEFAULT_LIFE = 20
+        private const val ONLOCKTOAST = "you life total has been incremented by 10"
     }
+
 
     private var player1Life = DEFAULT_LIFE
     private var player2Life = DEFAULT_LIFE
+    private val keyguardManager: KeyguardManager? =
+        context.getSystemService(KeyguardManager::class.java) as? KeyguardManager
 
     override fun initialize() {
         view.showLife(player1Life.toString(), Player.PLAYER_1)
         view.showLife(player2Life.toString(), Player.PLAYER_2)
+
     }
 
     override fun resume() {
-        //nothing to do
     }
 
     override fun stop() {
-        //nothing to do
+        if (keyguardManager != null) {
+            if (!keyguardManager.isKeyguardLocked) {
+                player1Life += 10
+                player2Life += 10
+                view.showLife(player1Life.toString(), Player.PLAYER_1)
+                view.showLife(player2Life.toString(), Player.PLAYER_2)
+            }
+        }
     }
 
     override fun destroy() {

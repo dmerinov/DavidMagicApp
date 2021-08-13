@@ -30,7 +30,8 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
         bind<DicePresenter>() with provider {
             DicePresenter(
                 errorHandler = instance(),
-                view = this@DiceActivity
+                view = this@DiceActivity,
+                context = instance()
             )
 
         }
