@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import com.davidmerino.davidmagicapp.R
+import com.davidmerino.davidmagicapp.extension.load
 import com.davidmerino.davidmagicapp.presenter.ControlPanelView
 import com.davidmerino.davidmagicapp.presenter.MenuPresenter
 import kotlinx.android.synthetic.main.activity_main_menu.*
@@ -19,14 +20,6 @@ class MenuActivity(
     companion object {
 
         private const val MENU_ACTIVITY_KEY = "MENU_ACTIVITY_KEY"
-
-        fun getCallingIntent(context: Context, id: String): Intent {
-            val intent = Intent(context, MenuActivity::class.java).apply {
-                putExtra(MENU_ACTIVITY_KEY, id)
-            }
-            return intent
-        }
-
         fun getCallingIntent2(context: Context) = Intent(context, MenuActivity::class.java)
     }
 
@@ -64,6 +57,10 @@ class MenuActivity(
     override fun navigateToDiceScreen() {
         val intent = Intent(this, DiceActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun loadImageLogo(image: String) {
+        logo.load(image)
     }
 
 }

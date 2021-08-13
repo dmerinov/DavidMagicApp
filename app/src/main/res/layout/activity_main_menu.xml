@@ -4,29 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/showCards"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="200dp"
         android:layout_marginRight="10dp"
         android:text="@string/cards"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/dices"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <Button
         android:id="@+id/dices"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="200dp"
         android:layout_marginRight="10dp"
         android:text="@string/dices"
         app:layout_constraintLeft_toRightOf="@id/showCards"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/showCards" />
 
     <Button
         android:id="@+id/searchCard"

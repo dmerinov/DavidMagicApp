@@ -2,17 +2,17 @@ package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 
-class MenuPresenter (errorHandler: ErrorHandler, view: ControlPanelView) :
+class MenuPresenter(errorHandler: ErrorHandler, view: ControlPanelView) :
     Presenter<ControlPanelView>(errorHandler, view) {
     override fun initialize() {
-        //nothing to do
+        view.loadImageLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Magicthegathering-logo.svg/2560px-Magicthegathering-logo.svg.png")
     }
 
-    fun onListCardClick(){
+    fun onListCardClick() {
         view.navigateToCardListScreen()
     }
 
-    fun onDiceClick(){
+    fun onDiceClick() {
         view.navigateToDiceScreen()
     }
 
@@ -29,7 +29,9 @@ class MenuPresenter (errorHandler: ErrorHandler, view: ControlPanelView) :
     }
 
 }
-interface ControlPanelView : Presenter.View{
+
+interface ControlPanelView : Presenter.View {
     fun navigateToCardListScreen()
     fun navigateToDiceScreen()
+    fun loadImageLogo(image: String)
 }

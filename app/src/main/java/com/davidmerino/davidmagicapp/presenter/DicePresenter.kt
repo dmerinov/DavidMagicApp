@@ -1,9 +1,6 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
-import com.davidmerino.davidmagicapp.mapper.toCardDetailView
-import com.davidmerino.davidmagicapp.model.CardDetailView
-import com.davidmerino.domain.repository.Repository
 
 class DicePresenter(
     errorHandler: ErrorHandler,
@@ -24,7 +21,6 @@ class DicePresenter(
     override fun destroy() {
         //nothing to do
     }
-
 }
 
 interface DiceView : Presenter.View {
