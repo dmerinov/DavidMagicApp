@@ -6,8 +6,17 @@ class DicePresenter(
     errorHandler: ErrorHandler,
     view: DiceView
 ) : Presenter<DiceView>(errorHandler, view) {
+
+    companion object {
+        private const val DEFAULT_LIFE = 20
+    }
+
+    private var player1Life = DEFAULT_LIFE
+    private var player2Life = DEFAULT_LIFE
+
     override fun initialize() {
-        view.initializeCounters(20)
+        view.showLife(player1Life.toString(), Player.PLAYER_1)
+        view.showLife(player2Life.toString(), Player.PLAYER_2)
     }
 
     override fun resume() {
@@ -22,21 +31,38 @@ class DicePresenter(
         //nothing to do
     }
 
-    fun incrementCounter(amount: Int, player: Int) {
-        var remaininglife = view.getRemainingLife(player)
-        remaininglife += amount
-        view.setLife(remaininglife.toString(), player)
+    fun incrementCounter(player: Player) {
+        when (player) {
+            Player.PLAYER_1 -> {
+                player1Life++
+                view.showLife(player1Life.toString(), player)
+            }
+            Player.PLAYER_2 -> {
+                player2Life++
+                view.showLife(player2Life.toString(), player)
+            }
+        }
     }
 
-    fun decrementCounter(amount: Int, player: Int) {
-        var remaininglife = view.getRemainingLife(player)
-        remaininglife -= amount
-        view.setLife(remaininglife.toString(), player)
+    fun decrementCounter(player: Player) {
+        when (player) {
+            Player.PLAYER_1 -> {
+                player1Life--
+                view.showLife(player1Life.toString(), player)
+            }
+            Player.PLAYER_2 -> {
+                player2Life--
+                view.showLife(player2Life.toString(), player)
+            }
+        }
     }
 }
 
 interface DiceView : Presenter.View {
-    fun setLife(life: String, player: Int)
-    fun initializeCounters(amount: Int)
-    fun getRemainingLife(player: Int): Int
+    fun showLife(life: String, player: Player)
+}
+
+enum class Player {
+    PLAYER_1,
+    PLAYER_2
 }

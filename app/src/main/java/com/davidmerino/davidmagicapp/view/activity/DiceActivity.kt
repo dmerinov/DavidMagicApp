@@ -6,6 +6,7 @@ import android.view.View
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.presenter.DicePresenter
 import com.davidmerino.davidmagicapp.presenter.DiceView
+import com.davidmerino.davidmagicapp.presenter.Player
 import kotlinx.android.synthetic.main.activity_dice_counter.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -42,34 +43,19 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
 
     override fun registerListeners() {
 
-        addLifeP1.setOnClickListener { presenter.incrementCounter(1, 1) }
-        addLifeP2.setOnClickListener { presenter.incrementCounter(1, 2) }
-        decrementLifeP1.setOnClickListener { presenter.decrementCounter(1, 1) }
-        decrementLifeP2.setOnClickListener { presenter.decrementCounter(1, 2) }
+        addLifeP1.setOnClickListener { presenter.incrementCounter(Player.PLAYER_1) }
+        addLifeP2.setOnClickListener { presenter.incrementCounter(Player.PLAYER_2) }
+        decrementLifeP1.setOnClickListener { presenter.decrementCounter(Player.PLAYER_1) }
+        decrementLifeP2.setOnClickListener { presenter.decrementCounter(Player.PLAYER_2) }
 
 
     }
 
-    override fun initializeCounters(amount: Int) {
-        lifeCounterP1.text = amount.toString()
-        lifeCounterP2.text = amount.toString()
-    }
-
-    override fun setLife(life: String, player: Int) {
+    override fun showLife(life: String, player: Player) {
         when (player) {
-            1 -> lifeCounterP1.text = life
-            2 -> lifeCounterP2.text = life
+            Player.PLAYER_1 -> lifeCounterP1.text = life
+            Player.PLAYER_2 -> lifeCounterP2.text = life
         }
-    }
-
-
-    override fun getRemainingLife(player: Int): Int {
-        var life = ""
-        when (player) {
-            1 -> life = lifeCounterP1.text.toString()
-            2 -> life = lifeCounterP2.text.toString()
-        }
-        return life.toInt()
     }
 
     override fun onSupportNavigateUp(): Boolean {
