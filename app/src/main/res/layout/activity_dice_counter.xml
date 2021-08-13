@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/addLifeP1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="150dp"
+        android:text="@string/add_life_1"/>
+
+    <TextView
+        android:id="@+id/lifeCounterP1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/addLifeP1"
+        app:layout_constraintEnd_toEndOf="@id/addLifeP1"
+        app:layout_constraintTop_toBottomOf="@id/addLifeP1"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/decrementLifeP1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/lifeCounterP1"
+        app:layout_constraintEnd_toEndOf="@id/lifeCounterP1"
+        app:layout_constraintTop_toBottomOf="@id/lifeCounterP1"
+        android:layout_marginTop="15dp"
+        android:text="@string/decrement_life_1"/>
+
+    <Button
+        android:id="@+id/addLifeP2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/decrementLifeP1"
+        app:layout_constraintEnd_toEndOf="@id/decrementLifeP1"
+        app:layout_constraintTop_toBottomOf="@id/decrementLifeP1"
+        android:layout_marginTop="100dp"
+        android:text="@string/add_life_1"/>
+
+    <TextView
+        android:id="@+id/lifeCounterP2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/addLifeP2"
+        app:layout_constraintEnd_toEndOf="@id/addLifeP2"
+        app:layout_constraintTop_toBottomOf="@id/addLifeP2"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/decrementLifeP2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/lifeCounterP2"
+        app:layout_constraintEnd_toEndOf="@id/lifeCounterP2"
+        app:layout_constraintTop_toBottomOf="@id/lifeCounterP2"
+        android:layout_marginTop="15dp"
+        android:text="@string/decrement_life_1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

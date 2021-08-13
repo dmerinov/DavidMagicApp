@@ -15,4 +15,6 @@
     <string name="search_card">search card</string>
     <string name="dices">Dices</string>
     <string name="cards">Cards</string>
+    <string name="add_life_1">+1</string>
+    <string name="decrement_life_1">-1</string>
 </resources>
