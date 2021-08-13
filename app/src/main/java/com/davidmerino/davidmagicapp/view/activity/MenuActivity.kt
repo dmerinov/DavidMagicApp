@@ -5,6 +5,9 @@ import android.content.Intent
 import android.view.View
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.extension.load
+import com.davidmerino.davidmagicapp.navigator.navigateToCardListActivity
+import com.davidmerino.davidmagicapp.navigator.navigateToDiceActivity
+import com.davidmerino.davidmagicapp.navigator.navigateToSearchCardActivity
 import com.davidmerino.davidmagicapp.presenter.ControlPanelView
 import com.davidmerino.davidmagicapp.presenter.MenuPresenter
 import kotlinx.android.synthetic.main.activity_main_menu.*
@@ -47,16 +50,19 @@ class MenuActivity(
     override fun registerListeners() {
         showCards.setOnClickListener { presenter.onListCardClick() }
         dices.setOnClickListener { presenter.onDiceClick() }
+        searchCard.setOnClickListener { presenter.onSearchCardClick() }
     }
 
     override fun navigateToCardListScreen() {
-        val intent = Intent(this, CardListActivity::class.java)
-        startActivity(intent)
+        navigateToCardListActivity(this)
     }
 
     override fun navigateToDiceScreen() {
-        val intent = Intent(this, DiceActivity::class.java)
-        startActivity(intent)
+        navigateToDiceActivity(this)
+    }
+
+    override fun navigateToSearchCardScreen() {
+        navigateToSearchCardActivity(this)
     }
 
     override fun loadImageLogo(image: String) {

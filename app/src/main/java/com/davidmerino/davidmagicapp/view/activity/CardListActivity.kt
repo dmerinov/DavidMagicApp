@@ -1,5 +1,7 @@
 package com.davidmerino.davidmagicapp.view.activity
 
+import android.content.Context
+import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidmerino.data.datasource.CommonRepository
@@ -18,6 +20,10 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
 class CardListActivity() : RootActivity<CardListView>(), CardListView {
+    companion object {
+        fun getCallingIntent(context: Context) = Intent(context, CardListActivity::class.java)
+    }
+
     override val progress: View
         get() = TODO("Not yet implemented")
 

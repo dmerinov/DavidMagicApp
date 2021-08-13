@@ -17,4 +17,7 @@
     <string name="cards">Cards</string>
     <string name="add_life_1">+1</string>
     <string name="decrement_life_1">-1</string>
+    <string name="card_request">Please, enter the name of the card</string>
+    <string name="card_name">Card name</string>
+    <string name="search">Search</string>
 </resources>

@@ -27,6 +27,7 @@
         <activity android:name=".view.activity.CardListActivity" />
         <activity android:name=".view.activity.DiceActivity" />
         <activity android:name=".view.activity.DetailCardActivity" />
+        <activity android:name=".view.activity.SearchCardActivity" />
 
 
     </application>

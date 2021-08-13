@@ -1,5 +1,7 @@
 package com.davidmerino.davidmagicapp.view.activity
 
+import android.content.Context
+import android.content.Intent
 import android.view.View
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.presenter.DicePresenter
@@ -11,6 +13,11 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
 class DiceActivity : RootActivity<DiceView>(), DiceView {
+
+    companion object {
+        fun getCallingIntent(context: Context) = Intent(context, DiceActivity::class.java)
+    }
+
     override val progress: View
         get() = TODO("Not yet implemented")
 
@@ -49,7 +56,7 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
     }
 
     override fun setLife(life: String, player: Int) {
-        when(player){
+        when (player) {
             1 -> lifeCounterP1.text = life
             2 -> lifeCounterP2.text = life
         }
@@ -58,7 +65,7 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
 
     override fun getRemainingLife(player: Int): Int {
         var life = ""
-        when(player){
+        when (player) {
             1 -> life = lifeCounterP1.text.toString()
             2 -> life = lifeCounterP2.text.toString()
         }
