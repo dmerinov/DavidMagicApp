@@ -11,7 +11,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:text="@string/add_life_1"/>
 
     <TextView
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="@id/decrementLifeP1"
         app:layout_constraintEnd_toEndOf="@id/decrementLifeP1"
         app:layout_constraintTop_toBottomOf="@id/decrementLifeP1"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:text="@string/add_life_1"/>
 
     <TextView
@@ -63,5 +63,15 @@
         app:layout_constraintTop_toBottomOf="@id/lifeCounterP2"
         android:layout_marginTop="15dp"
         android:text="@string/decrement_life_1"/>
+
+    <Button
+        android:id="@+id/resetCounters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/decrementLifeP2"
+        app:layout_constraintEnd_toEndOf="@id/decrementLifeP2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="100dp"
+        android:text="@string/reset_counters"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

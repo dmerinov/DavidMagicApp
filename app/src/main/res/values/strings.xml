@@ -20,4 +20,6 @@
     <string name="card_request">Please, enter the name of the card</string>
     <string name="card_name">Card name</string>
     <string name="search">Search</string>
+    <string name="reset_counters">reset counters</string>
+    <string name="buy_card">buy card</string>
 </resources>

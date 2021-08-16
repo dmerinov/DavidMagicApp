@@ -3,7 +3,6 @@ package com.davidmerino.davidmagicapp.view.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
-import com.davidmerino.data.datasource.cache.Cache
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.presenter.DicePresenter
 import com.davidmerino.davidmagicapp.presenter.DiceView
@@ -32,7 +31,7 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
             DicePresenter(
                 errorHandler = instance(),
                 view = this@DiceActivity,
-                cache = Cache()
+                cache = instance()
             )
 
         }
@@ -49,6 +48,7 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
         addLifeP2.setOnClickListener { presenter.incrementCounter(Player.PLAYER_2) }
         decrementLifeP1.setOnClickListener { presenter.decrementCounter(Player.PLAYER_1) }
         decrementLifeP2.setOnClickListener { presenter.decrementCounter(Player.PLAYER_2) }
+        resetCounters.setOnClickListener { presenter.resetCounters() }
 
 
     }

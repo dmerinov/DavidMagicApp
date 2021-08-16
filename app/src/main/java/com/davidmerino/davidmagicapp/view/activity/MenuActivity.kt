@@ -50,7 +50,7 @@ class MenuActivity(
     override fun registerListeners() {
         showCards.setOnClickListener { presenter.onListCardClick() }
         dices.setOnClickListener { presenter.onDiceClick() }
-        searchCard.setOnClickListener { presenter.onSearchCardClick() }
+        buyCard.setOnClickListener { presenter.onSearchCardClick() }
     }
 
     override fun navigateToCardListScreen() {
