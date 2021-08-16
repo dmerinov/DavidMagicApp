@@ -3,6 +3,7 @@ package com.davidmerino.davidmagicapp.view.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import com.davidmerino.data.datasource.cache.Cache
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.presenter.DicePresenter
 import com.davidmerino.davidmagicapp.presenter.DiceView
@@ -30,7 +31,8 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
         bind<DicePresenter>() with provider {
             DicePresenter(
                 errorHandler = instance(),
-                view = this@DiceActivity
+                view = this@DiceActivity,
+                cache = Cache()
             )
 
         }

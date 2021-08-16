@@ -1,24 +1,24 @@
 package com.davidmerino.davidmagicapp.presenter
 
+import com.davidmerino.data.datasource.cache.ICache
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 
 class DicePresenter(
+
+    private val cache: ICache,
     errorHandler: ErrorHandler,
-    view: DiceView
+    view: DiceView,
 ) : Presenter<DiceView>(errorHandler, view) {
 
-    companion object {
-        private const val DEFAULT_LIFE = 20
-    }
-
-    private var player1Life = DEFAULT_LIFE
-    private var player2Life = DEFAULT_LIFE
+    private var player1Life = cache.getLife(Player.PLAYER_1.ordinal)
+    private var player2Life = cache.getLife(Player.PLAYER_2.ordinal)
 
     override fun initialize() {
-        //nothing to do
     }
 
     override fun resume() {
+        player1Life = cache.getLife(Player.PLAYER_1.ordinal)
+        player2Life = cache.getLife(Player.PLAYER_2.ordinal)
         view.showLife(player1Life.toString(), Player.PLAYER_1)
         view.showLife(player2Life.toString(), Player.PLAYER_2)
     }
@@ -26,10 +26,13 @@ class DicePresenter(
     override fun stop() {
         player1Life += 10
         player2Life += 10
+        cache.setLife(Player.PLAYER_1.ordinal, player1Life)
+        cache.setLife(Player.PLAYER_2.ordinal, player2Life)
     }
 
     override fun destroy() {
-        //nothing to do
+        cache.setLife(Player.PLAYER_1.ordinal, player1Life)
+        cache.setLife(Player.PLAYER_2.ordinal, player2Life)
     }
 
     fun incrementCounter(player: Player) {
