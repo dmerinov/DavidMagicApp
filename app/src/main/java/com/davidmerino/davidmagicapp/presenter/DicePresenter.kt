@@ -15,16 +15,17 @@ class DicePresenter(
     private var player2Life = DEFAULT_LIFE
 
     override fun initialize() {
+        //nothing to do
+    }
+
+    override fun resume() {
         view.showLife(player1Life.toString(), Player.PLAYER_1)
         view.showLife(player2Life.toString(), Player.PLAYER_2)
     }
 
-    override fun resume() {
-        //nothing to do
-    }
-
     override fun stop() {
-        //nothing to do
+        player1Life += 10
+        player2Life += 10
     }
 
     override fun destroy() {
