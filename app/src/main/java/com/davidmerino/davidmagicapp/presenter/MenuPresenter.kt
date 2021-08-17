@@ -16,7 +16,10 @@ class MenuPresenter(errorHandler: ErrorHandler, view: ControlPanelView) :
         view.navigateToDiceScreen()
     }
 
-    fun onSearchCardClick() {
+    fun onBuyCardClick() {
+        view.navigateToBuyCardScreen()
+    }
+    fun onSearchCardClick(){
         view.navigateToSearchCardScreen()
     }
 
@@ -38,5 +41,6 @@ interface ControlPanelView : Presenter.View {
     fun navigateToCardListScreen()
     fun navigateToDiceScreen()
     fun navigateToSearchCardScreen()
+    fun navigateToBuyCardScreen()
     fun loadImageLogo(image: String)
 }

@@ -31,6 +31,9 @@ fun navigateToCardListActivity(context: Context) {
     context.startActivity(CardListActivity.getCallingIntent(context))
 }
 
+fun navigateToBuyCardActivity(context: Context) {
+    context.startActivity(BuyCardActivity.getCallingIntent(context))
+}
 fun navigateToSearchCardActivity(context: Context) {
     context.startActivity(SearchCardActivity.getCallingIntent(context))
 }

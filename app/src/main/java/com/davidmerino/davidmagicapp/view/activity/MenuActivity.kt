@@ -7,6 +7,7 @@ import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.extension.load
 import com.davidmerino.davidmagicapp.navigator.navigateToCardListActivity
 import com.davidmerino.davidmagicapp.navigator.navigateToDiceActivity
+import com.davidmerino.davidmagicapp.navigator.navigateToBuyCardActivity
 import com.davidmerino.davidmagicapp.navigator.navigateToSearchCardActivity
 import com.davidmerino.davidmagicapp.presenter.ControlPanelView
 import com.davidmerino.davidmagicapp.presenter.MenuPresenter
@@ -50,7 +51,8 @@ class MenuActivity(
     override fun registerListeners() {
         showCards.setOnClickListener { presenter.onListCardClick() }
         dices.setOnClickListener { presenter.onDiceClick() }
-        buyCard.setOnClickListener { presenter.onSearchCardClick() }
+        buyCard.setOnClickListener { presenter.onBuyCardClick() }
+        searchCard.setOnClickListener { presenter.onSearchCardClick() }
     }
 
     override fun navigateToCardListScreen() {
@@ -63,6 +65,10 @@ class MenuActivity(
 
     override fun navigateToSearchCardScreen() {
         navigateToSearchCardActivity(this)
+    }
+
+    override fun navigateToBuyCardScreen() {
+        navigateToBuyCardActivity(this)
     }
 
     override fun loadImageLogo(image: String) {
