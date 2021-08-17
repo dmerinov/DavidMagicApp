@@ -1,5 +1,6 @@
 package com.davidmerino.davidmagicapp.view.activity
 
+import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.view.View
@@ -58,6 +59,11 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
             Player.PLAYER_1 -> lifeCounterP1.text = life
             Player.PLAYER_2 -> lifeCounterP2.text = life
         }
+    }
+
+    override fun isLocked(): Boolean {
+        var keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        return (keyguardManager != null && keyguardManager.isKeyguardLocked)
     }
 
     override fun onSupportNavigateUp(): Boolean {

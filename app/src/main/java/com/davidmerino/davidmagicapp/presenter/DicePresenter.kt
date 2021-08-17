@@ -14,10 +14,16 @@ class DicePresenter(
         private const val DEFAULT_LIFE = 20
     }
 
-    private var player1Life = cache.getLife(Player.PLAYER_1.ordinal)
-    private var player2Life = cache.getLife(Player.PLAYER_2.ordinal)
+    private var player1Life = 0
+    private var player2Life = 0
 
     override fun initialize() {
+        if (cache.getLife(Player.PLAYER_1.ordinal) == 0) {
+            cache.setLife(Player.PLAYER_1.ordinal, DEFAULT_LIFE)
+        }
+        if (cache.getLife(Player.PLAYER_2.ordinal) == 0) {
+            cache.setLife(Player.PLAYER_2.ordinal, DEFAULT_LIFE)
+        }
     }
 
     override fun resume() {
@@ -28,8 +34,12 @@ class DicePresenter(
     }
 
     override fun stop() {
-        cache.setLife(Player.PLAYER_1.ordinal + 10, player1Life)
-        cache.setLife(Player.PLAYER_2.ordinal + 10, player2Life)
+        if (view.isLocked()) {
+            player1Life = cache.getLife(Player.PLAYER_1.ordinal)
+            player2Life = cache.getLife(Player.PLAYER_2.ordinal)
+            cache.setLife(Player.PLAYER_1.ordinal, player1Life + 10)
+            cache.setLife(Player.PLAYER_2.ordinal, player2Life + 10)
+        }
     }
 
     override fun destroy() {
@@ -75,6 +85,7 @@ class DicePresenter(
 
 interface DiceView : Presenter.View {
     fun showLife(life: String, player: Player)
+    fun isLocked(): Boolean
 }
 
 enum class Player {

@@ -1,9 +1,9 @@
 package com.davidmerino.data.datasource.cache
 
-class Cache : ICache {
+class Cache() : ICache {
 
-    private var lifeP1: Int = 20
-    private var lifeP2: Int = 20
+    private var lifeP1: Int = 0
+    private var lifeP2: Int = 0
     override fun getLife(player: Int): Int =
         when (player) {
             0 -> lifeP1
@@ -19,9 +19,4 @@ class Cache : ICache {
     }
 
 
-}
-
-interface ICache {
-    fun getLife(player: Int): Int
-    fun setLife(player: Int, amount: Int)
 }
