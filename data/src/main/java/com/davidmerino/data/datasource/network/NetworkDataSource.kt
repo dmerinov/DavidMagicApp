@@ -32,4 +32,25 @@ class NetworkDataSource : Network {
         })
     }
 
+    override fun getCardBooster(
+        expansion: String,
+        success: (List<Card>) -> Unit,
+        error: () -> Unit
+    ) {
+        val result: Call<CardResponseDto> = service.mockBoosterPack(expansion)
+        result.enqueue(object : Callback<CardResponseDto> {
+            override fun onResponse(
+                call: Call<CardResponseDto>,
+                response: Response<CardResponseDto>
+            ) {
+                response.body()?.let { success(it.cards.map { it.toCard() }) }
+            }
+
+            override fun onFailure(call: Call<CardResponseDto>, t: Throwable) {
+                error()
+            }
+        })
+    }
+
+
 }

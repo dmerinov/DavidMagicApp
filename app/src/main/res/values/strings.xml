@@ -22,5 +22,6 @@
     <string name="search">Search</string>
     <string name="reset_counters">reset counters</string>
     <string name="buy_card">buy card</string>
-    <string name="exact_text_warning">Please make sure you provide the EXACT name of the card</string>
+    <string name="exact_text_warning">Please make sure you provide the EXACT name of the expansion</string>
+    <string name="mock_booster_pack">mock booster pack</string>
 </resources>

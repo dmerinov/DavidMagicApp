@@ -22,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:autofillHints="@string/card_name"
-        android:hint="@string/card_name"
+        android:autofillHints="@string/expansion"
+        android:hint="@string/expansion"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@id/warningText"
         app:layout_constraintStart_toStartOf="@id/warningText"
@@ -31,11 +31,11 @@
         android:inputType="text" />
 
     <Button
-        android:id="@+id/searchCard"
+        android:id="@+id/searchExpansion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="@string/search_card"
+        android:text="@string/mock_booster_pack"
         app:layout_constraintEnd_toEndOf="@id/cardName"
         app:layout_constraintStart_toStartOf="@id/cardName"
         app:layout_constraintTop_toBottomOf="@id/cardName" />

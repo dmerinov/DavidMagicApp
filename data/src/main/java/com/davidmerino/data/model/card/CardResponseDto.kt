@@ -18,7 +18,7 @@ data class CardDto(
     @SerializedName("imageUrl") var imageUrl: String? = "",
     @SerializedName("layout") var layout: String,
     @SerializedName("legalities") var legalities: List<Legality> = listOf(),
-    @SerializedName("manaCost") var manaCost: String = "",
+    @SerializedName("manaCost") var manaCost: String? = "",
     @SerializedName("multiverseid") var multiverseid: String?,
     @SerializedName("name") var name: String = "",
     @SerializedName("number") var number: String,

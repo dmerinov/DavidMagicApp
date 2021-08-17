@@ -19,8 +19,8 @@ class MenuPresenter(errorHandler: ErrorHandler, view: ControlPanelView) :
     fun onBuyCardClick() {
         view.navigateToBuyCardScreen()
     }
-    fun onSearchCardClick(){
-        view.navigateToSearchCardScreen()
+    fun onBoosterCardClick(){
+        view.navigateToBoosterPackScreen()
     }
 
     override fun resume() {
@@ -40,7 +40,7 @@ class MenuPresenter(errorHandler: ErrorHandler, view: ControlPanelView) :
 interface ControlPanelView : Presenter.View {
     fun navigateToCardListScreen()
     fun navigateToDiceScreen()
-    fun navigateToSearchCardScreen()
+    fun navigateToBoosterPackScreen()
     fun navigateToBuyCardScreen()
     fun loadImageLogo(image: String)
 }

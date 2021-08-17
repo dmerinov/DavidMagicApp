@@ -34,6 +34,11 @@ fun navigateToCardListActivity(context: Context) {
 fun navigateToBuyCardActivity(context: Context) {
     context.startActivity(BuyCardActivity.getCallingIntent(context))
 }
-fun navigateToSearchCardActivity(context: Context) {
-    context.startActivity(SearchCardActivity.getCallingIntent(context))
+
+fun navigateToSearchBoosterActivity(context: Context) {
+    context.startActivity(MockBoosterCardActivity.getCallingIntent(context))
+}
+
+fun navigateToBoosterListActivity(context: Context, expansion: String) {
+    context.startActivity(DetailCardActivity.getCallingIntent(context, expansion))
 }

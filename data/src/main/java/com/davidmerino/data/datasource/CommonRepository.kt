@@ -32,4 +32,12 @@ class CommonRepository(private val network: Network, private val local: Local) :
         }
     }
 
+    override fun getBoosterPack(expansion: String, success: (List<Card>) -> Unit, error: () -> Unit) {
+        network.getCardBooster(expansion,
+        success = {
+            success(it)
+        },
+        error = { error() })
+    }
+
 }

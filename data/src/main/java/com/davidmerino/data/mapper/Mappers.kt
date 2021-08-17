@@ -7,7 +7,7 @@ fun CardDto.toCard() = Card(
     id = id,
     imageUrl = imageUrl
         ?: "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg",
-    manaCost = manaCost,
+    manaCost = manaCost ?: "",
     multiverseid = multiverseid ?: "",
     name = name,
     set = set,

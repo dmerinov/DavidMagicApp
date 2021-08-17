@@ -28,7 +28,8 @@
         <activity android:name=".view.activity.DiceActivity" />
         <activity android:name=".view.activity.DetailCardActivity" />
         <activity android:name=".view.activity.BuyCardActivity" />
-        <activity android:name=".view.activity.SearchCardActivity" />
+        <activity android:name=".view.activity.MockBoosterCardActivity" />
+        <activity android:name=".view.activity.BoosterListActivity" />
 
 
     </application>

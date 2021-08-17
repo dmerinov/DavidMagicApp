@@ -8,7 +8,7 @@ import com.davidmerino.davidmagicapp.extension.load
 import com.davidmerino.davidmagicapp.navigator.navigateToCardListActivity
 import com.davidmerino.davidmagicapp.navigator.navigateToDiceActivity
 import com.davidmerino.davidmagicapp.navigator.navigateToBuyCardActivity
-import com.davidmerino.davidmagicapp.navigator.navigateToSearchCardActivity
+import com.davidmerino.davidmagicapp.navigator.navigateToSearchBoosterActivity
 import com.davidmerino.davidmagicapp.presenter.ControlPanelView
 import com.davidmerino.davidmagicapp.presenter.MenuPresenter
 import kotlinx.android.synthetic.main.activity_main_menu.*
@@ -52,7 +52,7 @@ class MenuActivity(
         showCards.setOnClickListener { presenter.onListCardClick() }
         dices.setOnClickListener { presenter.onDiceClick() }
         buyCard.setOnClickListener { presenter.onBuyCardClick() }
-        searchCard.setOnClickListener { presenter.onSearchCardClick() }
+        mockBooster.setOnClickListener { presenter.onBoosterCardClick() }
     }
 
     override fun navigateToCardListScreen() {
@@ -63,8 +63,8 @@ class MenuActivity(
         navigateToDiceActivity(this)
     }
 
-    override fun navigateToSearchCardScreen() {
-        navigateToSearchCardActivity(this)
+    override fun navigateToBoosterPackScreen() {
+        navigateToSearchBoosterActivity(this)
     }
 
     override fun navigateToBuyCardScreen() {
