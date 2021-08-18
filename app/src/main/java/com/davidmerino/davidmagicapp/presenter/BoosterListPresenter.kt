@@ -29,7 +29,7 @@ class BoosterListPresenter(
     }
 
     fun onCardClick(card: CardView) {
-        view.navigateToBoosterDetailScreen(card.id)
+        //nothing to do
     }
 
     private fun getBooster() {

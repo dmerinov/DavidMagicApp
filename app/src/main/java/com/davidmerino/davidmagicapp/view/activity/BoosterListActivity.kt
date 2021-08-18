@@ -42,7 +42,10 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
             BoosterListPresenter(
                 expansion = getExpansionName(),
                 repository = CommonRepository(
-                    network = NetworkDataSource(),
+                    network = NetworkDataSource(
+                        apiService = instance(),
+                        apiScryfallService = instance()
+                    ),
                     local = RealmDatabase(this@BoosterListActivity)
                 ),
                 errorHandler = instance(),

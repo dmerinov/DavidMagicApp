@@ -1,6 +1,9 @@
 package com.davidmerino.davidmagicapp.di
 
 import android.content.Context
+import com.davidmerino.data.api.ApiScryfallService
+import com.davidmerino.data.api.ApiService
+import com.davidmerino.data.api.createService
 import com.davidmerino.data.datasource.CommonRepository
 import com.davidmerino.data.datasource.cache.Cache
 import com.davidmerino.data.datasource.local.Local
@@ -37,7 +40,19 @@ val dataModule = Kodein.Module("dataModule") {
             local = instance()
         )
     }
-    bind<Network>() with singleton { NetworkDataSource() }
+    bind<Network>() with singleton {
+        NetworkDataSource(
+            apiService = instance(),
+            apiScryfallService = instance()
+        )
+    }
+    bind<ApiService>() with singleton {
+        createService(endPoint = ApiService.END_POINT)
+    }
+    bind<ApiScryfallService>() with singleton {
+        createService(endPoint = ApiScryfallService.END_POINT)
+    }
+
     bind<Local>() with singleton { RealmDatabase(context = instance()) }
-    bind<Cache>() with singleton {Cache()}
+    bind<Cache>() with singleton { Cache() }
 }

@@ -1,4 +1,4 @@
-package com.davidmerino.data.model.card
+package com.davidmerino.data.model.card.cardResponseMTG
 
 
 import com.google.gson.annotations.SerializedName

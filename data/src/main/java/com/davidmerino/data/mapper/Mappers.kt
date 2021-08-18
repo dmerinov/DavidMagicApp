@@ -1,7 +1,9 @@
 package com.davidmerino.data.mapper
 
-import com.davidmerino.data.model.card.CardDto
+import com.davidmerino.data.model.card.cardResponseMTG.CardDto
+import com.davidmerino.data.model.card.cardResponseScryfall.Prices
 import com.davidmerino.domain.model.Card
+import com.davidmerino.domain.model.LocalPrices
 
 fun CardDto.toCard() = Card(
     id = id,
@@ -14,5 +16,13 @@ fun CardDto.toCard() = Card(
     text = text ?: "",
     toughness = toughness ?: "",
     power = power ?: ""
+)
+
+fun Prices.toLocalPrices() = LocalPrices(
+    eur = eur,
+    eurFoil = eurFoil,
+    tix = tix,
+    usd = usd,
+    usdFoil = usdFoil
 )
 
