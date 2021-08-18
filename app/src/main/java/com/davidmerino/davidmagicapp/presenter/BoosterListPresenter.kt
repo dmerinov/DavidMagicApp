@@ -42,4 +42,5 @@ class BoosterListPresenter(
 interface BoosterListPresenterView : Presenter.View {
     fun navigateToBoosterDetailScreen(id: String)
     fun showCards(cards: List<CardView>)
+    fun getExpansionName(): String
 }

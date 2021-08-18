@@ -22,8 +22,12 @@ import org.kodein.di.generic.provider
 
 class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterListPresenterView {
     companion object {
-        fun getCallingIntent(context: Context, expansion: String) =
-            Intent(context, BoosterListActivity::class.java)
+        private const val MOCK_DETAIL_EXP_KEY = "MOCK_DETAIL_EXP_KEY"
+
+        fun getCallingIntent(context: Context, expName: String) =
+            Intent(context, BoosterListActivity::class.java).apply {
+                putExtra(MOCK_DETAIL_EXP_KEY, expName)
+            }
     }
 
     override val progress: View
@@ -36,7 +40,7 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
     override val activityModule: Kodein.Module = Kodein.Module {
         bind<BoosterListPresenter>() with provider {
             BoosterListPresenter(
-                expansion = "dom", //you have to retrieve it from an intent
+                expansion = getExpansionName(),
                 repository = CommonRepository(
                     network = NetworkDataSource(),
                     local = RealmDatabase(this@BoosterListActivity)
@@ -69,6 +73,11 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
 
     override fun showCards(cards: List<CardView>) {
         mockBoosterAdapter.replace(cards.toMutableList())
+    }
+
+    override fun getExpansionName(): String {
+        return intent.getStringExtra(MOCK_DETAIL_EXP_KEY)
+            ?: throw IllegalArgumentException("This activity needs an expansion name")
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -37,11 +37,11 @@ class MockBoosterPresenter(
     }
 
     fun searchCard() {
-        getBoosterPack(view.getCardName())
+        getBoosterPack(view.getCardExpansion())
     }
 }
 
 interface MockBoosterCardView : Presenter.View {
-    fun getCardName(): String
+    fun getCardExpansion(): String
     fun showBoosterPack(boosterPack: List<CardView>)
 }

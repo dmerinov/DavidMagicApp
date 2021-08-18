@@ -40,5 +40,5 @@ fun navigateToSearchBoosterActivity(context: Context) {
 }
 
 fun navigateToBoosterListActivity(context: Context, expansion: String) {
-    context.startActivity(DetailCardActivity.getCallingIntent(context, expansion))
+    context.startActivity(BoosterListActivity.getCallingIntent(context, expansion))
 }

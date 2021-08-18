@@ -9,6 +9,7 @@ import com.davidmerino.davidmagicapp.navigator.navigateToBoosterListActivity
 import com.davidmerino.davidmagicapp.presenter.MockBoosterCardView
 import com.davidmerino.davidmagicapp.presenter.MockBoosterPresenter
 import kotlinx.android.synthetic.main.activity_booster_expansion.*
+import kotlinx.android.synthetic.main.item_booster.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -45,13 +46,13 @@ class MockBoosterCardActivity : RootActivity<MockBoosterCardView>(), MockBooster
         searchExpansion.setOnClickListener { presenter.searchCard() }
     }
 
-    override fun getCardName(): String {
-        return cardName.text.toString()
+    override fun getCardExpansion(): String {
+        return expansionName.text.toString()
     }
 
     override fun showBoosterPack(boosterPack: List<CardView>) {
         boosterPack.map { println("BOOSTERPACK ${it.title}") }
-        navigateToBoosterListActivity(this, searchExpansion.text.toString())
+        navigateToBoosterListActivity(this, expansionName.text.toString())
     }
 
 }

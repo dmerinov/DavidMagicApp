@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/cardName"
+        android:id="@+id/expansionName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/mock_booster_pack"
-        app:layout_constraintEnd_toEndOf="@id/cardName"
-        app:layout_constraintStart_toStartOf="@id/cardName"
-        app:layout_constraintTop_toBottomOf="@id/cardName" />
+        app:layout_constraintEnd_toEndOf="@id/expansionName"
+        app:layout_constraintStart_toStartOf="@id/expansionName"
+        app:layout_constraintTop_toBottomOf="@id/expansionName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
