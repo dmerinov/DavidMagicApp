@@ -69,7 +69,7 @@ class NetworkDataSource(
             }
 
             override fun onFailure(call: Call<CardResponseScryfallDto>, t: Throwable) {
-                TODO("Not yet implemented")
+                error()
             }
 
         })

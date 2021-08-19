@@ -29,7 +29,7 @@ class BoosterListPresenter(
     }
 
     fun onCardClick(card: CardView) {
-        //nothing to do
+        view.navigateToBoosterDetailScreen(card.multiverseId, card.image)
     }
 
     private fun getBooster() {
@@ -40,7 +40,7 @@ class BoosterListPresenter(
 }
 
 interface BoosterListPresenterView : Presenter.View {
-    fun navigateToBoosterDetailScreen(id: String)
+    fun navigateToBoosterDetailScreen(id: String, img: String)
     fun showCards(cards: List<CardView>)
     fun getExpansionName(): String
 }

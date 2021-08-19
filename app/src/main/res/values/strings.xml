@@ -24,4 +24,8 @@
     <string name="buy_card">buy card</string>
     <string name="exact_text_warning">Please make sure you provide the EXACT name of the expansion</string>
     <string name="mock_booster_pack">mock booster pack</string>
+    <string name="eur">eur</string>
+    <string name="usd">usd</string>
+    <string name="tix">tix</string>
+    <string name="buy">Buy</string>
 </resources>

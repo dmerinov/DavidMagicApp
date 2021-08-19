@@ -7,8 +7,8 @@ import com.davidmerino.domain.model.Card
 fun Card.toCardDetailView() = toughness?.let {
     power?.let { it1 ->
         CardDetailView(
-        id, imageUrl, manaCost, name, set, text, it, it1
-    )
+            id, imageUrl, manaCost, name, set, text, it, it1
+        )
     }
 }
 
@@ -16,5 +16,6 @@ fun Card.toCardView() = CardView(
     id = id,
     image = imageUrl,
     title = name,
-    expansion = set
+    expansion = set,
+    multiverseId = multiverseid
 )

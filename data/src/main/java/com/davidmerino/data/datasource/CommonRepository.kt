@@ -3,6 +3,7 @@ package com.davidmerino.data.datasource
 import com.davidmerino.data.datasource.local.Local
 import com.davidmerino.data.datasource.network.Network
 import com.davidmerino.domain.model.Card
+import com.davidmerino.domain.model.LocalPrices
 import com.davidmerino.domain.repository.Repository
 
 class CommonRepository(private val network: Network, private val local: Local) :
@@ -32,12 +33,28 @@ class CommonRepository(private val network: Network, private val local: Local) :
         }
     }
 
-    override fun getBoosterPack(expansion: String, success: (List<Card>) -> Unit, error: () -> Unit) {
+    override fun getBoosterPack(
+        expansion: String,
+        success: (List<Card>) -> Unit,
+        error: () -> Unit
+    ) {
         network.getCardBooster(expansion,
-        success = {
-            success(it)
-        },
-        error = { error() })
+            success = {
+                success(it)
+            },
+            error = { error() })
+    }
+
+    override fun getCardMarketInfo(
+        multiverseId: String,
+        success: (LocalPrices) -> Unit,
+        error: () -> Unit
+    ) {
+        network.getCardMarketInfo(multiverseId,
+            success = {
+                success(it)
+            },
+            error = { error() })
     }
 
 }

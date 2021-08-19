@@ -4,12 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.davidmerino.data.datasource.CommonRepository
-import com.davidmerino.data.datasource.local.RealmDatabase
-import com.davidmerino.data.datasource.network.NetworkDataSource
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.model.CardView
-import com.davidmerino.davidmagicapp.navigator.navigateToDetailCardActivity
+import com.davidmerino.davidmagicapp.navigator.navigateToDetailBoosterActivity
 import com.davidmerino.davidmagicapp.presenter.BoosterListPresenter
 import com.davidmerino.davidmagicapp.presenter.BoosterListPresenterView
 import com.davidmerino.davidmagicapp.view.adapter.BoosterAdapter
@@ -41,13 +38,7 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
         bind<BoosterListPresenter>() with provider {
             BoosterListPresenter(
                 expansion = getExpansionName(),
-                repository = CommonRepository(
-                    network = NetworkDataSource(
-                        apiService = instance(),
-                        apiScryfallService = instance()
-                    ),
-                    local = RealmDatabase(this@BoosterListActivity)
-                ),
+                repository = instance(),
                 errorHandler = instance(),
                 view = this@BoosterListActivity
             )
@@ -70,8 +61,8 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
         //nothing to do
     }
 
-    override fun navigateToBoosterDetailScreen(id: String) {
-        navigateToDetailCardActivity(this, id)
+    override fun navigateToBoosterDetailScreen(id: String, img:String) {
+        navigateToDetailBoosterActivity(this, id,img)
     }
 
     override fun showCards(cards: List<CardView>) {

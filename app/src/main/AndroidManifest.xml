@@ -30,6 +30,7 @@
         <activity android:name=".view.activity.BuyCardActivity" />
         <activity android:name=".view.activity.MockBoosterCardActivity" />
         <activity android:name=".view.activity.BoosterListActivity" />
+        <activity android:name=".view.activity.DetailBoosterActivity" />
 
 
     </application>

@@ -19,10 +19,10 @@ fun CardDto.toCard() = Card(
 )
 
 fun Prices.toLocalPrices() = LocalPrices(
-    eur = eur,
-    eurFoil = eurFoil,
-    tix = tix,
-    usd = usd,
-    usdFoil = usdFoil
+    eur = eur ?: "",
+    eurFoil = eurFoil ?: "",
+    tix = tix ?: "",
+    usd = usd ?: "",
+    usdFoil = usdFoil ?: ""
 )
 
