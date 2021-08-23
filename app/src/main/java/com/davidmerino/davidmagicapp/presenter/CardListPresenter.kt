@@ -1,7 +1,6 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
-import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
 import com.davidmerino.domain.repository.Repository
 
@@ -32,14 +31,7 @@ class CardListPresenter(
     }
 
     private fun getCards() {
-        repository.getCards(
-            success = {
-                view.showCards(it.map { it.toCardView() })
-            },
-            error = {
-                error("Could not retrieve cards from network")
-            }
-        )
+        repository.getCards()
     }
 }
 

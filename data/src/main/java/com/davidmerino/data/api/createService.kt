@@ -3,6 +3,7 @@ package com.davidmerino.data.api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 inline fun <reified S> createService(endPoint: String): S {
@@ -14,6 +15,7 @@ inline fun <reified S> createService(endPoint: String): S {
     val retrofit = Retrofit.Builder()
         .baseUrl(endPoint)
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(client)
         .build()
 

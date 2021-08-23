@@ -1,10 +1,12 @@
 package com.davidmerino.data.datasource.network
 
+import com.davidmerino.data.model.card.cardResponseMTG.CardResponseDto
+import com.davidmerino.data.model.card.cardResponseScryfall.CardResponseScryfallDto
 import com.davidmerino.domain.model.Card
-import com.davidmerino.domain.model.LocalPrices
+import io.reactivex.Single
 
 interface Network {
-    fun getCards(success: (List<Card>) -> Unit, error: () -> Unit)
-    fun getCardBooster(expansion: String, success: (List<Card>) -> Unit, error: () -> Unit)
-    fun getCardMarketInfo(multiverseId: String, success: (LocalPrices) -> Unit, error: () -> Unit)
+    fun getCards(): Single<List<Card>>
+    fun getCardBooster(set: String): Single<CardResponseDto>
+    fun getCardMarketInfo(multiverseId: String): Single<CardResponseScryfallDto>
 }
