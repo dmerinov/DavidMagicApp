@@ -7,11 +7,9 @@ import com.davidmerino.domain.model.LocalPrices
 import com.davidmerino.domain.repository.Repository
 import io.reactivex.Single
 
-class CommonRepository(private val network: Network, private val local: Local) :
-    Repository {
-    override fun getCards(): Single<List<Card>> =
-        network.getCards()
+class CommonRepository(private val network: Network, private val local: Local) : Repository {
 
+    override fun getCards(): Single<List<Card>> = network.getCards()
 
     override fun getCardByID(id: String, success: (Card) -> Unit, error: () -> Unit) {
         val obtainedCard = local.getCardByID(id)

@@ -14,6 +14,7 @@ import com.davidmerino.davidmagicapp.error.AndroidErrorHandler
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.executor.RxExecutor
 import com.davidmerino.domain.executor.Executor
+import com.davidmerino.domain.interactor.GetCardsUseCase
 import com.davidmerino.domain.repository.Repository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -30,7 +31,8 @@ fun appModule(context: Context) = Kodein.Module("appModule") {
 }
 
 val domainModule = Kodein.Module("domainModule") {
-    // Add here data dependencies
+
+    bind() from singleton { GetCardsUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module("dataModule") {

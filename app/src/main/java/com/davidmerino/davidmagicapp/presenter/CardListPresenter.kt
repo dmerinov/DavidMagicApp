@@ -1,11 +1,12 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
-import com.davidmerino.domain.repository.Repository
+import com.davidmerino.domain.interactor.GetCardsUseCase
 
 class CardListPresenter(
-    private val repository: Repository,
+    private val getCardsUseCase: GetCardsUseCase,
     errorHandler: ErrorHandler,
     view: CardListView
 ) : Presenter<CardListView>(errorHandler, view) {
@@ -31,7 +32,14 @@ class CardListPresenter(
     }
 
     private fun getCards() {
-        repository.getCards()
+        view.showProgress()
+        getCardsUseCase.execute(
+            onSuccess = {
+                view.showCards(it.map { it.toCardView() })
+                view.hideProgress()
+            },
+            onError = onError { view.showError(it) }
+        )
     }
 }
 

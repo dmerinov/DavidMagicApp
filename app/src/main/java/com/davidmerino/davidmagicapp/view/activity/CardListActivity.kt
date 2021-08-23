@@ -11,6 +11,7 @@ import com.davidmerino.davidmagicapp.presenter.CardListPresenter
 import com.davidmerino.davidmagicapp.presenter.CardListView
 import com.davidmerino.davidmagicapp.view.adapter.CardsAdapter
 import kotlinx.android.synthetic.main.activity_card_list.*
+import kotlinx.android.synthetic.main.view_progress.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -21,8 +22,7 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
         fun getCallingIntent(context: Context) = Intent(context, CardListActivity::class.java)
     }
 
-    override val progress: View
-        get() = TODO("Not yet implemented")
+    override val progress: View by lazy { progressView }
 
     override val presenter: CardListPresenter by instance()
 
@@ -33,7 +33,7 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
             CardListPresenter(
                 view = this@CardListActivity,
                 errorHandler = instance(),
-                repository = instance()
+                getCardsUseCase = instance()
             )
         }
     }
