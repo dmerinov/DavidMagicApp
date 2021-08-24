@@ -39,7 +39,8 @@ class MockBoosterCardActivity : RootActivity<MockBoosterCardView>(), MockBooster
     }
 
     override fun initializeUI() {
-        //nothing to do
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun registerListeners() {
@@ -53,6 +54,11 @@ class MockBoosterCardActivity : RootActivity<MockBoosterCardView>(), MockBooster
     override fun showBoosterPack(boosterPack: List<CardView>) {
         boosterPack.map { println("BOOSTERPACK ${it.title}") }
         navigateToBoosterListActivity(this, expansionName.text.toString())
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 }
