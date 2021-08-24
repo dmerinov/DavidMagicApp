@@ -18,12 +18,7 @@ class CommonRepository(private val network: Network, private val local: Local) :
         expansion: String,
     ): Single<List<Card>> = network.getCardBooster(expansion)
 
-    override fun getCardMarketInfo(
-        multiverseId: String,
-        success: (LocalPrices) -> Unit,
-        error: () -> Unit
-    ) {
-        //to be completed
-    }
+    override fun getCardMarketInfo(multiverseId: String):
+            Single<LocalPrices> = network.getCardMarketInfo(multiverseId)
 
 }

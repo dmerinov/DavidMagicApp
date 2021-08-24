@@ -9,9 +9,5 @@ interface Repository {
     fun getCards(): Single<List<Card>>
     fun getCardByID(id: String): Card
     fun getBoosterPack(expansion: String): Single<List<Card>>
-    fun getCardMarketInfo(
-        multiverseId: String,
-        success: (LocalPrices) -> Unit,
-        error: () -> Unit
-    )
+    fun getCardMarketInfo(multiverseId: String): Single<LocalPrices>
 }

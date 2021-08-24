@@ -1,11 +1,11 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.domain.interactor.usecases.GetCardPricesUseCase
 import com.davidmerino.domain.model.LocalPrices
-import com.davidmerino.domain.repository.Repository
 
 class DetailBoosterPresenter(
-    private val repository: Repository,
+    private val getCardPricesUseCase: GetCardPricesUseCase,
     errorHandler: ErrorHandler,
     view: DetailBoosterView
 ) :
@@ -28,14 +28,16 @@ class DetailBoosterPresenter(
     }
 
     private fun getCardPrices(multiverseId: String) {
-        println("EL ID DE LA CARTA A BUSCAR ES: $multiverseId")
-        repository.getCardMarketInfo(
-            multiverseId,
-            success = { view.drawPrices(it) },
-            error = { error("couldn't retrieve prices from network") }
-        )
-    }
 
+        getCardPricesUseCase.execute(
+            multiverseId,
+            success = {
+                view.drawPrices(it)
+            },
+            error = { onError { it } }
+        )
+
+    }
 }
 
 interface DetailBoosterView : Presenter.View {

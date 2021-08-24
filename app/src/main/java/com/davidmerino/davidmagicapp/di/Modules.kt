@@ -15,6 +15,7 @@ import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.executor.RxExecutor
 import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.interactor.usecases.GetBoosterPackUseCase
+import com.davidmerino.domain.interactor.usecases.GetCardPricesUseCase
 import com.davidmerino.domain.interactor.usecases.GetCardsUseCase
 import com.davidmerino.domain.repository.Repository
 import org.kodein.di.Kodein
@@ -34,12 +35,8 @@ fun appModule(context: Context) = Kodein.Module("appModule") {
 val domainModule = Kodein.Module("domainModule") {
 
     bind() from singleton { GetCardsUseCase(repository = instance(), executor = instance()) }
-    bind() from singleton {
-        GetBoosterPackUseCase(
-            repository = instance(),
-            executor = instance()
-        )
-    }
+    bind() from singleton { GetBoosterPackUseCase(repository = instance(), executor = instance()) }
+    bind() from singleton { GetCardPricesUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module("dataModule") {
