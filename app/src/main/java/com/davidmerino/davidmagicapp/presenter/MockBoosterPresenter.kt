@@ -3,11 +3,11 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
-import com.davidmerino.domain.repository.Repository
+import com.davidmerino.domain.interactor.usecases.GetBoosterPackUseCase
 
 
 class MockBoosterPresenter(
-    private val repository: Repository,
+    private val getBoosterPackUseCase: GetBoosterPackUseCase,
     errorHandler: ErrorHandler, view: MockBoosterCardView
 ) :
     Presenter<MockBoosterCardView>(errorHandler, view) {
@@ -29,10 +29,10 @@ class MockBoosterPresenter(
     }
 
     private fun getBoosterPack(expansion: String) {
-        repository.getBoosterPack(
-            expansion,
-            success = { view.showBoosterPack(it.map { it.toCardView() }) },
-            error = { error("could not load booster pack, check if your expansion input is correct") }
+        getBoosterPackUseCase.execute(
+            expansion = expansion,
+            onSuccess = { view.showBoosterPack(it.map { it.toCardView() }) },
+            onError = onError { view.showError(it) }
         )
     }
 

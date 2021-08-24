@@ -38,7 +38,7 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
         bind<BoosterListPresenter>() with provider {
             BoosterListPresenter(
                 expansion = getExpansionName(),
-                repository = instance(),
+                getBoosterPackUseCase = instance(),
                 errorHandler = instance(),
                 view = this@BoosterListActivity
             )
@@ -61,8 +61,8 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
         //nothing to do
     }
 
-    override fun navigateToBoosterDetailScreen(id: String, img:String) {
-        navigateToDetailBoosterActivity(this, id,img)
+    override fun navigateToBoosterDetailScreen(id: String, img: String) {
+        navigateToDetailBoosterActivity(this, id, img)
     }
 
     override fun showCards(cards: List<CardView>) {

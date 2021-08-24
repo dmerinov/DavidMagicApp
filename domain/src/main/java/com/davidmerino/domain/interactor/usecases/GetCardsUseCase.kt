@@ -1,6 +1,7 @@
-package com.davidmerino.domain.interactor
+package com.davidmerino.domain.interactor.usecases
 
 import com.davidmerino.domain.executor.Executor
+import com.davidmerino.domain.interactor.SingleInteractor
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.repository.Repository
 

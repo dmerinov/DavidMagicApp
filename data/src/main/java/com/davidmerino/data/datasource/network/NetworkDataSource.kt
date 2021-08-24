@@ -17,9 +17,9 @@ class NetworkDataSource(
         return apiService.getAllCards().map { it.cards.map { it.toCard() } }
     }
 
-    override fun getCardBooster(set: String): Single<CardResponseDto> {
+    override fun getCardBooster(set: String): Single<List<Card>> {
 
-        return apiService.mockBoosterPack(set)
+        return apiService.mockBoosterPack(set).map{it.cards.map {it.toCard()}}
     }
 
     override fun getCardMarketInfo(multiverseId: String): Single<CardResponseScryfallDto> {

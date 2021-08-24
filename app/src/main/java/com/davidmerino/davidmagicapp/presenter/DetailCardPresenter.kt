@@ -3,11 +3,11 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardDetailView
 import com.davidmerino.davidmagicapp.model.CardDetailView
-import com.davidmerino.domain.repository.Repository
+import com.davidmerino.domain.interactor.usecases.GetCardByIdUseCase
 
 
 class DetailCardPresenter(
-    private val repository: Repository,
+    private val getCardByIdUseCase: GetCardByIdUseCase,
     errorHandler: ErrorHandler,
     view: DetailCardView
 ) : Presenter<DetailCardView>(errorHandler, view) {
@@ -32,11 +32,7 @@ class DetailCardPresenter(
     }
 
     private fun getCardByID(id: String) {
-        repository.getCardByID(
-            id,
-            success = { view.showCard(it.toCardDetailView()) },
-            error = { error("could not retrieve card from bd") }
-        )
+        view.showCard(getCardByIdUseCase.execute().toCardDetailView())
     }
 
     fun onShowCardClick() {

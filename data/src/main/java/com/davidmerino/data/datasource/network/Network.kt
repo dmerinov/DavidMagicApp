@@ -7,6 +7,6 @@ import io.reactivex.Single
 
 interface Network {
     fun getCards(): Single<List<Card>>
-    fun getCardBooster(set: String): Single<CardResponseDto>
+    fun getCardBooster(set: String): Single<List<Card>>
     fun getCardMarketInfo(multiverseId: String): Single<CardResponseScryfallDto>
 }

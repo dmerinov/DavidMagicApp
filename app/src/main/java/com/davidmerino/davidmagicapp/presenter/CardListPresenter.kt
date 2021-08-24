@@ -3,7 +3,7 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
-import com.davidmerino.domain.interactor.GetCardsUseCase
+import com.davidmerino.domain.interactor.usecases.GetCardsUseCase
 
 class CardListPresenter(
     private val getCardsUseCase: GetCardsUseCase,

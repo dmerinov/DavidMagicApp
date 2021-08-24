@@ -3,11 +3,11 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
-import com.davidmerino.domain.repository.Repository
+import com.davidmerino.domain.interactor.usecases.GetBoosterPackUseCase
 
 
 class BoosterListPresenter(
-    private val repository: Repository,
+    private val getBoosterPackUseCase: GetBoosterPackUseCase,
     private val expansion: String,
     errorHandler: ErrorHandler, view: BoosterListPresenterView
 ) :
@@ -33,9 +33,12 @@ class BoosterListPresenter(
     }
 
     private fun getBooster() {
-        repository.getBoosterPack(expansion,
-            success = { view.showCards(it.map { it.toCardView() }) },
-            error = { error("Could not retrieve cards from network") })
+
+        getBoosterPackUseCase.execute(
+            expansion = expansion,
+            onError = { onError { it } },
+            onSuccess = { view.showCards(it.map { it.toCardView() }) })
+
     }
 }
 
