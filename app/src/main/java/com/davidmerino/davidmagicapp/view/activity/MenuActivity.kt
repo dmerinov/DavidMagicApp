@@ -5,10 +5,7 @@ import android.content.Intent
 import android.view.View
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.extension.load
-import com.davidmerino.davidmagicapp.navigator.navigateToCardListActivity
-import com.davidmerino.davidmagicapp.navigator.navigateToDiceActivity
-import com.davidmerino.davidmagicapp.navigator.navigateToBuyCardActivity
-import com.davidmerino.davidmagicapp.navigator.navigateToSearchBoosterActivity
+import com.davidmerino.davidmagicapp.navigator.*
 import com.davidmerino.davidmagicapp.presenter.ControlPanelView
 import com.davidmerino.davidmagicapp.presenter.MenuPresenter
 import kotlinx.android.synthetic.main.activity_main_menu.*
@@ -53,6 +50,7 @@ class MenuActivity(
         dices.setOnClickListener { presenter.onDiceClick() }
         buyCard.setOnClickListener { presenter.onBuyCardClick() }
         mockBooster.setOnClickListener { presenter.onBoosterCardClick() }
+        shops.setOnClickListener { presenter.onShopSearchClick() }
     }
 
     override fun navigateToCardListScreen() {
@@ -73,6 +71,10 @@ class MenuActivity(
 
     override fun loadImageLogo(image: String) {
         logo.load(image)
+    }
+
+    override fun navigateToShopMapScreen() {
+        navigateToShopMapScreen(this)
     }
 
 }

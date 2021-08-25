@@ -44,6 +44,10 @@ fun navigateToBoosterListActivity(context: Context, expansion: String) {
 }
 
 fun navigateToDetailBoosterActivity(context: Context, id: String, img: String) {
-    context.startActivity(DetailBoosterActivity.getCallingIntent(context, id,img))
+    context.startActivity(DetailBoosterActivity.getCallingIntent(context, id, img))
 
+}
+
+fun navigateToShopMapScreen(context: Context) {
+    context.startActivity(ShopMapActivity.getCallingIntent(context))
 }
