@@ -32,7 +32,7 @@ class DetailCardPresenter(
     }
 
     private fun getCardByID(id: String) {
-        view.showCard(getCardByIdUseCase.execute().toCardDetailView())
+        view.showCard(getCardByIdUseCase.execute(id).toCardDetailView())
     }
 
     fun onShowCardClick() {
