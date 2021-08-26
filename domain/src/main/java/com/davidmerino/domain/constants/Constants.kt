@@ -20,7 +20,13 @@ class Constants {
             BuildType.DEBUG -> "t21_debug"
             BuildType.RELEASE -> "t21"
         }
+
+        const val GEN_X_COORDINATES_LAT = 39.46927593708924
+        const val GEN_X_COORDINATES_LONG = -6.380133059817144
+        const val DADOS_FUERA_COORDINATES_LAT = 39.4730392896283
+        const val DADOS_FUERA_COORDINATES_LONG = -6.380556815638426
     }
+
 }
 
 fun buildType(type: String): BuildType = when (type) {

@@ -33,6 +33,12 @@
         <activity android:name=".view.activity.DetailBoosterActivity" />
         <activity android:name=".view.activity.ShopMapActivity" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBN_TnRYaITUzMBeguVH8WY5ypePgWwQfw" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
     </application>
 </manifest>

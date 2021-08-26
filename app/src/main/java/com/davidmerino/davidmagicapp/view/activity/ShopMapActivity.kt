@@ -6,12 +6,20 @@ import android.view.View
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.presenter.ShopMapPresenter
 import com.davidmerino.davidmagicapp.presenter.ShopMapView
+import com.davidmerino.domain.constants.Constants
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_search_shop.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
-class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
+class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView, OnMapReadyCallback {
 
     companion object {
         private const val SHOP_MAP_KEY = "SHOP_MAP_KEY"
@@ -36,11 +44,34 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
         }
     }
 
+    private lateinit var map: GoogleMap
+
     override fun initializeUI() {
-        //nothing to do
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
 
     override fun registerListeners() {
         //nothing to do
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        val genXShop = LatLng(Constants.GEN_X_COORDINATES_LAT, Constants.GEN_X_COORDINATES_LONG)
+        val dadosFueraShop =
+            LatLng(Constants.DADOS_FUERA_COORDINATES_LAT, Constants.DADOS_FUERA_COORDINATES_LONG)
+        map.addMarker(MarkerOptions().position(genXShop).title(getString(R.string.GenX_Shop)))
+        map.addMarker(
+            MarkerOptions().position(dadosFueraShop).title(getString(R.string.DadosFuera_Shop))
+        )
+        map.moveCamera(CameraUpdateFactory.newLatLng(genXShop))
+        map.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }
