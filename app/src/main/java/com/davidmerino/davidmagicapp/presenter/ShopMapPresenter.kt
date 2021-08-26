@@ -1,14 +1,29 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.davidmagicapp.model.GeoPoints
+import com.davidmerino.domain.constants.Constants
+import com.google.android.gms.maps.GoogleMap
 
 class ShopMapPresenter(
     errorHandler: ErrorHandler,
     view: ShopMapView
 ) :
     Presenter<ShopMapView>(errorHandler, view) {
+
+    var points: MutableList<GeoPoints> = mutableListOf()
+    private val genX =
+        GeoPoints(Constants.GEN_X_COORDINATES_LAT, Constants.GEN_X_COORDINATES_LONG, "Generación X")
+    private val dadosF =
+        GeoPoints(
+            Constants.DADOS_FUERA_COORDINATES_LAT,
+            Constants.DADOS_FUERA_COORDINATES_LONG,
+            "Dados Fuera"
+        )
+
     override fun initialize() {
-        //nothing to do
+        points.add(genX)
+        points.add(dadosF)
     }
 
     override fun resume() {
@@ -23,8 +38,11 @@ class ShopMapPresenter(
         //nothing to do
     }
 
+    fun onMapLoaded(googleMap: GoogleMap) {
+        view.loadPoints(points, googleMap)
+    }
 }
 
 interface ShopMapView : Presenter.View {
-
+    fun loadPoints(points: MutableList<GeoPoints>, googleMap: GoogleMap)
 }

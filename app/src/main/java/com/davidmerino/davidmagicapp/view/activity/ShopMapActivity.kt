@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import com.davidmerino.davidmagicapp.R
+import com.davidmerino.davidmagicapp.model.GeoPoints
 import com.davidmerino.davidmagicapp.presenter.ShopMapPresenter
 import com.davidmerino.davidmagicapp.presenter.ShopMapView
-import com.davidmerino.domain.constants.Constants
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -59,19 +59,29 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView, OnMapReadyCall
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-        val genXShop = LatLng(Constants.GEN_X_COORDINATES_LAT, Constants.GEN_X_COORDINATES_LONG)
-        val dadosFueraShop =
-            LatLng(Constants.DADOS_FUERA_COORDINATES_LAT, Constants.DADOS_FUERA_COORDINATES_LONG)
-        map.addMarker(MarkerOptions().position(genXShop).title(getString(R.string.GenX_Shop)))
-        map.addMarker(
-            MarkerOptions().position(dadosFueraShop).title(getString(R.string.DadosFuera_Shop))
-        )
-        map.moveCamera(CameraUpdateFactory.newLatLng(genXShop))
-        map.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
+        presenter.onMapLoaded(googleMap)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    override fun loadPoints(points: MutableList<GeoPoints>, googleMap: GoogleMap) {
+        map = googleMap
+
+        points.forEach { point ->
+            map.addMarker(
+                MarkerOptions().position(LatLng(point.Latitude, point.Longitude)).title(point.Name)
+            )
+        }
+
+        map.moveCamera(
+            CameraUpdateFactory.newLatLng(
+                LatLng(
+                    points.get(0).Latitude,
+                    points.get(0).Longitude
+                )
+            )
+        )
+        map.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
+
+
     }
+
 }
