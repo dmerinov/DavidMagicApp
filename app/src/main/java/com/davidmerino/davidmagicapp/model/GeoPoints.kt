@@ -5,3 +5,4 @@ data class GeoPoints(
     val Longitude: Double,
     val Name: String
 )
+
