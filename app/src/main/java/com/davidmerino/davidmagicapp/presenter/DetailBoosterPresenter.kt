@@ -2,7 +2,7 @@ package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.domain.interactor.usecases.GetCardPricesUseCase
-import com.davidmerino.domain.model.LocalPrices
+import com.davidmerino.domain.model.LocalPrice
 
 class DetailBoosterPresenter(
     private val getCardPricesUseCase: GetCardPricesUseCase,
@@ -42,6 +42,6 @@ class DetailBoosterPresenter(
 
 interface DetailBoosterView : Presenter.View {
     fun getIntentId(): String
-    fun drawPrices(prices: LocalPrices)
+    fun drawPrices(price: LocalPrice)
     fun getIntentImg(): String
 }

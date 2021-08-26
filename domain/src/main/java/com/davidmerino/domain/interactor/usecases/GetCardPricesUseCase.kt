@@ -2,18 +2,18 @@ package com.davidmerino.domain.interactor.usecases
 
 import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.interactor.SingleInteractor
-import com.davidmerino.domain.model.LocalPrices
+import com.davidmerino.domain.model.LocalPrice
 import com.davidmerino.domain.repository.Repository
 
 class GetCardPricesUseCase(
     private val repository: Repository,
     executor: Executor
 ) :
-    SingleInteractor<LocalPrices>(executor = executor) {
+    SingleInteractor<LocalPrice>(executor = executor) {
 
     fun execute(
         multiverseId: String,
-        success: (LocalPrices) -> Unit,
+        success: (LocalPrice) -> Unit,
         error: (Throwable) -> Unit
     ) {
         super.execute(

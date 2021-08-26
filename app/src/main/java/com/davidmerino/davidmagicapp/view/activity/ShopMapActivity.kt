@@ -39,7 +39,8 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView, OnMapReadyCall
         bind<ShopMapPresenter>() with provider {
             ShopMapPresenter(
                 errorHandler = instance(),
-                view = this@ShopMapActivity
+                view = this@ShopMapActivity,
+                shopsUseCase = instance()
             )
         }
     }
@@ -62,7 +63,7 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView, OnMapReadyCall
         presenter.onMapLoaded(googleMap)
     }
 
-    override fun loadPoints(points: MutableList<GeoPoints>, googleMap: GoogleMap) {
+    override fun loadPoints(points: List<GeoPoints>, googleMap: GoogleMap) {
         map = googleMap
 
         points.forEach { point ->

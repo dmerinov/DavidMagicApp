@@ -3,6 +3,7 @@ package com.davidmerino.davidmagicapp.di
 import android.content.Context
 import com.davidmerino.data.api.ApiScryfallService
 import com.davidmerino.data.api.ApiService
+import com.davidmerino.data.api.ApiShopService
 import com.davidmerino.data.api.createService
 import com.davidmerino.data.datasource.CommonRepository
 import com.davidmerino.data.datasource.cache.Cache
@@ -14,10 +15,7 @@ import com.davidmerino.davidmagicapp.error.AndroidErrorHandler
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.executor.RxExecutor
 import com.davidmerino.domain.executor.Executor
-import com.davidmerino.domain.interactor.usecases.GetBoosterPackUseCase
-import com.davidmerino.domain.interactor.usecases.GetCardByIdUseCase
-import com.davidmerino.domain.interactor.usecases.GetCardPricesUseCase
-import com.davidmerino.domain.interactor.usecases.GetCardsUseCase
+import com.davidmerino.domain.interactor.usecases.*
 import com.davidmerino.domain.repository.Repository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -39,6 +37,7 @@ val domainModule = Kodein.Module("domainModule") {
     bind() from singleton { GetBoosterPackUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetCardPricesUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetCardByIdUseCase(repository = instance(), executor = instance()) }
+    bind() from singleton { GetShopsUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module("dataModule") {
@@ -51,7 +50,8 @@ val dataModule = Kodein.Module("dataModule") {
     bind<Network>() with singleton {
         NetworkDataSource(
             apiService = instance(),
-            apiScryfallService = instance()
+            apiScryfallService = instance(),
+            apiShopService = instance()
         )
     }
     bind<ApiService>() with singleton {
@@ -59,6 +59,9 @@ val dataModule = Kodein.Module("dataModule") {
     }
     bind<ApiScryfallService>() with singleton {
         createService(endPoint = ApiScryfallService.END_POINT)
+    }
+    bind<ApiShopService>() with singleton {
+        createService(endPoint = ApiShopService.END_POINT)
     }
 
     bind<Local>() with singleton { RealmDatabase(context = instance()) }

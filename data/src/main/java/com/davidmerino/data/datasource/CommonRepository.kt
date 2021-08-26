@@ -3,7 +3,8 @@ package com.davidmerino.data.datasource
 import com.davidmerino.data.datasource.local.Local
 import com.davidmerino.data.datasource.network.Network
 import com.davidmerino.domain.model.Card
-import com.davidmerino.domain.model.LocalPrices
+import com.davidmerino.domain.model.LocalPrice
+import com.davidmerino.domain.model.Location
 import com.davidmerino.domain.repository.Repository
 import io.reactivex.Single
 
@@ -19,6 +20,8 @@ class CommonRepository(private val network: Network, private val local: Local) :
     ): Single<List<Card>> = network.getCardBooster(expansion)
 
     override fun getCardMarketInfo(multiverseId: String):
-            Single<LocalPrices> = network.getCardMarketInfo(multiverseId)
+            Single<LocalPrice> = network.getCardMarketInfo(multiverseId)
+
+    override fun getShops(): Single<List<Location>> = network.getAllShops()
 
 }

@@ -7,7 +7,7 @@ import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.extension.load
 import com.davidmerino.davidmagicapp.presenter.DetailBoosterPresenter
 import com.davidmerino.davidmagicapp.presenter.DetailBoosterView
-import com.davidmerino.domain.model.LocalPrices
+import com.davidmerino.domain.model.LocalPrice
 import kotlinx.android.synthetic.main.activity_detail_booster.*
 import kotlinx.android.synthetic.main.activity_detail_booster.cardPhoto
 import kotlinx.android.synthetic.main.activity_detail_card.*
@@ -57,11 +57,11 @@ class DetailBoosterActivity() : RootActivity<DetailBoosterView>(), DetailBooster
     override fun getIntentId() = intent.getStringExtra(DETAIL_BOOSTER_KEY).toString()
     override fun getIntentImg() = intent.getStringExtra(DETAIL_BOOSTER_IMAGE_KEY).toString()
 
-    override fun drawPrices(prices: LocalPrices) {
+    override fun drawPrices(price: LocalPrice) {
         cardPhoto.load(getIntentImg())
-        eurValue.text = prices.eur
-        usdValue.text = prices.usd
-        tixValue.text = prices.tix
+        eurValue.text = price.eur
+        usdValue.text = price.usd
+        tixValue.text = price.tix
     }
 
     override fun onSupportNavigateUp(): Boolean {

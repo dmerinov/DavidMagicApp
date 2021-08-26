@@ -1,6 +1,6 @@
 package com.davidmerino.domain.model
 
-data class LocalPrices(
+data class LocalPrice(
     val eur: String,
     val eurFoil: String,
     val tix: String,
