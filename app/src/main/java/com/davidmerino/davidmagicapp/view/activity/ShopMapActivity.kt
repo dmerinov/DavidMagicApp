@@ -81,8 +81,6 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView, OnMapReadyCall
             )
         )
         map.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
-
-
     }
 
 }
