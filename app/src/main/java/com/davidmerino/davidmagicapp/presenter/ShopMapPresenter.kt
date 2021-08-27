@@ -4,7 +4,6 @@ import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toGeoPoints
 import com.davidmerino.davidmagicapp.model.GeoPoints
 import com.davidmerino.domain.interactor.usecases.GetShopsUseCase
-import com.google.android.gms.maps.GoogleMap
 
 class ShopMapPresenter(
     private val shopsUseCase: GetShopsUseCase,
@@ -28,12 +27,11 @@ class ShopMapPresenter(
         //nothing to do
     }
 
-    fun onMapLoaded(googleMap: GoogleMap) {
+    fun onMapLoaded() {
         shopsUseCase.execute(
             onSuccess = {
                 view.loadPoints(
                     points = it.map { it.toGeoPoints() },
-                    googleMap = googleMap
                 )
             },
             onError = { onError { it } }
@@ -44,5 +42,5 @@ class ShopMapPresenter(
 }
 
 interface ShopMapView : Presenter.View {
-    fun loadPoints(points: List<GeoPoints>, googleMap: GoogleMap)
+    fun loadPoints(points: List<GeoPoints>)
 }

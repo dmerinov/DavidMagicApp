@@ -3,15 +3,16 @@ package com.davidmerino.davidmagicapp.view.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.model.GeoPoints
 import com.davidmerino.davidmagicapp.presenter.ShopMapPresenter
 import com.davidmerino.davidmagicapp.presenter.ShopMapView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_search_shop.*
 import org.kodein.di.Kodein
@@ -19,7 +20,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
-class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView, OnMapReadyCallback {
+class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
 
     companion object {
         private const val SHOP_MAP_KEY = "SHOP_MAP_KEY"
@@ -45,34 +46,47 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView, OnMapReadyCall
         }
     }
 
-    private lateinit var map: GoogleMap
+    private var googleMap: GoogleMap? = null
+    private val markersMap = mutableMapOf<Marker, GeoPoints>()
 
     override fun initializeUI() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        (mapFragment as SupportMapFragment).getMapAsync {
+            googleMap = it
+            registerMapListeners()
+            presenter.onMapLoaded()
+        }
     }
 
     override fun registerListeners() {
         //nothing to do
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        presenter.onMapLoaded(googleMap)
+    private fun registerMapListeners() {
+        googleMap?.setOnMarkerClickListener { marker ->
+            markersMap[marker]?.let { shop ->
+                Toast.makeText(
+                    this,
+                    "the point that has been clicked is ${shop.Name}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }.let { true }
+        }
     }
 
-    override fun loadPoints(points: List<GeoPoints>, googleMap: GoogleMap) {
-        map = googleMap
+    override fun loadPoints(points: List<GeoPoints>) {
 
         points.forEach { point ->
-            map.addMarker(
+            googleMap?.addMarker(
                 MarkerOptions().position(LatLng(point.Latitude, point.Longitude)).title(point.Name)
-            )
+            )?.let {
+                markersMap[it] = point
+            }
         }
 
-        map.moveCamera(
+        googleMap?.moveCamera(
             CameraUpdateFactory.newLatLng(
                 LatLng(
                     points.get(0).Latitude,
@@ -80,7 +94,7 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView, OnMapReadyCall
                 )
             )
         )
-        map.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
+        googleMap?.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
     }
 
 }
