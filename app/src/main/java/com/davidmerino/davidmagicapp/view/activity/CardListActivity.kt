@@ -41,8 +41,6 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
     }
 
     private val cardsAdapter: CardsAdapter = CardsAdapter() { presenter.onCardClick(it) }
-    private var actualCardList: MutableList<CardView> = mutableListOf()
-    var filteredList: MutableList<CardView> = mutableListOf()
 
     override fun initializeUI() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -65,7 +63,6 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
 
     override fun showCards(cards: List<CardView>) {
         cardsAdapter.replace(cards.toMutableList())
-        actualCardList.addAll(cards)
     }
 
     private val textWatcher = object : TextWatcher {
@@ -74,18 +71,7 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            filteredList.clear()
-            if (s != "") {
-                actualCardList.forEach { card ->
-                    if (card.title.contains(s.toString())) {
-                        filteredList.add(card)
-                    }
-                }
-                cardsAdapter.replace(filteredList)
-            } else {
-                cardsAdapter.replace(actualCardList)
-            }
-
+            presenter.onTextChanged(s.toString())
         }
 
         override fun afterTextChanged(s: Editable?) {

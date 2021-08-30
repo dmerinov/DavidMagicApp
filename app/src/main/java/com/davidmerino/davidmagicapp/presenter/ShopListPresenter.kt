@@ -16,6 +16,9 @@ class ShopListPresenter(
         getShops()
     }
 
+    private var actualShopList: List<GeoPoints> = mutableListOf()
+    private var filteredList: MutableList<GeoPoints> = mutableListOf()
+
     override fun resume() {
         //nothing to do
     }
@@ -32,6 +35,7 @@ class ShopListPresenter(
         view.showProgress()
         getShopsUseCase.execute(
             onSuccess = {
+                actualShopList = it.toMutableList().map { it.toGeoPoints() }
                 view.showShops(it.map { it.toGeoPoints() })
             },
             onError {
@@ -41,8 +45,31 @@ class ShopListPresenter(
         view.hideProgress()
     }
 
+    fun onShopClick(shop: GeoPoints) {
+
+    }
+
+    fun onPhoneClick(shop: GeoPoints) {
+        view.callShop(shop.phone)
+    }
+
+    fun onTextChanged(text: String) {
+        filteredList.clear()
+        if (text != "") {
+            actualShopList.forEach { shop ->
+                if (shop.name.contains(text)) {
+                    filteredList.add(shop)
+                }
+            }
+            view.showShops(filteredList)
+        } else {
+            view.showShops(actualShopList)
+        }
+    }
+
 }
 
 interface ShopListView : Presenter.View {
     fun showShops(cards: List<GeoPoints>)
+    fun callShop(phone: String)
 }

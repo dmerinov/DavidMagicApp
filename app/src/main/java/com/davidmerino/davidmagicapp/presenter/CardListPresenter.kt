@@ -11,6 +11,9 @@ class CardListPresenter(
     view: CardListView
 ) : Presenter<CardListView>(errorHandler, view) {
 
+    private var actualCardList: List<CardView> = mutableListOf()
+    private var filteredList: MutableList<CardView> = mutableListOf()
+
     override fun initialize() {
         getCards()
     }
@@ -29,6 +32,20 @@ class CardListPresenter(
 
     fun onCardClick(card: CardView) {
         view.navigateToCardDetailScreen(card.id)
+    }
+
+    fun onTextChanged(text: String) {
+        filteredList.clear()
+        if (text != "") {
+            actualCardList.forEach { shop ->
+                if (shop.title.contains(text)) {
+                    filteredList.add(shop)
+                }
+            }
+            view.showCards(filteredList)
+        } else {
+            view.showCards(actualCardList)
+        }
     }
 
     private fun getCards() {

@@ -23,6 +23,13 @@ fun openExternalUrl(context: Context, url: String) {
     context.startActivity(intent)
 }
 
+fun openDialPhone(context: Context, phone: String) {
+    val intent = Intent(Intent.ACTION_DIAL).apply {
+        data = Uri.parse("tel:${phone}")
+    }
+    context.startActivity(intent)
+}
+
 fun navigateToDiceActivity(context: Context) {
     context.startActivity(DiceActivity.getCallingIntent(context))
 }

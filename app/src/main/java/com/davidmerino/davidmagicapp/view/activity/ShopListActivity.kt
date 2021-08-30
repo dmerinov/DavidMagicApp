@@ -8,11 +8,13 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.model.GeoPoints
+import com.davidmerino.davidmagicapp.navigator.openDialPhone
 import com.davidmerino.davidmagicapp.presenter.ShopListPresenter
 import com.davidmerino.davidmagicapp.presenter.ShopListView
 import com.davidmerino.davidmagicapp.view.adapter.ShopsAdapter
 import kotlinx.android.synthetic.main.activity_card_list.*
 import kotlinx.android.synthetic.main.activity_shop_list.*
+import kotlinx.android.synthetic.main.item_shop.*
 import kotlinx.android.synthetic.main.view_progress.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -40,9 +42,10 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
         }
     }
 
-    private val shopsAdapter = ShopsAdapter()
-    private var actualShopList: MutableList<GeoPoints> = mutableListOf()
-    var filteredList: MutableList<GeoPoints> = mutableListOf()
+    private val shopsAdapter = ShopsAdapter(
+        onItemClickListener = { presenter.onShopClick(it) },
+        onPhoneClickListener = { presenter.onPhoneClick(it) }
+    )
 
     override fun initializeUI() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -64,18 +67,7 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            filteredList.clear()
-            if (s != "") {
-                actualShopList.forEach { shop ->
-                    if (shop.name.contains(s.toString())) {
-                        filteredList.add(shop)
-                    }
-                }
-                shopsAdapter.replace(filteredList)
-            } else {
-                shopsAdapter.replace(actualShopList)
-            }
-
+            presenter.onTextChanged(s.toString())
         }
 
         override fun afterTextChanged(s: Editable?) {
@@ -86,7 +78,10 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
 
     override fun showShops(shops: List<GeoPoints>) {
         shopsAdapter.replace(shops.toMutableList())
-        actualShopList = shops.toMutableList()
+    }
+
+    override fun callShop(phone: String) {
+        openDialPhone(this, phone)
     }
 
 }
