@@ -13,7 +13,7 @@ class ShopsAdapter() : RootAdapter<GeoPoints>() {
 
     class ViewHolder(view: View) : RootAdapter.RootViewHolder<GeoPoints>(itemView = view) {
         override fun bind(model: GeoPoints) {
-            itemView.nameText.text = model.Name
+            itemView.nameText.text = model.name
             itemView.addressText.text = model.address
             itemView.phoneText.text = model.phone
         }

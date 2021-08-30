@@ -2,6 +2,8 @@ package com.davidmerino.davidmagicapp.view.activity
 
 import android.content.Context
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidmerino.davidmagicapp.R
@@ -39,6 +41,8 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
     }
 
     private val shopsAdapter = ShopsAdapter()
+    private var actualShopList: MutableList<GeoPoints> = mutableListOf()
+    var filteredList: MutableList<GeoPoints> = mutableListOf()
 
     override fun initializeUI() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -51,11 +55,38 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
     }
 
     override fun registerListeners() {
-        //nothing to do
+        searchShop.addTextChangedListener(textWatcher)
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            //nothing to do
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            filteredList.clear()
+            if (s != "") {
+                actualShopList.forEach { shop ->
+                    if (shop.name.contains(s.toString())) {
+                        filteredList.add(shop)
+                    }
+                }
+                shopsAdapter.replace(filteredList)
+            } else {
+                shopsAdapter.replace(actualShopList)
+            }
+
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            //nothing to do
+        }
+
     }
 
     override fun showShops(shops: List<GeoPoints>) {
         shopsAdapter.replace(shops.toMutableList())
+        actualShopList = shops.toMutableList()
     }
 
 }

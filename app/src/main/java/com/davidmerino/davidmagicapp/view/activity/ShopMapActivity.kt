@@ -69,7 +69,7 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
             markersMap[marker]?.let { shop ->
                 Toast.makeText(
                     this,
-                    "the point that has been clicked is ${shop.Name}",
+                    "the point that has been clicked is ${shop.name}",
                     Toast.LENGTH_LONG
                 ).show()
             }.let { true }
@@ -80,7 +80,7 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
 
         points.forEach { point ->
             googleMap?.addMarker(
-                MarkerOptions().position(LatLng(point.Latitude, point.Longitude)).title(point.Name)
+                MarkerOptions().position(LatLng(point.lat, point.long)).title(point.name)
             )?.let {
                 markersMap[it] = point
             }
@@ -89,8 +89,8 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
         googleMap?.moveCamera(
             CameraUpdateFactory.newLatLng(
                 LatLng(
-                    points.get(0).Latitude,
-                    points.get(0).Longitude
+                    points.get(0).lat,
+                    points.get(0).long
                 )
             )
         )
