@@ -74,7 +74,7 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
             true -> {
                 showCard.text = resources.getString(R.string.hide_card)
                 cardPhoto.showMe()
-                name.hideMe()
+                shopName.hideMe()
                 manaCost.hideMe()
                 set.hideMe()
                 toughness.hideMe()
@@ -90,7 +90,7 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
             false -> {
                 showCard.text = resources.getString(R.string.show_card)
                 cardPhoto.hideMe()
-                name.showMe()
+                shopName.showMe()
                 manaCost.showMe()
                 set.showMe()
                 toughness.showMe()

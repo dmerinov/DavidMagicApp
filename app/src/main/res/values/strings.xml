@@ -30,4 +30,7 @@
     <string name="buy">Buy</string>
     <string name="shops">shops</string>
     <string name="shop_list">Shop List</string>
+    <string name="shop">Shop: </string>
+    <string name="address">Address: </string>
+    <string name="phone">Phone: </string>
 </resources>

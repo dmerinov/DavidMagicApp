@@ -32,6 +32,7 @@
         <activity android:name=".view.activity.BoosterListActivity" />
         <activity android:name=".view.activity.DetailBoosterActivity" />
         <activity android:name=".view.activity.ShopMapActivity" />
+        <activity android:name=".view.activity.ShopListActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

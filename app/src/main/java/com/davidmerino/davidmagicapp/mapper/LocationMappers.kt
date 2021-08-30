@@ -6,5 +6,9 @@ import com.davidmerino.domain.model.Location
 fun Location.toGeoPoints() = GeoPoints(
     Latitude = lat,
     Longitude = lng,
-    Name = name
+    Name = name,
+    address = address,
+    city = city,
+    phone = phone,
+    postalCode = postalCode
 )

@@ -51,6 +51,7 @@ class MenuActivity(
         buyCard.setOnClickListener { presenter.onBuyCardClick() }
         mockBooster.setOnClickListener { presenter.onBoosterCardClick() }
         shops.setOnClickListener { presenter.onShopSearchClick() }
+        shopsList.setOnClickListener { presenter.onShopListClick() }
     }
 
     override fun navigateToCardListScreen() {
@@ -75,6 +76,10 @@ class MenuActivity(
 
     override fun navigateToShopMapScreen() {
         navigateToShopMapScreen(this)
+    }
+
+    override fun navigateToShopListScreen() {
+        navigateToShopListScreen(this)
     }
 
 }

@@ -51,3 +51,7 @@ fun navigateToDetailBoosterActivity(context: Context, id: String, img: String) {
 fun navigateToShopMapScreen(context: Context) {
     context.startActivity(ShopMapActivity.getCallingIntent(context))
 }
+
+fun navigateToShopListScreen(context: Context) {
+    context.startActivity(ShopListActivity.getCallingIntent(context))
+}
