@@ -4,6 +4,7 @@ import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
 import com.davidmerino.domain.interactor.usecases.GetCardsUseCase
+import com.davidmerino.domain.model.Card
 
 class CardListPresenter(
     private val getCardsUseCase: GetCardsUseCase,
@@ -11,8 +12,7 @@ class CardListPresenter(
     view: CardListView
 ) : Presenter<CardListView>(errorHandler, view) {
 
-    private var actualCardList: List<CardView> = mutableListOf()
-    private var filteredList: MutableList<CardView> = mutableListOf()
+    private val cards: MutableList<Card> = mutableListOf()
 
     override fun initialize() {
         getCards()
@@ -35,24 +35,15 @@ class CardListPresenter(
     }
 
     fun onTextChanged(text: String) {
-        filteredList.clear()
-        if (text != "") {
-            actualCardList.forEach { shop ->
-                if (shop.title.contains(text)) {
-                    filteredList.add(shop)
-                }
-            }
-            view.showCards(filteredList)
-        } else {
-            view.showCards(actualCardList)
-        }
+        view.showCards(cards.filter { it.name.startsWith(text) }.map { it.toCardView() })
     }
 
     private fun getCards() {
         view.showProgress()
         getCardsUseCase.execute(
             onSuccess = {
-                view.showCards(it.map { it.toCardView() })
+                cards.addAll(it)
+                view.showCards(cards.map { it.toCardView() })
                 view.hideProgress()
             },
             onError = onError { view.showError(it) }

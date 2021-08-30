@@ -66,7 +66,7 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
     }
 
     override fun showCards(cards: List<CardView>) {
-        mockBoosterAdapter.replace(cards.toMutableList())
+        mockBoosterAdapter.replace(cards)
     }
 
     override fun getExpansionName(): String {

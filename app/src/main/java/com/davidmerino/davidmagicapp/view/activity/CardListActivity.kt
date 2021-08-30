@@ -62,7 +62,7 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
     }
 
     override fun showCards(cards: List<CardView>) {
-        cardsAdapter.replace(cards.toMutableList())
+        cardsAdapter.replace(cards)
     }
 
     private val textWatcher = object : TextWatcher {

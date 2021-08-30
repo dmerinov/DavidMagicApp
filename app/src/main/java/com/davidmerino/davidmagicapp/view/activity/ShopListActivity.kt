@@ -77,7 +77,7 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
     }
 
     override fun showShops(shops: List<GeoPoints>) {
-        shopsAdapter.replace(shops.toMutableList())
+        shopsAdapter.replace(shops)
     }
 
     override fun callShop(phone: String) {
