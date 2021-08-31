@@ -7,7 +7,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidmerino.davidmagicapp.R
-import com.davidmerino.davidmagicapp.model.GeoPoints
+import com.davidmerino.davidmagicapp.model.ShopView
 import com.davidmerino.davidmagicapp.navigator.openDialPhone
 import com.davidmerino.davidmagicapp.navigator.openGoogleMaps
 import com.davidmerino.davidmagicapp.presenter.ShopListPresenter
@@ -38,14 +38,16 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
             ShopListPresenter(
                 errorHandler = instance(),
                 view = this@ShopListActivity,
-                getShopsUseCase = instance()
+                getShopsUseCase = instance(),
+                setFavouriteUseCase = instance()
             )
         }
     }
 
     private val shopsAdapter = ShopsAdapter(
         onItemClickListener = { presenter.onShopClick(it) },
-        onPhoneClickListener = { presenter.onPhoneClick(it) }
+        onPhoneClickListener = { presenter.onPhoneClick(it) },
+        onFavClickListener = { geoPoint, isChecked -> presenter.onFavouriteClick(geoPoint,isChecked) }
     )
 
     override fun initializeUI() {
@@ -77,7 +79,7 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
 
     }
 
-    override fun showShops(shops: List<GeoPoints>) {
+    override fun showShops(shops: List<ShopView>) {
         shopsAdapter.replace(shops)
     }
 
@@ -86,8 +88,7 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
     }
 
     override fun showShopInMap(location: String) {
-        println("Coordinates are: $location")
-        openGoogleMaps(this,location)
+        openGoogleMaps(this, location)
 
     }
 

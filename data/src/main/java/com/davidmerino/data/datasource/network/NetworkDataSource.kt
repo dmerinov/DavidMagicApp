@@ -8,7 +8,7 @@ import com.davidmerino.data.mapper.toLocalPrices
 import com.davidmerino.data.mapper.toLocations
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.model.LocalPrice
-import com.davidmerino.domain.model.Location
+import com.davidmerino.domain.model.Shop
 import io.reactivex.Single
 
 class NetworkDataSource(
@@ -30,7 +30,7 @@ class NetworkDataSource(
         return apiScryfallService.getCardInfo(multiverseId).map { it.prices.toLocalPrices() }
     }
 
-    override fun getAllShops(): Single<List<Location>> {
+    override fun getAllShops(): Single<List<Shop>> {
         return apiShopService.getAllShops().map { it.sites.map { it.toLocations() } }
     }
 

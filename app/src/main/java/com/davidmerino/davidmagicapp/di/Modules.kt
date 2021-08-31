@@ -6,11 +6,13 @@ import com.davidmerino.data.api.ApiService
 import com.davidmerino.data.api.ApiShopService
 import com.davidmerino.data.api.createService
 import com.davidmerino.data.datasource.CommonRepository
-import com.davidmerino.data.datasource.cache.Cache
+import com.davidmerino.data.datasource.cache.CommonCache
 import com.davidmerino.data.datasource.local.Local
 import com.davidmerino.data.datasource.local.RealmDatabase
 import com.davidmerino.data.datasource.network.Network
 import com.davidmerino.data.datasource.network.NetworkDataSource
+import com.davidmerino.data.datasource.preferences.CommonPreferences
+import com.davidmerino.data.datasource.preferences.Preferences
 import com.davidmerino.davidmagicapp.error.AndroidErrorHandler
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.executor.RxExecutor
@@ -38,13 +40,15 @@ val domainModule = Kodein.Module("domainModule") {
     bind() from singleton { GetCardPricesUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetCardByIdUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetShopsUseCase(repository = instance(), executor = instance()) }
+    bind() from singleton { SetFavouriteUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module("dataModule") {
     bind<Repository>() with singleton {
         CommonRepository(
             network = instance(),
-            local = instance()
+            local = instance(),
+            preferences = instance()
         )
     }
     bind<Network>() with singleton {
@@ -65,5 +69,6 @@ val dataModule = Kodein.Module("dataModule") {
     }
 
     bind<Local>() with singleton { RealmDatabase(context = instance()) }
-    bind<Cache>() with singleton { Cache() }
+    bind<CommonCache>() with singleton { CommonCache() }
+    bind<Preferences>() with singleton { CommonPreferences(context = instance()) }
 }

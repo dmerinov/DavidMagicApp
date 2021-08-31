@@ -2,22 +2,23 @@ package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toGeoPoints
-import com.davidmerino.davidmagicapp.model.GeoPoints
+import com.davidmerino.davidmagicapp.mapper.toShop
+import com.davidmerino.davidmagicapp.model.ShopView
 import com.davidmerino.domain.interactor.usecases.GetShopsUseCase
-
+import com.davidmerino.domain.interactor.usecases.SetFavouriteUseCase
 
 class ShopListPresenter(
+    private val setFavouriteUseCase: SetFavouriteUseCase,
     private val getShopsUseCase: GetShopsUseCase,
     errorHandler: ErrorHandler,
     view: ShopListView
-) :
-    Presenter<ShopListView>(errorHandler, view) {
+) : Presenter<ShopListView>(errorHandler, view) {
+
+    private var shops: List<ShopView> = mutableListOf()
+
     override fun initialize() {
         getShops()
     }
-
-    private var actualShopList: List<GeoPoints> = mutableListOf()
-    private var filteredList: MutableList<GeoPoints> = mutableListOf()
 
     override fun resume() {
         //nothing to do
@@ -35,7 +36,7 @@ class ShopListPresenter(
         view.showProgress()
         getShopsUseCase.execute(
             onSuccess = {
-                actualShopList = it.toMutableList().map { it.toGeoPoints() }
+                shops = it.toMutableList().map { it.toGeoPoints() }
                 view.showShops(it.map { it.toGeoPoints() })
             },
             onError {
@@ -45,7 +46,7 @@ class ShopListPresenter(
         view.hideProgress()
     }
 
-    fun onShopClick(shop: GeoPoints) {
+    fun onShopClick(shop: ShopView) {
         view.showShopInMap(
             "geo:".plus(
                 shop.lat.toString().plus(", ").plus(shop.long).plus("?q=${shop.name}")
@@ -53,28 +54,26 @@ class ShopListPresenter(
         )
     }
 
-    fun onPhoneClick(shop: GeoPoints) {
+    fun onPhoneClick(shop: ShopView) {
         view.callShop(shop.phone)
     }
 
     fun onTextChanged(text: String) {
-        filteredList.clear()
-        if (text != "") {
-            actualShopList.forEach { shop ->
-                if (shop.name.contains(text)) {
-                    filteredList.add(shop)
-                }
-            }
-            view.showShops(filteredList)
-        } else {
-            view.showShops(actualShopList)
-        }
+        view.showShops(shops.filter { it.name.startsWith(text) })
     }
 
+    fun onFavouriteClick(shopView: ShopView, isChecked: Boolean) {
+        shopView.isFavourite = isChecked
+        setFavouriteUseCase.execute(
+            shop = shopView.toShop(),
+            onComplete = {},
+            onError = {}
+        )
+    }
 }
 
 interface ShopListView : Presenter.View {
-    fun showShops(cards: List<GeoPoints>)
+    fun showShops(cards: List<ShopView>)
     fun callShop(phone: String)
     fun showShopInMap(location: String)
 }

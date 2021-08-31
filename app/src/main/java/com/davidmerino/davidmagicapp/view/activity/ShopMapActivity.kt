@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import com.davidmerino.davidmagicapp.R
-import com.davidmerino.davidmagicapp.model.GeoPoints
+import com.davidmerino.davidmagicapp.model.ShopView
 import com.davidmerino.davidmagicapp.presenter.ShopMapPresenter
 import com.davidmerino.davidmagicapp.presenter.ShopMapView
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -47,7 +47,7 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
     }
 
     private var googleMap: GoogleMap? = null
-    private val markersMap = mutableMapOf<Marker, GeoPoints>()
+    private val markersMap = mutableMapOf<Marker, ShopView>()
 
     override fun initializeUI() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -76,7 +76,7 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
         }
     }
 
-    override fun loadPoints(points: List<GeoPoints>) {
+    override fun loadPoints(points: List<ShopView>) {
 
         points.forEach { point ->
             googleMap?.addMarker(

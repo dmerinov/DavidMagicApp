@@ -2,7 +2,7 @@ package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toGeoPoints
-import com.davidmerino.davidmagicapp.model.GeoPoints
+import com.davidmerino.davidmagicapp.model.ShopView
 import com.davidmerino.domain.interactor.usecases.GetShopsUseCase
 
 class ShopMapPresenter(
@@ -42,5 +42,5 @@ class ShopMapPresenter(
 }
 
 interface ShopMapView : Presenter.View {
-    fun loadPoints(points: List<GeoPoints>)
+    fun loadPoints(points: List<ShopView>)
 }

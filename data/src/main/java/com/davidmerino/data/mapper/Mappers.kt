@@ -2,10 +2,10 @@ package com.davidmerino.data.mapper
 
 import com.davidmerino.data.model.card.cardResponseMTG.CardDto
 import com.davidmerino.data.model.card.cardResponseScryfall.Prices
-import com.davidmerino.data.model.shop.Site
+import com.davidmerino.data.model.shop.SiteDto
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.model.LocalPrice
-import com.davidmerino.domain.model.Location
+import com.davidmerino.domain.model.Shop
 
 fun CardDto.toCard() = Card(
     id = id,
@@ -28,13 +28,15 @@ fun Prices.toLocalPrices() = LocalPrice(
     usdFoil = usdFoil ?: ""
 )
 
-fun Site.toLocations() = Location(
+fun SiteDto.toLocations() = Shop(
+    id = id,
     address = address,
     city = city,
     lat = lat,
     lng = lng,
     name = name,
     phone = phone,
-    postalCode = postalCode
+    postalCode = postalCode,
+    isFav = false
 )
 

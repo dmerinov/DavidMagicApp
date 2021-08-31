@@ -1,11 +1,10 @@
 package com.davidmerino.davidmagicapp.presenter
 
-import com.davidmerino.data.datasource.cache.ICache
+import com.davidmerino.data.datasource.cache.Cache
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 
 class DicePresenter(
-
-    private val cache: ICache,
+    private val cache: Cache, //cambiar de sitio al repo.
     errorHandler: ErrorHandler,
     view: DiceView,
 ) : Presenter<DiceView>(errorHandler, view) {
@@ -43,6 +42,7 @@ class DicePresenter(
     }
 
     override fun destroy() {
+        // nothing to do
     }
 
     fun incrementCounter(player: Player) {

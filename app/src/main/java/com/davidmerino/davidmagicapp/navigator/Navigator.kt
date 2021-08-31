@@ -31,12 +31,11 @@ fun openDialPhone(context: Context, phone: String) {
 }
 
 fun openGoogleMaps(context: Context, location: String) {
-
-    val data = Uri.parse(location)
-    val mapIntent = Intent(Intent.ACTION_VIEW, data)
-    mapIntent.setPackage("com.google.android.apps.maps")
+    val mapIntent = Intent(Intent.ACTION_VIEW).apply {
+        data = Uri.parse(location)
+        setPackage("com.google.android.apps.maps")
+    }
     context.startActivity(mapIntent)
-
 }
 
 fun navigateToDiceActivity(context: Context) {
