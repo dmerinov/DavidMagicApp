@@ -30,6 +30,15 @@ fun openDialPhone(context: Context, phone: String) {
     context.startActivity(intent)
 }
 
+fun openGoogleMaps(context: Context, location: String) {
+
+    val data = Uri.parse(location)
+    val mapIntent = Intent(Intent.ACTION_VIEW, data)
+    mapIntent.setPackage("com.google.android.apps.maps")
+    context.startActivity(mapIntent)
+
+}
+
 fun navigateToDiceActivity(context: Context) {
     context.startActivity(DiceActivity.getCallingIntent(context))
 }

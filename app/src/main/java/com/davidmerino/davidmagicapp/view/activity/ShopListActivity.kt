@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.model.GeoPoints
 import com.davidmerino.davidmagicapp.navigator.openDialPhone
+import com.davidmerino.davidmagicapp.navigator.openGoogleMaps
 import com.davidmerino.davidmagicapp.presenter.ShopListPresenter
 import com.davidmerino.davidmagicapp.presenter.ShopListView
 import com.davidmerino.davidmagicapp.view.adapter.ShopsAdapter
@@ -82,6 +83,12 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
 
     override fun callShop(phone: String) {
         openDialPhone(this, phone)
+    }
+
+    override fun showShopInMap(location: String) {
+        println("Coordinates are: $location")
+        openGoogleMaps(this,location)
+
     }
 
 }

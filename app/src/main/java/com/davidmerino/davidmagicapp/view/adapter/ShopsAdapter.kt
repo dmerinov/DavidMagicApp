@@ -20,6 +20,7 @@ class ShopsAdapter(
         RootAdapter.RootViewHolder<GeoPoints>(itemView = view) {
 
         init {
+            itemView.setOnClickListener { onItemClickListener(adapterPosition) }
             itemView.phoneText.setOnClickListener {
                 onPhoneClickListener(adapterPosition)
             }

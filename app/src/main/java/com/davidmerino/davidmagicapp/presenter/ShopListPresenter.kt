@@ -46,7 +46,11 @@ class ShopListPresenter(
     }
 
     fun onShopClick(shop: GeoPoints) {
-
+        view.showShopInMap(
+            "geo:".plus(
+                shop.lat.toString().plus(", ").plus(shop.long).plus("?q=${shop.name}")
+            )
+        )
     }
 
     fun onPhoneClick(shop: GeoPoints) {
@@ -72,4 +76,5 @@ class ShopListPresenter(
 interface ShopListView : Presenter.View {
     fun showShops(cards: List<GeoPoints>)
     fun callShop(phone: String)
+    fun showShopInMap(location: String)
 }
