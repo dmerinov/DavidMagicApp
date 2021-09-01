@@ -33,4 +33,6 @@
     <string name="shop">Shop: </string>
     <string name="address">Address: </string>
     <string name="phone">Phone: </string>
+    <string name="google_maps_pkg">com.google.android.apps.maps</string>
+    <string name="no_expansion_error">This activity needs an expansion name</string>
 </resources>

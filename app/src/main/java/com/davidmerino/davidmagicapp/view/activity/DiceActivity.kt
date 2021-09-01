@@ -32,7 +32,8 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
             DicePresenter(
                 errorHandler = instance(),
                 view = this@DiceActivity,
-                cache = instance()
+                setLifeCounter = instance(),
+                getLifeCounter = instance()
             )
 
         }
@@ -62,8 +63,8 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
     }
 
     override fun isLocked(): Boolean {
-        var keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-        return (keyguardManager != null && keyguardManager.isKeyguardLocked)
+        val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        return (keyguardManager.isKeyguardLocked)
     }
 
     override fun onSupportNavigateUp(): Boolean {

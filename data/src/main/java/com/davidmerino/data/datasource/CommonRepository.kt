@@ -1,5 +1,6 @@
 package com.davidmerino.data.datasource
 
+import com.davidmerino.data.datasource.cache.Cache
 import com.davidmerino.data.datasource.local.Local
 import com.davidmerino.data.datasource.network.Network
 import com.davidmerino.data.datasource.preferences.Preferences
@@ -13,7 +14,8 @@ import io.reactivex.Single
 class CommonRepository(
     private val network: Network,
     private val local: Local,
-    private val preferences: Preferences
+    private val preferences: Preferences,
+    private val cache: Cache
 ) : Repository {
 
     override fun getCards(): Single<List<Card>> = network.getCards()
@@ -44,4 +46,11 @@ class CommonRepository(
         }
         return Completable.complete()
     }
+
+    override fun setLifeCounter(player: Int, life: Int): Completable {
+        cache.setLife(player, life)
+        return Completable.complete()
+    }
+
+    override fun getLifeCounter(player: Int): Single<Int> = cache.getLife(player)
 }

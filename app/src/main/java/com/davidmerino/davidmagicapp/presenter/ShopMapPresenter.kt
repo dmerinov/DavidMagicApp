@@ -9,22 +9,22 @@ class ShopMapPresenter(
     private val shopsUseCase: GetShopsUseCase,
     errorHandler: ErrorHandler,
     view: ShopMapView
-) :
-    Presenter<ShopMapView>(errorHandler, view) {
+) : Presenter<ShopMapView>(errorHandler, view) {
 
     override fun initialize() {
+        // nothing to do
     }
 
     override fun resume() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun stop() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun destroy() {
-        //nothing to do
+        // nothing to do
     }
 
     fun onMapLoaded() {

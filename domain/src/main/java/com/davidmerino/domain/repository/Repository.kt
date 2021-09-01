@@ -13,4 +13,6 @@ interface Repository {
     fun getCardMarketInfo(multiverseId: String): Single<LocalPrice>
     fun getShops(): Single<List<Shop>>
     fun setFavShop(shop: Shop): Completable
+    fun setLifeCounter(player: Int, life: Int): Completable
+    fun getLifeCounter(player: Int): Single<Int>
 }

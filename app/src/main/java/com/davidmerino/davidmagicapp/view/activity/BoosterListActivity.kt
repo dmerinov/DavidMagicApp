@@ -18,6 +18,7 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
 class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterListPresenterView {
+
     companion object {
         private const val MOCK_DETAIL_EXP_KEY = "MOCK_DETAIL_EXP_KEY"
 
@@ -58,7 +59,7 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
     }
 
     override fun registerListeners() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun navigateToBoosterDetailScreen(id: String, img: String) {
@@ -71,7 +72,7 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
 
     override fun getExpansionName(): String {
         return intent.getStringExtra(MOCK_DETAIL_EXP_KEY)
-            ?: throw IllegalArgumentException("This activity needs an expansion name")
+            ?: throw IllegalArgumentException(getString(R.string.no_expansion_error))
     }
 
     override fun onSupportNavigateUp(): Boolean {

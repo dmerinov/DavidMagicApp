@@ -23,8 +23,6 @@ import org.kodein.di.generic.provider
 class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
 
     companion object {
-        private const val SHOP_MAP_KEY = "SHOP_MAP_KEY"
-
         fun getCallingIntent(context: Context) =
             Intent(context, ShopMapActivity::class.java)
     }
@@ -61,7 +59,7 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
     }
 
     override fun registerListeners() {
-        //nothing to do
+        // nothing to do
     }
 
     private fun registerMapListeners() {

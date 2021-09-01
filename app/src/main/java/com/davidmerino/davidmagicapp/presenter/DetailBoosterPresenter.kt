@@ -16,19 +16,18 @@ class DetailBoosterPresenter(
     }
 
     override fun resume() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun stop() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun destroy() {
-        //nothing to do
+        // nothing to do
     }
 
     private fun getCardPrices(multiverseId: String) {
-
         getCardPricesUseCase.execute(
             multiverseId,
             success = {

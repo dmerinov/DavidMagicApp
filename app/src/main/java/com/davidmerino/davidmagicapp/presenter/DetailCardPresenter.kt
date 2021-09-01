@@ -20,15 +20,15 @@ class DetailCardPresenter(
     }
 
     override fun resume() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun stop() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun destroy() {
-        //nothing to do
+        // nothing to do
     }
 
     private fun getCardByID(id: String) {

@@ -4,6 +4,7 @@ import com.davidmerino.davidmagicapp.error.ErrorHandler
 
 class MenuPresenter(errorHandler: ErrorHandler, view: ControlPanelView) :
     Presenter<ControlPanelView>(errorHandler, view) {
+
     override fun initialize() {
         view.loadImageLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Magicthegathering-logo.svg/2560px-Magicthegathering-logo.svg.png")
     }
@@ -33,15 +34,15 @@ class MenuPresenter(errorHandler: ErrorHandler, view: ControlPanelView) :
     }
 
     override fun resume() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun stop() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun destroy() {
-        //nothing to do
+        // nothing to do
     }
 
 }

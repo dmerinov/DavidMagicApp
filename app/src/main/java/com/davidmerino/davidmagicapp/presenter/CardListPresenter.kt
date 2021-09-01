@@ -19,15 +19,15 @@ class CardListPresenter(
     }
 
     override fun resume() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun stop() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun destroy() {
-        //nothing to do
+        // nothing to do
     }
 
     fun onCardClick(card: CardView) {

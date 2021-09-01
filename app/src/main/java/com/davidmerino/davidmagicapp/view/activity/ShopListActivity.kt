@@ -23,6 +23,7 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
 class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
+
     companion object {
         fun getCallingIntent(context: Context) = Intent(context, ShopListActivity::class.java)
     }
@@ -47,7 +48,12 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
     private val shopsAdapter = ShopsAdapter(
         onItemClickListener = { presenter.onShopClick(it) },
         onPhoneClickListener = { presenter.onPhoneClick(it) },
-        onFavClickListener = { geoPoint, isChecked -> presenter.onFavouriteClick(geoPoint,isChecked) }
+        onFavClickListener = { geoPoint, isChecked ->
+            presenter.onFavouriteClick(
+                geoPoint,
+                isChecked
+            )
+        }
     )
 
     override fun initializeUI() {
@@ -66,7 +72,7 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            //nothing to do
+            // nothing to do
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -74,7 +80,7 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
         }
 
         override fun afterTextChanged(s: Editable?) {
-            //nothing to do
+            // nothing to do
         }
 
     }

@@ -10,6 +10,7 @@ class CardsAdapter(onItemClickListener: (CardView) -> Unit) :
     RootAdapter<CardView>(onItemClickListener = onItemClickListener) {
 
     override val itemLayoutId: Int = R.layout.item_card
+
     override fun viewHolder(view: View): RootViewHolder<CardView> = ViewHolder(view)
 
     class ViewHolder(view: View) : RootAdapter.RootViewHolder<CardView>(itemView = view) {

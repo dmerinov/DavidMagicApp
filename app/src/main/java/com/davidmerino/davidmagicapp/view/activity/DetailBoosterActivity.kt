@@ -16,7 +16,8 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
-class DetailBoosterActivity() : RootActivity<DetailBoosterView>(), DetailBoosterView {
+class DetailBoosterActivity : RootActivity<DetailBoosterView>(), DetailBoosterView {
+
     companion object {
         private const val DETAIL_BOOSTER_KEY = "DETAIL_BOOSTER_KEY"
         private const val DETAIL_BOOSTER_IMAGE_KEY = "DETAIL_BOOSTER_IMAGE_KEY"
@@ -24,7 +25,6 @@ class DetailBoosterActivity() : RootActivity<DetailBoosterView>(), DetailBooster
             Intent(context, DetailBoosterActivity::class.java).apply {
                 putExtra(DETAIL_BOOSTER_KEY, id)
                 putExtra(DETAIL_BOOSTER_IMAGE_KEY, img)
-
             }
     }
 
@@ -51,7 +51,7 @@ class DetailBoosterActivity() : RootActivity<DetailBoosterView>(), DetailBooster
     }
 
     override fun registerListeners() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun getIntentId() = intent.getStringExtra(DETAIL_BOOSTER_KEY).toString()

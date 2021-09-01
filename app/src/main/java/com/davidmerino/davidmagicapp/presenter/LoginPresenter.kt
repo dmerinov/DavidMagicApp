@@ -4,20 +4,21 @@ import com.davidmerino.davidmagicapp.error.ErrorHandler
 
 class LoginPresenter(errorHandler: ErrorHandler, view: LoginView) :
     Presenter<LoginView>(errorHandler, view) {
+
     override fun initialize() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun resume() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun stop() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun destroy() {
-        //nothing to do
+        // nothing to do
     }
 
     fun onResetClick() {

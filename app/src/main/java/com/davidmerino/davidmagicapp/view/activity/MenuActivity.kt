@@ -15,13 +15,10 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
 
-class MenuActivity(
-) : RootActivity<ControlPanelView>(), ControlPanelView {
+class MenuActivity : RootActivity<ControlPanelView>(), ControlPanelView {
 
     companion object {
-
-        private const val MENU_ACTIVITY_KEY = "MENU_ACTIVITY_KEY"
-        fun getCallingIntent2(context: Context) = Intent(context, MenuActivity::class.java)
+        fun getCallingIntent(context: Context) = Intent(context, MenuActivity::class.java)
     }
 
     override val progress: View

@@ -4,13 +4,9 @@ import com.davidmerino.davidmagicapp.model.CardDetailView
 import com.davidmerino.davidmagicapp.model.CardView
 import com.davidmerino.domain.model.Card
 
-fun Card.toCardDetailView() = toughness?.let {
-    power?.let { it1 ->
-        CardDetailView(
-            id, imageUrl, manaCost, name, set, text, it, it1
-        )
-    }
-}
+fun Card.toCardDetailView() = CardDetailView(
+    id, imageUrl, manaCost, name, set, text, toughness, power
+)
 
 fun Card.toCardView() = CardView(
     id = id,

@@ -21,15 +21,15 @@ class ShopListPresenter(
     }
 
     override fun resume() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun stop() {
-        //nothing to do
+        // nothing to do
     }
 
     override fun destroy() {
-        //nothing to do
+        // nothing to do
     }
 
     private fun getShops() {
@@ -39,9 +39,7 @@ class ShopListPresenter(
                 shops = it.toMutableList().map { it.toGeoPoints() }
                 view.showShops(it.map { it.toGeoPoints() })
             },
-            onError {
-                error("List could not be loaded properly, try again later")
-            }
+            onError = onError { }
         )
         view.hideProgress()
     }
@@ -67,7 +65,7 @@ class ShopListPresenter(
         setFavouriteUseCase.execute(
             shop = shopView.toShop(),
             onComplete = {},
-            onError = {}
+            onError = onError { view.showError(it) }
         )
     }
 }

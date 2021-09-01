@@ -10,6 +10,7 @@ class BoosterAdapter(onItemClickListener: (CardView) -> Unit) :
     RootAdapter<CardView>(onItemClickListener = onItemClickListener) {
 
     override val itemLayoutId: Int = R.layout.item_booster
+
     override fun viewHolder(view: View): RootViewHolder<CardView> = ViewHolder(view)
 
     class ViewHolder(view: View) :

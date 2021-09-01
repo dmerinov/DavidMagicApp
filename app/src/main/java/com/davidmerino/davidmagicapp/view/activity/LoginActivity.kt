@@ -1,6 +1,5 @@
 package com.davidmerino.davidmagicapp.view.activity
 
-import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import com.davidmerino.davidmagicapp.R
@@ -13,7 +12,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
-class LoginActivity() : RootActivity<LoginView>(), LoginView {
+class LoginActivity : RootActivity<LoginView>(), LoginView {
 
     override val progress: View
         get() = TODO("Not yet implemented")
@@ -58,6 +57,6 @@ class LoginActivity() : RootActivity<LoginView>(), LoginView {
     }
 
     override fun showError(string: String) {
-        Toast.makeText(this, "Something went wrong: $string", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
     }
 }

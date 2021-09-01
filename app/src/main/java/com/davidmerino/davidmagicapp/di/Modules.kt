@@ -34,13 +34,14 @@ fun appModule(context: Context) = Kodein.Module("appModule") {
 }
 
 val domainModule = Kodein.Module("domainModule") {
-
     bind() from singleton { GetCardsUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetBoosterPackUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetCardPricesUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetCardByIdUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetShopsUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { SetFavouriteUseCase(repository = instance(), executor = instance()) }
+    bind() from singleton { SetLifeCounter(repository = instance(), executor = instance()) }
+    bind() from singleton { GetLifeCounter(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module("dataModule") {
@@ -48,7 +49,8 @@ val dataModule = Kodein.Module("dataModule") {
         CommonRepository(
             network = instance(),
             local = instance(),
-            preferences = instance()
+            preferences = instance(),
+            cache = instance()
         )
     }
     bind<Network>() with singleton {
@@ -67,7 +69,6 @@ val dataModule = Kodein.Module("dataModule") {
     bind<ApiShopService>() with singleton {
         createService(endPoint = ApiShopService.END_POINT)
     }
-
     bind<Local>() with singleton { RealmDatabase(context = instance()) }
     bind<CommonCache>() with singleton { CommonCache() }
     bind<Preferences>() with singleton { CommonPreferences(context = instance()) }

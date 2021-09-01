@@ -9,10 +9,7 @@ class ShopsAdapter(
     private val onPhoneClickListener: (ShopView) -> Unit,
     private val onFavClickListener: (ShopView, Boolean) -> Unit,
     onItemClickListener: (ShopView) -> Unit
-) :
-    RootAdapter<ShopView>(
-        onItemClickListener = onItemClickListener
-    ) {
+) : RootAdapter<ShopView>(onItemClickListener = onItemClickListener) {
 
     override val itemLayoutId: Int = R.layout.item_shop
 

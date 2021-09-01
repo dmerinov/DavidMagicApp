@@ -19,7 +19,8 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
-class CardListActivity() : RootActivity<CardListView>(), CardListView {
+class CardListActivity : RootActivity<CardListView>(), CardListView {
+
     companion object {
         fun getCallingIntent(context: Context) = Intent(context, CardListActivity::class.java)
     }
@@ -67,7 +68,7 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            //nothing to do
+            // nothing to do
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -75,7 +76,7 @@ class CardListActivity() : RootActivity<CardListView>(), CardListView {
         }
 
         override fun afterTextChanged(s: Editable?) {
-            //nothing to do
+            // nothing to do
         }
 
     }

@@ -3,6 +3,7 @@ package com.davidmerino.davidmagicapp.navigator
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import com.davidmerino.davidmagicapp.R
 import com.davidmerino.davidmagicapp.view.activity.*
 
 /**
@@ -13,7 +14,7 @@ fun navigateToDetailCardActivity(context: Context, id: String) {
 }
 
 fun navigateToMenuActivity(context: Context) {
-    context.startActivity(MenuActivity.getCallingIntent2(context))
+    context.startActivity(MenuActivity.getCallingIntent(context))
 }
 
 fun openExternalUrl(context: Context, url: String) {
@@ -33,7 +34,7 @@ fun openDialPhone(context: Context, phone: String) {
 fun openGoogleMaps(context: Context, location: String) {
     val mapIntent = Intent(Intent.ACTION_VIEW).apply {
         data = Uri.parse(location)
-        setPackage("com.google.android.apps.maps")
+        setPackage(context.getString(R.string.google_maps_pkg))
     }
     context.startActivity(mapIntent)
 }

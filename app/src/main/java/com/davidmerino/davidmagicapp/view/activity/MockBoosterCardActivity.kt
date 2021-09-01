@@ -16,6 +16,7 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
 class MockBoosterCardActivity : RootActivity<MockBoosterCardView>(), MockBoosterCardView {
+
     companion object {
         fun getCallingIntent(context: Context) =
             Intent(context, MockBoosterCardActivity::class.java)
