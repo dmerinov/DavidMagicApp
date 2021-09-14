@@ -12,7 +12,7 @@ interface ApiService {
     }
 
     @GET("v1/cards")
-    fun getAllCards(): Single<CardResponseDto>
+    suspend fun getAllCards(): CardResponseDto
 
     @GET("v1/sets/{set}/booster")
     fun mockBoosterPack(@Path("set") Set: String): Single<CardResponseDto>

@@ -6,6 +6,8 @@ import com.davidmerino.data.api.ApiShopService
 import com.davidmerino.data.mapper.toCard
 import com.davidmerino.data.mapper.toLocalPrices
 import com.davidmerino.data.mapper.toLocations
+import com.davidmerino.domain.Either
+import com.davidmerino.domain.MagicError
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.model.LocalPrice
 import com.davidmerino.domain.model.Shop
@@ -17,9 +19,10 @@ class NetworkDataSource(
     private val apiShopService: ApiShopService
 ) : Network {
 
-    override fun getCards(): Single<List<Card>> {
-        return apiService.getAllCards().map { it.cards.map { it.toCard() } }
-    }
+    override suspend fun getCards(): Either<MagicError, List<Card>> =
+        execute {
+            apiService.getAllCards().cards.map { it.toCard() }
+        }
 
     override fun getCardBooster(set: String): Single<List<Card>> {
 
@@ -33,6 +36,13 @@ class NetworkDataSource(
     override fun getAllShops(): Single<List<Shop>> {
         return apiShopService.getAllShops().map { it.sites.map { it.toLocations() } }
     }
+
+    suspend fun <R> execute(f: suspend () -> R): Either<MagicError, R> =
+        try {
+            Either.Right(f())
+        } catch (t: Throwable) {
+            Either.Left(MagicError.Default())
+        }
 
 
 }

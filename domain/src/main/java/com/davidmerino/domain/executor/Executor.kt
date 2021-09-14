@@ -6,7 +6,7 @@ import io.reactivex.Scheduler
  * Executor
  */
 interface Executor {
-    fun new(): Scheduler
+    fun new(): Scheduler// CoroutineDispatcher // bg
 
     fun main(): Scheduler
 }

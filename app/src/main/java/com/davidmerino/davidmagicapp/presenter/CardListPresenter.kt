@@ -3,11 +3,15 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
-import com.davidmerino.domain.interactor.usecases.GetCardsUseCase
 import com.davidmerino.domain.model.Card
+import com.davidmerino.domain.repository.Repository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CardListPresenter(
-    private val getCardsUseCase: GetCardsUseCase,
+    private val repository: Repository,
     errorHandler: ErrorHandler,
     view: CardListView
 ) : Presenter<CardListView>(errorHandler, view) {
@@ -39,15 +43,15 @@ class CardListPresenter(
     }
 
     private fun getCards() {
-        view.showProgress()
-        getCardsUseCase.execute(
-            onSuccess = {
-                cards.addAll(it)
-                view.showCards(cards.map { it.toCardView() })
-                view.hideProgress()
-            },
-            onError = onError { view.showError(it) }
-        )
+        CoroutineScope(Dispatchers.IO).launch {
+            view.showProgress()
+            val result = withContext(Dispatchers.IO) { repository.getCards() }
+            view.hideProgress()
+            result.fold(
+                error = { onError { } },
+                success = { view.showCards(it.map { it.toCardView() }) }
+            )
+        }
     }
 }
 

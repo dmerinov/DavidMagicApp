@@ -4,6 +4,8 @@ import com.davidmerino.data.datasource.cache.Cache
 import com.davidmerino.data.datasource.local.Local
 import com.davidmerino.data.datasource.network.Network
 import com.davidmerino.data.datasource.preferences.Preferences
+import com.davidmerino.domain.Either
+import com.davidmerino.domain.MagicError
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.model.LocalPrice
 import com.davidmerino.domain.model.Shop
@@ -18,7 +20,7 @@ class CommonRepository(
     private val cache: Cache
 ) : Repository {
 
-    override fun getCards(): Single<List<Card>> = network.getCards()
+    override suspend fun getCards(): Either<MagicError, List<Card>> = network.getCards()
 
     override fun getCardByID(id: String) = local.getCardByID(id) // handle errors
 
