@@ -3,10 +3,11 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toGeoPoints
 import com.davidmerino.davidmagicapp.model.ShopView
-import com.davidmerino.domain.interactor.usecases.GetShopsUseCase
+import com.davidmerino.domain.repository.Repository
+import kotlinx.coroutines.*
 
 class ShopMapPresenter(
-    private val shopsUseCase: GetShopsUseCase,
+    private val repository: Repository,
     errorHandler: ErrorHandler,
     view: ShopMapView
 ) : Presenter<ShopMapView>(errorHandler, view) {
@@ -28,14 +29,13 @@ class ShopMapPresenter(
     }
 
     fun onMapLoaded() {
-        shopsUseCase.execute(
-            onSuccess = {
-                view.loadPoints(
-                    points = it.map { it.toGeoPoints() },
-                )
-            },
-            onError = { onError { it } }
-        )
+        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+            val result = withContext(Dispatchers.IO) { repository.getShops() }
+            result.fold(
+                error = { onError { } },
+                success = { view.loadPoints(it.map { it.toGeoPoints() }) }
+            )
+        }
 
 
     }

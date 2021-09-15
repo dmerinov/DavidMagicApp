@@ -4,12 +4,13 @@ import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toGeoPoints
 import com.davidmerino.davidmagicapp.mapper.toShop
 import com.davidmerino.davidmagicapp.model.ShopView
-import com.davidmerino.domain.interactor.usecases.GetShopsUseCase
 import com.davidmerino.domain.interactor.usecases.SetFavouriteUseCase
+import com.davidmerino.domain.repository.Repository
+import kotlinx.coroutines.*
 
 class ShopListPresenter(
     private val setFavouriteUseCase: SetFavouriteUseCase,
-    private val getShopsUseCase: GetShopsUseCase,
+    private val repository: Repository,
     errorHandler: ErrorHandler,
     view: ShopListView
 ) : Presenter<ShopListView>(errorHandler, view) {
@@ -33,15 +34,13 @@ class ShopListPresenter(
     }
 
     private fun getShops() {
-        view.showProgress()
-        getShopsUseCase.execute(
-            onSuccess = {
-                shops = it.toMutableList().map { it.toGeoPoints() }
-                view.showShops(it.map { it.toGeoPoints() })
-            },
-            onError = onError { }
-        )
-        view.hideProgress()
+        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+            val result = withContext(Dispatchers.IO) { repository.getShops() }
+            result.fold(
+                error = { onError { } },
+                success = { view.showShops(it.map { it.toGeoPoints() }) }
+            )
+        }
     }
 
     fun onShopClick(shop: ShopView) {

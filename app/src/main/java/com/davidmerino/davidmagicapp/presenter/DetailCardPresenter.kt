@@ -3,11 +3,11 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardDetailView
 import com.davidmerino.davidmagicapp.model.CardDetailView
-import com.davidmerino.domain.interactor.usecases.GetCardByIdUseCase
+import com.davidmerino.domain.repository.Repository
 
 
 class DetailCardPresenter(
-    private val getCardByIdUseCase: GetCardByIdUseCase,
+    private val repository: Repository,
     errorHandler: ErrorHandler,
     view: DetailCardView
 ) : Presenter<DetailCardView>(errorHandler, view) {
@@ -32,7 +32,16 @@ class DetailCardPresenter(
     }
 
     private fun getCardByID(id: String) {
-        view.showCard(getCardByIdUseCase.execute(id).toCardDetailView())
+//        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+        val result = repository.getCardByID(id)
+//            result.fold(
+//                error = onError {},
+//                success = {
+//                    view.showCard(it.toCardDetailView())
+//                }
+//            )
+        view.showCard(result.toCardDetailView())
+//        }
     }
 
     fun onShowCardClick() {

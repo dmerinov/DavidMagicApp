@@ -12,7 +12,6 @@ import com.davidmerino.domain.MagicError
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.model.LocalPrice
 import com.davidmerino.domain.model.Shop
-import io.reactivex.Single
 
 class NetworkDataSource(
     private val apiService: ApiService,
@@ -38,8 +37,11 @@ class NetworkDataSource(
         }
     }
 
-    override fun getAllShops(): Single<List<Shop>> {
-        return apiShopService.getAllShops().map { it.sites.map { it.toLocations() } }
+    override suspend fun getAllShops(): Either<MagicError, List<Shop>> {
+        return execute {
+            apiShopService.getAllShops().body()?.sites?.map { it.toLocations() }
+                ?: throw Exception()
+        }
     }
 
     suspend fun <R> execute(f: suspend () -> R): Either<MagicError, R> =

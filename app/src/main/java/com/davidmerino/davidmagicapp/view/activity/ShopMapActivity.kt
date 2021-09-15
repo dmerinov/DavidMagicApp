@@ -39,7 +39,7 @@ class ShopMapActivity : RootActivity<ShopMapView>(), ShopMapView {
             ShopMapPresenter(
                 errorHandler = instance(),
                 view = this@ShopMapActivity,
-                shopsUseCase = instance()
+                repository = instance()
             )
         }
     }

@@ -13,7 +13,7 @@ interface Repository {
     fun getCardByID(id: String): Card
     suspend fun getBoosterPack(expansion: String): Either<MagicError, List<Card>>
     suspend fun getCardMarketInfo(multiverseId: String): Either<MagicError, LocalPrice>
-    fun getShops(): Single<List<Shop>>
+    suspend fun getShops(): Either<MagicError, List<Shop>>
     fun setFavShop(shop: Shop): Completable
     fun setLifeCounter(player: Int, life: Int): Completable
     fun getLifeCounter(player: Int): Single<Int>

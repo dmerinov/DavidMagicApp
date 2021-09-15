@@ -22,7 +22,7 @@ class CommonRepository(
 
     override suspend fun getCards(): Either<MagicError, List<Card>> = network.getCards()
 
-    override fun getCardByID(id: String) = local.getCardByID(id) // handle errors
+    override fun getCardByID(id: String) = local.getCardByID(id)
 
     override suspend fun getBoosterPack(expansion: String): Either<MagicError, List<Card>> =
         network.getCardBooster(expansion)
@@ -30,13 +30,17 @@ class CommonRepository(
     override suspend fun getCardMarketInfo(multiverseId: String): Either<MagicError, LocalPrice> =
         network.getCardMarketInfo(multiverseId)
 
-    override fun getShops(): Single<List<Shop>> {
+    override suspend fun getShops(): Either<MagicError, List<Shop>> {
         val favouritesIDs = preferences.getFavourites()
-        return network.getAllShops().map {
-            return@map it.map {
-                it.isFav = favouritesIDs.contains(it.id)
-                return@map it
-            }
+
+        return when (val result = network.getAllShops()) {
+            is Either.Left -> result
+            is Either.Right -> Either.Right(
+                result.success.map {
+                    it.isFav = favouritesIDs.contains(it.id)
+                    return@map it
+                }
+            )
         }
     }
 

@@ -1,7 +1,7 @@
 package com.davidmerino.data.api
 
 import com.davidmerino.data.model.shop.ShopResponseDto
-import io.reactivex.Single
+import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiShopService {
@@ -11,6 +11,6 @@ interface ApiShopService {
     }
 
     @GET("cards.json")
-    fun getAllShops(): Single<ShopResponseDto>
+    suspend fun getAllShops(): Response<ShopResponseDto>
 
 }

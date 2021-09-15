@@ -39,7 +39,7 @@ class DetailCardActivity : RootActivity<DetailCardView>(), DetailCardView {
             DetailCardPresenter(
                 errorHandler = instance(),
                 view = this@DetailCardActivity,
-                getCardByIdUseCase = instance()
+                repository = instance()
             )
         }
     }
