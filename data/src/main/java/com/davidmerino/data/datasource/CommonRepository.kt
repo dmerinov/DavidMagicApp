@@ -24,10 +24,10 @@ class CommonRepository(
 
     override fun getCardByID(id: String) = local.getCardByID(id) // handle errors
 
-    override fun getBoosterPack(expansion: String): Single<List<Card>> =
+    override suspend fun getBoosterPack(expansion: String): Either<MagicError, List<Card>> =
         network.getCardBooster(expansion)
 
-    override fun getCardMarketInfo(multiverseId: String): Single<LocalPrice> =
+    override suspend fun getCardMarketInfo(multiverseId: String): Either<MagicError, LocalPrice> =
         network.getCardMarketInfo(multiverseId)
 
     override fun getShops(): Single<List<Shop>> {

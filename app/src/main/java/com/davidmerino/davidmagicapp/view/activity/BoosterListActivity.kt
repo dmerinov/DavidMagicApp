@@ -39,7 +39,7 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
         bind<BoosterListPresenter>() with provider {
             BoosterListPresenter(
                 expansion = getExpansionName(),
-                getBoosterPackUseCase = instance(),
+                repository = instance(),
                 errorHandler = instance(),
                 view = this@BoosterListActivity
             )

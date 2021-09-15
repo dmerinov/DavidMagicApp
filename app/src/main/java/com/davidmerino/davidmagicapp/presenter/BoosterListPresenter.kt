@@ -3,10 +3,11 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
-import com.davidmerino.domain.interactor.usecases.GetBoosterPackUseCase
+import com.davidmerino.domain.repository.Repository
+import kotlinx.coroutines.*
 
 class BoosterListPresenter(
-    private val getBoosterPackUseCase: GetBoosterPackUseCase,
+    private val repository: Repository,
     private val expansion: String,
     errorHandler: ErrorHandler, view: BoosterListPresenterView
 ) : Presenter<BoosterListPresenterView>(errorHandler, view) {
@@ -32,10 +33,14 @@ class BoosterListPresenter(
     }
 
     private fun getBooster() {
-        getBoosterPackUseCase.execute(
-            expansion = expansion,
-            onError = { onError { it } },
-            onSuccess = { view.showCards(it.map { it.toCardView() }) })
+
+        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+            val result = withContext(Dispatchers.IO) { repository.getBoosterPack(expansion) }
+            result.fold(
+                error = { onError { } },
+                success = { view.showCards(it.map { it.toCardView() }) }
+            )
+        }
     }
 }
 

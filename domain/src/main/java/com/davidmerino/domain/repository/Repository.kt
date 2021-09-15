@@ -11,8 +11,8 @@ import io.reactivex.Single
 interface Repository {
     suspend fun getCards(): Either<MagicError, List<Card>>
     fun getCardByID(id: String): Card
-    fun getBoosterPack(expansion: String): Single<List<Card>>
-    fun getCardMarketInfo(multiverseId: String): Single<LocalPrice>
+    suspend fun getBoosterPack(expansion: String): Either<MagicError, List<Card>>
+    suspend fun getCardMarketInfo(multiverseId: String): Either<MagicError, LocalPrice>
     fun getShops(): Single<List<Shop>>
     fun setFavShop(shop: Shop): Completable
     fun setLifeCounter(player: Int, life: Int): Completable

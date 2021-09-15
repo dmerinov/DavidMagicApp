@@ -9,7 +9,7 @@ import io.reactivex.Single
 
 interface Network {
     suspend fun getCards(): Either<MagicError, List<Card>>
-    fun getCardBooster(set: String): Single<List<Card>>
-    fun getCardMarketInfo(multiverseId: String): Single<LocalPrice>
+    suspend fun getCardBooster(set: String): Either<MagicError, List<Card>>
+    suspend fun getCardMarketInfo(multiverseId: String): Either<MagicError, LocalPrice>
     fun getAllShops(): Single<List<Shop>>
 }

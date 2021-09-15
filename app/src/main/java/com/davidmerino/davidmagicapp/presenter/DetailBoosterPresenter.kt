@@ -1,11 +1,12 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
-import com.davidmerino.domain.interactor.usecases.GetCardPricesUseCase
 import com.davidmerino.domain.model.LocalPrice
+import com.davidmerino.domain.repository.Repository
+import kotlinx.coroutines.*
 
 class DetailBoosterPresenter(
-    private val getCardPricesUseCase: GetCardPricesUseCase,
+    private val repository: Repository,
     errorHandler: ErrorHandler,
     view: DetailBoosterView
 ) :
@@ -28,13 +29,13 @@ class DetailBoosterPresenter(
     }
 
     private fun getCardPrices(multiverseId: String) {
-        getCardPricesUseCase.execute(
-            multiverseId,
-            success = {
-                view.drawPrices(it)
-            },
-            error = { onError { it } }
-        )
+        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+            val result = withContext(Dispatchers.IO) { repository.getCardMarketInfo(multiverseId) }
+            result.fold(
+                error = { onError { } },
+                success = { view.drawPrices(it) }
+            )
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 package com.davidmerino.data.datasource.network
 
+import android.util.Log
 import com.davidmerino.data.api.ApiScryfallService
 import com.davidmerino.data.api.ApiService
 import com.davidmerino.data.api.ApiShopService
@@ -24,13 +25,17 @@ class NetworkDataSource(
             apiService.getAllCards().body()?.cards?.map { it.toCard() } ?: throw Exception()
         }
 
-    override fun getCardBooster(set: String): Single<List<Card>> {
-
-        return apiService.mockBoosterPack(set).map { it.cards.map { it.toCard() } }
+    override suspend fun getCardBooster(set: String): Either<MagicError, List<Card>> {
+        return execute {
+            apiService.mockBoosterPack(set).body()?.cards?.map { it.toCard() } ?: throw Exception()
+        }
     }
 
-    override fun getCardMarketInfo(multiverseId: String): Single<LocalPrice> {
-        return apiScryfallService.getCardInfo(multiverseId).map { it.prices.toLocalPrices() }
+    override suspend fun getCardMarketInfo(multiverseId: String): Either<MagicError, LocalPrice> {
+        return execute {
+            apiScryfallService.getCardInfo(multiverseId).body()?.prices?.toLocalPrices()
+                ?: throw Exception()
+        }
     }
 
     override fun getAllShops(): Single<List<Shop>> {
@@ -41,6 +46,7 @@ class NetworkDataSource(
         try {
             Either.Right(f())
         } catch (t: Throwable) {
+            Log.e("boosterExc", t.toString())
             Either.Left(MagicError.Default())
         }
 

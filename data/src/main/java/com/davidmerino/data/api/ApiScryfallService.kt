@@ -1,7 +1,7 @@
 package com.davidmerino.data.api
 
 import com.davidmerino.data.model.card.cardResponseScryfall.CardResponseScryfallDto
-import io.reactivex.Single
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -12,6 +12,6 @@ interface ApiScryfallService {
     }
 
     @GET("cards/multiverse/{multiverseId}")
-    fun getCardInfo(@Path("multiverseId") multiverseId: String): Single<CardResponseScryfallDto>
+    suspend fun getCardInfo(@Path("multiverseId") multiverseId: String): Response<CardResponseScryfallDto>
 
 }

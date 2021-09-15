@@ -38,7 +38,7 @@ class DetailBoosterActivity : RootActivity<DetailBoosterView>(), DetailBoosterVi
     override val activityModule: Kodein.Module = Kodein.Module {
         bind<DetailBoosterPresenter>() with provider {
             DetailBoosterPresenter(
-                getCardPricesUseCase = instance(),
+                repository = instance(),
                 errorHandler = instance(),
                 view = this@DetailBoosterActivity
             )

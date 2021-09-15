@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import com.davidmerino.davidmagicapp.R
-import com.davidmerino.davidmagicapp.model.CardView
 import com.davidmerino.davidmagicapp.navigator.navigateToBoosterListActivity
 import com.davidmerino.davidmagicapp.presenter.MockBoosterCardView
 import com.davidmerino.davidmagicapp.presenter.MockBoosterPresenter
@@ -32,7 +31,7 @@ class MockBoosterCardActivity : RootActivity<MockBoosterCardView>(), MockBooster
     override val activityModule: Kodein.Module = Kodein.Module {
         bind<MockBoosterPresenter>() with provider {
             MockBoosterPresenter(
-                getBoosterPackUseCase = instance(),
+                repository = instance(),
                 errorHandler = instance(),
                 view = this@MockBoosterCardActivity
             )
@@ -52,8 +51,8 @@ class MockBoosterCardActivity : RootActivity<MockBoosterCardView>(), MockBooster
         return expansionName.text.toString()
     }
 
-    override fun showBoosterPack(boosterPack: List<CardView>) {
-        boosterPack.map { println("BOOSTERPACK ${it.title}") }
+    override fun showBoosterPack() {
+        //boosterPack.map { println("BOOSTERPACK ${it.title}") }
         navigateToBoosterListActivity(this, expansionName.text.toString())
     }
 

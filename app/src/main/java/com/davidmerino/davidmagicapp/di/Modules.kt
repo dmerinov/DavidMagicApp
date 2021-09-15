@@ -34,8 +34,6 @@ fun appModule(context: Context) = Kodein.Module("appModule") {
 }
 
 val domainModule = Kodein.Module("domainModule") {
-    bind() from singleton { GetBoosterPackUseCase(repository = instance(), executor = instance()) }
-    bind() from singleton { GetCardPricesUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetCardByIdUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { GetShopsUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { SetFavouriteUseCase(repository = instance(), executor = instance()) }

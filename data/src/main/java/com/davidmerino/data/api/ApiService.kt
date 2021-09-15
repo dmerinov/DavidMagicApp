@@ -1,7 +1,6 @@
 package com.davidmerino.data.api
 
 import com.davidmerino.data.model.card.cardResponseMTG.CardResponseDto
-import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,5 +15,5 @@ interface ApiService {
     suspend fun getAllCards(): Response<CardResponseDto>
 
     @GET("v1/sets/{set}/booster")
-    fun mockBoosterPack(@Path("set") Set: String): Single<CardResponseDto>
+    suspend fun mockBoosterPack(@Path("set") Set: String): Response<CardResponseDto>
 }
