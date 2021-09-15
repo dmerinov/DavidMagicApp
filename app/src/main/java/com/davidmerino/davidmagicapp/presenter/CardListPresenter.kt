@@ -5,10 +5,7 @@ import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.repository.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class CardListPresenter(
     private val repository: Repository,
@@ -43,7 +40,7 @@ class CardListPresenter(
     }
 
     private fun getCards() {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
             view.showProgress()
             val result = withContext(Dispatchers.IO) { repository.getCards() }
             view.hideProgress()

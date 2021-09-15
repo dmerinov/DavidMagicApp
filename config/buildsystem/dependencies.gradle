@@ -24,7 +24,7 @@ ext {
     permissionsVersion = '3.0.0'
 
     //Frameworks
-    retrofitVersion = '2.3.0'
+    retrofitVersion = '2.9.0'
     okthttpVersion = '3.9.1'
     rxJavaVersion = '2.2.7'
     rxAndroidVersion = '2.1.1'

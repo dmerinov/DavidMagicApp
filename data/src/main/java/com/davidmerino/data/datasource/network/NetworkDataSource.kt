@@ -21,7 +21,7 @@ class NetworkDataSource(
 
     override suspend fun getCards(): Either<MagicError, List<Card>> =
         execute {
-            apiService.getAllCards().cards.map { it.toCard() }
+            apiService.getAllCards().body()?.cards?.map { it.toCard() } ?: throw Exception()
         }
 
     override fun getCardBooster(set: String): Single<List<Card>> {
