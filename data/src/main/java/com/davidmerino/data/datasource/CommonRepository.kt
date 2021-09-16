@@ -11,8 +11,6 @@ import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.model.LocalPrice
 import com.davidmerino.domain.model.Shop
 import com.davidmerino.domain.repository.Repository
-import io.reactivex.Completable
-import io.reactivex.Single
 
 class CommonRepository(
     private val network: Network,
@@ -54,10 +52,12 @@ class CommonRepository(
         return Either.Right(Success)
     }
 
-    override fun setLifeCounter(player: Int, life: Int): Completable {
+    override fun setLifeCounter(player: Int, life: Int): Either<MagicError, Success> {
         cache.setLife(player, life)
-        return Completable.complete()
+        return Either.Right(Success)
     }
 
-    override fun getLifeCounter(player: Int): Single<Int> = cache.getLife(player)
+    override fun getLifeCounter(player: Int): Either<MagicError, Int> {
+        return Either.Right(cache.getLife(player))
+    }
 }

@@ -41,9 +41,6 @@ dependencies {
     implementation dataDependencies.okthttp
     implementation dataDependencies.loggingInterceptor
 
-    implementation dataDependencies.rxJava
-    implementation dataDependencies.rxJavaCallAdapter
-
     testImplementation dataTestDependencies.jUnit
     testImplementation dataTestDependencies.mockito
 

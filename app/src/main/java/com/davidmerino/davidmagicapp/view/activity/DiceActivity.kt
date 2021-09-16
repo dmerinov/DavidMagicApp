@@ -32,8 +32,7 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
             DicePresenter(
                 errorHandler = instance(),
                 view = this@DiceActivity,
-                setLifeCounter = instance(),
-                getLifeCounter = instance(),
+                repository = instance(),
                 executor = instance()
             )
 

@@ -51,7 +51,7 @@ dependencies {
 
     implementation appDependencies.rxJava
     implementation appDependencies.rxAndroid
-    compile 'com.google.android.gms:play-services-maps:8.3.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
     testImplementation appTestDependencies.jUnit
     testImplementation appTestDependencies.mockito

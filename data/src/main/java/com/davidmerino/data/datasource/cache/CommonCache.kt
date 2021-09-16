@@ -1,17 +1,15 @@
 package com.davidmerino.data.datasource.cache
 
-import io.reactivex.Single
-
 class CommonCache : Cache {
 
     private var lifeP1: Int = 0
     private var lifeP2: Int = 0
 
-    override fun getLife(player: Int): Single<Int> =
+    override fun getLife(player: Int): Int =
         when (player) {
-            0 -> Single.just(lifeP1)
-            1 -> Single.just(lifeP2)
-            else -> Single.just(0)
+            0 -> lifeP1
+            1 -> lifeP2
+            else -> 0
         }
 
     override fun setLife(player: Int, amount: Int) {

@@ -2,12 +2,10 @@ package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.domain.executor.Executor
-import com.davidmerino.domain.interactor.usecases.GetLifeCounter
-import com.davidmerino.domain.interactor.usecases.SetLifeCounter
+import com.davidmerino.domain.repository.Repository
 
 class DicePresenter(
-    private val setLifeCounter: SetLifeCounter,
-    private val getLifeCounter: GetLifeCounter,
+    private val repository: Repository,
     errorHandler: ErrorHandler,
     executor: Executor,
     view: DiceView,
@@ -22,64 +20,62 @@ class DicePresenter(
 
     override fun initialize() {
 
+        repository.getLifeCounter(Player.PLAYER_1.ordinal).fold(
+            error = {},
+            success = { player1Life = it }
+        )
+
         if (player1Life == 0) {
             player1Life = DEFAULT_LIFE
-            setLifeCounter.execute(Player.PLAYER_1.ordinal, DEFAULT_LIFE)
+            repository.setLifeCounter(Player.PLAYER_1.ordinal, DEFAULT_LIFE)
             view.showLife(player1Life.toString(), Player.PLAYER_1)
         }
 
-        getLifeCounter.execute(
-            onSuccess = {
-                player2Life = it
-            },
-            onError = onError { },
-            Player.PLAYER_2.ordinal
+        repository.getLifeCounter(Player.PLAYER_2.ordinal).fold(
+            error = {},
+            success = { player2Life = it }
         )
 
         if (player2Life == 0) {
             player2Life = DEFAULT_LIFE
-            setLifeCounter.execute(Player.PLAYER_2.ordinal, DEFAULT_LIFE)
+            repository.setLifeCounter(Player.PLAYER_2.ordinal, DEFAULT_LIFE)
             view.showLife(player2Life.toString(), Player.PLAYER_2)
         }
     }
 
     override fun resume() {
-        getLifeCounter.execute(
-            onSuccess = {
+        repository.getLifeCounter(Player.PLAYER_1.ordinal).fold(
+            error = {},
+            success = {
                 player1Life = it
                 view.showLife(player1Life.toString(), Player.PLAYER_1)
-            },
-            onError = onError { },
-            Player.PLAYER_1.ordinal
+            }
         )
 
-        getLifeCounter.execute(
-            onSuccess = {
+        repository.getLifeCounter(Player.PLAYER_2.ordinal).fold(
+            error = {},
+            success = {
                 player2Life = it
                 view.showLife(player2Life.toString(), Player.PLAYER_2)
-            },
-            onError = onError { },
-            Player.PLAYER_2.ordinal
+            }
         )
     }
 
     override fun stop() {
         if (view.isLocked()) {
 
-            getLifeCounter.execute(
-                onSuccess = {
-                    setLifeCounter.execute(Player.PLAYER_1.ordinal, it + 10)
-                },
-                onError = onError { },
-                Player.PLAYER_1.ordinal
+            repository.getLifeCounter(Player.PLAYER_1.ordinal).fold(
+                error = {},
+                success = {
+                    repository.setLifeCounter(Player.PLAYER_1.ordinal, player1Life + 10)
+                }
             )
 
-            getLifeCounter.execute(
-                onSuccess = {
-                    setLifeCounter.execute(Player.PLAYER_2.ordinal, it + 10)
-                },
-                onError = onError { it },
-                Player.PLAYER_2.ordinal
+            repository.getLifeCounter(Player.PLAYER_2.ordinal).fold(
+                error = {},
+                success = {
+                    repository.setLifeCounter(Player.PLAYER_2.ordinal, player2Life + 10)
+                }
             )
         }
     }
@@ -91,26 +87,24 @@ class DicePresenter(
     fun incrementCounter(player: Player) {
         when (player) {
             Player.PLAYER_1 -> {
-                getLifeCounter.execute(
-                    onSuccess = {
-                        player1Life += 1
-                        setLifeCounter.execute(Player.PLAYER_1.ordinal, player1Life)
+                repository.getLifeCounter(Player.PLAYER_1.ordinal).fold(
+                    error = {},
+                    success = {
+                        player1Life = it + 1
+                        repository.setLifeCounter(Player.PLAYER_1.ordinal, player1Life)
                         view.showLife(player1Life.toString(), player)
-                    },
-                    onError = onError { it },
-                    Player.PLAYER_1.ordinal
+                    }
                 )
 
             }
             Player.PLAYER_2 -> {
-                getLifeCounter.execute(
-                    onSuccess = {
-                        player2Life += 1
-                        setLifeCounter.execute(Player.PLAYER_2.ordinal, player2Life)
+                repository.getLifeCounter(Player.PLAYER_2.ordinal).fold(
+                    error = {},
+                    success = {
+                        player2Life = it + 1
+                        repository.setLifeCounter(Player.PLAYER_2.ordinal, player2Life)
                         view.showLife(player2Life.toString(), player)
-                    },
-                    onError = onError { it },
-                    Player.PLAYER_2.ordinal
+                    }
                 )
             }
         }
@@ -119,25 +113,21 @@ class DicePresenter(
     fun resetCounters() {
         player1Life = DEFAULT_LIFE
         player2Life = DEFAULT_LIFE
-        setLifeCounter.execute(Player.PLAYER_1.ordinal, DEFAULT_LIFE)
-        setLifeCounter.execute(Player.PLAYER_2.ordinal, DEFAULT_LIFE)
+        repository.setLifeCounter(Player.PLAYER_1.ordinal, DEFAULT_LIFE)
+        repository.setLifeCounter(Player.PLAYER_2.ordinal, DEFAULT_LIFE)
 
-        getLifeCounter.execute(
-            onSuccess = {
-                player1Life = it
+        repository.getLifeCounter(Player.PLAYER_1.ordinal).fold(
+            error = {},
+            success = {
                 view.showLife(player1Life.toString(), Player.PLAYER_1)
-            },
-            onError = onError { it },
-            Player.PLAYER_1.ordinal
+            }
         )
 
-        getLifeCounter.execute(
-            onSuccess = {
-                player2Life = it
+        repository.getLifeCounter(Player.PLAYER_2.ordinal).fold(
+            error = {},
+            success = {
                 view.showLife(player2Life.toString(), Player.PLAYER_2)
-            },
-            onError = onError { it },
-            Player.PLAYER_2.ordinal
+            }
         )
 
     }
@@ -145,25 +135,24 @@ class DicePresenter(
     fun decrementCounter(player: Player) {
         when (player) {
             Player.PLAYER_1 -> {
-                getLifeCounter.execute(
-                    onSuccess = {
-                        player1Life -= 1
-                        setLifeCounter.execute(Player.PLAYER_1.ordinal, player1Life)
+                repository.getLifeCounter(Player.PLAYER_1.ordinal).fold(
+                    error = {},
+                    success = {
+                        player1Life = it - 1
+                        repository.setLifeCounter(Player.PLAYER_1.ordinal, player1Life)
                         view.showLife(player1Life.toString(), player)
-                    },
-                    onError = onError { it },
-                    Player.PLAYER_1.ordinal
+                    }
                 )
+
             }
             Player.PLAYER_2 -> {
-                getLifeCounter.execute(
-                    onSuccess = {
-                        player2Life -= 1
-                        setLifeCounter.execute(Player.PLAYER_2.ordinal, player2Life)
+                repository.getLifeCounter(Player.PLAYER_2.ordinal).fold(
+                    error = {},
+                    success = {
+                        player2Life = it - 1
+                        repository.setLifeCounter(Player.PLAYER_2.ordinal, player2Life)
                         view.showLife(player2Life.toString(), player)
-                    },
-                    onError = onError { it },
-                    Player.PLAYER_2.ordinal
+                    }
                 )
             }
         }
