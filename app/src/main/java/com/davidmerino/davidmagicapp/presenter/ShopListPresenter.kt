@@ -5,12 +5,10 @@ import com.davidmerino.davidmagicapp.mapper.toGeoPoints
 import com.davidmerino.davidmagicapp.mapper.toShop
 import com.davidmerino.davidmagicapp.model.ShopView
 import com.davidmerino.domain.executor.Executor
-import com.davidmerino.domain.interactor.usecases.SetFavouriteUseCase
 import com.davidmerino.domain.repository.Repository
 import kotlinx.coroutines.launch
 
 class ShopListPresenter(
-    private val setFavouriteUseCase: SetFavouriteUseCase,
     private val repository: Repository,
     errorHandler: ErrorHandler,
     view: ShopListView,
@@ -66,10 +64,8 @@ class ShopListPresenter(
 
     fun onFavouriteClick(shopView: ShopView, isChecked: Boolean) {
         shopView.isFavourite = isChecked
-        setFavouriteUseCase.execute(
-            shop = shopView.toShop(),
-            onComplete = {},
-            onError = onError { view.showError(it) }
+        repository.setFavShop(
+            shop = shopView.toShop()
         )
     }
 }

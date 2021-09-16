@@ -6,6 +6,7 @@ import com.davidmerino.data.datasource.network.Network
 import com.davidmerino.data.datasource.preferences.Preferences
 import com.davidmerino.domain.Either
 import com.davidmerino.domain.MagicError
+import com.davidmerino.domain.Success
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.model.LocalPrice
 import com.davidmerino.domain.model.Shop
@@ -44,13 +45,13 @@ class CommonRepository(
         }
     }
 
-    override fun setFavShop(shop: Shop): Completable {
+    override fun setFavShop(shop: Shop): Either<MagicError, Success> {
         if (shop.isFav) {
             preferences.addFavouriteShop(shop.id)
         } else {
             preferences.removeFavouriteShop(shop.id)
         }
-        return Completable.complete()
+        return Either.Right(Success)
     }
 
     override fun setLifeCounter(player: Int, life: Int): Completable {

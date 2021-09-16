@@ -18,7 +18,6 @@ import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.executor.RxExecutor
 import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.interactor.usecases.GetLifeCounter
-import com.davidmerino.domain.interactor.usecases.SetFavouriteUseCase
 import com.davidmerino.domain.interactor.usecases.SetLifeCounter
 import com.davidmerino.domain.repository.Repository
 import org.kodein.di.Kodein
@@ -36,7 +35,6 @@ fun appModule(context: Context) = Kodein.Module("appModule") {
 }
 
 val domainModule = Kodein.Module("domainModule") {
-    bind() from singleton { SetFavouriteUseCase(repository = instance(), executor = instance()) }
     bind() from singleton { SetLifeCounter(repository = instance(), executor = instance()) }
     bind() from singleton { GetLifeCounter(repository = instance(), executor = instance()) }
 }
