@@ -1,9 +1,13 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.domain.executor.Executor
 
-class LoginPresenter(errorHandler: ErrorHandler, view: LoginView) :
-    Presenter<LoginView>(errorHandler, view) {
+class LoginPresenter(
+    errorHandler: ErrorHandler,
+    view: LoginView,
+    executor: Executor
+) : Presenter<LoginView>(executor, errorHandler, view) {
 
     override fun initialize() {
         // nothing to do

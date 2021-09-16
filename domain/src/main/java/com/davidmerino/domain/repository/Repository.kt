@@ -10,7 +10,7 @@ import io.reactivex.Single
 
 interface Repository {
     suspend fun getCards(): Either<MagicError, List<Card>>
-    fun getCardByID(id: String): Card
+    fun getCardByID(id: String): Either<MagicError, Card>
     suspend fun getBoosterPack(expansion: String): Either<MagicError, List<Card>>
     suspend fun getCardMarketInfo(multiverseId: String): Either<MagicError, LocalPrice>
     suspend fun getShops(): Either<MagicError, List<Shop>>

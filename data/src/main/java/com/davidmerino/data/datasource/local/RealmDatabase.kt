@@ -4,6 +4,8 @@ import android.content.Context
 import com.davidmerino.data.mapper.toCard
 import com.davidmerino.data.mapper.toCardVO
 import com.davidmerino.data.model.cardVO.CardVO
+import com.davidmerino.domain.Either
+import com.davidmerino.domain.MagicError
 import com.davidmerino.domain.model.Card
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -48,14 +50,14 @@ class RealmDatabase(context: Context) : Local {
 
     }
 
-    override fun getCardByID(id: String): Card {
+    override fun getCardByID(id: String): Either<MagicError, Card> {
         val fetchedCard = backgroundThreadRealm.where(CardVO::class.java)
             .equalTo("id", id).findFirst()
         var returnCard = CardVO()
         if (fetchedCard != null) {
             returnCard = backgroundThreadRealm.copyFromRealm(fetchedCard)
         }
-        return returnCard.toCard()
+        return Either.Right(returnCard.toCard())
     }
 
 }

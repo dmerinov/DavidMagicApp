@@ -41,6 +41,7 @@ class BoosterListActivity : RootActivity<BoosterListPresenterView>(), BoosterLis
                 expansion = getExpansionName(),
                 repository = instance(),
                 errorHandler = instance(),
+                executor = instance(),
                 view = this@BoosterListActivity
             )
         }

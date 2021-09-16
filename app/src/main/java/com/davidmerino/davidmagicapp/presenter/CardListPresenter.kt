@@ -3,15 +3,17 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
+import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.model.Card
 import com.davidmerino.domain.repository.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 
 class CardListPresenter(
     private val repository: Repository,
     errorHandler: ErrorHandler,
-    view: CardListView
-) : Presenter<CardListView>(errorHandler, view) {
+    view: CardListView,
+    executor: Executor
+) : Presenter<CardListView>(executor, errorHandler, view) {
 
     private val cards: MutableList<Card> = mutableListOf()
 
@@ -40,14 +42,13 @@ class CardListPresenter(
     }
 
     private fun getCards() {
-        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+        scope.launch {
             view.showProgress()
-            val result = withContext(Dispatchers.IO) { repository.getCards() }
-            view.hideProgress()
-            result.fold(
+            execute { repository.getCards() }.fold(
                 error = { onError { } },
                 success = { view.showCards(it.map { it.toCardView() }) }
             )
+            view.hideProgress()
         }
     }
 }

@@ -3,14 +3,16 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toGeoPoints
 import com.davidmerino.davidmagicapp.model.ShopView
+import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.repository.Repository
 import kotlinx.coroutines.*
 
 class ShopMapPresenter(
     private val repository: Repository,
     errorHandler: ErrorHandler,
-    view: ShopMapView
-) : Presenter<ShopMapView>(errorHandler, view) {
+    view: ShopMapView,
+    executor: Executor
+) : Presenter<ShopMapView>(executor, errorHandler, view) {
 
     override fun initialize() {
         // nothing to do

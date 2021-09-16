@@ -1,9 +1,13 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.domain.executor.Executor
 
-class MenuPresenter(errorHandler: ErrorHandler, view: ControlPanelView) :
-    Presenter<ControlPanelView>(errorHandler, view) {
+class MenuPresenter(
+    errorHandler: ErrorHandler,
+    view: ControlPanelView,
+    executor: Executor
+) : Presenter<ControlPanelView>(executor, errorHandler, view) {
 
     override fun initialize() {
         view.loadImageLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Magicthegathering-logo.svg/2560px-Magicthegathering-logo.svg.png")

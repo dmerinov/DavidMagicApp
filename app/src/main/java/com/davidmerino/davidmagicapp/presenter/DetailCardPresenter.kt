@@ -3,14 +3,16 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardDetailView
 import com.davidmerino.davidmagicapp.model.CardDetailView
+import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.repository.Repository
-
+import kotlinx.coroutines.launch
 
 class DetailCardPresenter(
     private val repository: Repository,
     errorHandler: ErrorHandler,
-    view: DetailCardView
-) : Presenter<DetailCardView>(errorHandler, view) {
+    view: DetailCardView,
+    executor: Executor
+) : Presenter<DetailCardView>(executor, errorHandler, view) {
 
     private var isShowingImage = false
 
@@ -32,16 +34,15 @@ class DetailCardPresenter(
     }
 
     private fun getCardByID(id: String) {
-//        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
-        val result = repository.getCardByID(id)
-//            result.fold(
-//                error = onError {},
-//                success = {
-//                    view.showCard(it.toCardDetailView())
-//                }
-//            )
-        view.showCard(result.toCardDetailView())
-//        }
+        scope.launch {
+            execute {
+                repository.getCardByID(id)
+            }.fold(
+                error = {},
+                success = {
+                    view.showCard(it.toCardDetailView())
+                })
+        }
     }
 
     fun onShowCardClick() {

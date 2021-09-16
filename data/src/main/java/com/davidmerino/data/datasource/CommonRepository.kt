@@ -22,7 +22,7 @@ class CommonRepository(
 
     override suspend fun getCards(): Either<MagicError, List<Card>> = network.getCards()
 
-    override fun getCardByID(id: String) = local.getCardByID(id)
+    override fun getCardByID(id: String): Either<MagicError, Card> = local.getCardByID(id)
 
     override suspend fun getBoosterPack(expansion: String): Either<MagicError, List<Card>> =
         network.getCardBooster(expansion)

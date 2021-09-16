@@ -32,7 +32,8 @@ class MenuActivity : RootActivity<ControlPanelView>(), ControlPanelView {
         bind<MenuPresenter>() with provider {
             MenuPresenter(
                 view = this@MenuActivity,
-                errorHandler = instance()
+                errorHandler = instance(),
+                executor = instance()
             )
         }
     }

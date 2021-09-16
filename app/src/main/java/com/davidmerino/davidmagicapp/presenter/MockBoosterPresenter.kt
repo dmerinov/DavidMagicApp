@@ -1,14 +1,13 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
-import com.davidmerino.domain.repository.Repository
+import com.davidmerino.domain.executor.Executor
 
 
 class MockBoosterPresenter(
-    private val repository: Repository,
-    errorHandler: ErrorHandler, view: MockBoosterCardView
-) :
-    Presenter<MockBoosterCardView>(errorHandler, view) {
+    errorHandler: ErrorHandler,
+    view: MockBoosterCardView, executor: Executor
+) : Presenter<MockBoosterCardView>(executor, errorHandler, view) {
 
     override fun initialize() {
         // nothing to do

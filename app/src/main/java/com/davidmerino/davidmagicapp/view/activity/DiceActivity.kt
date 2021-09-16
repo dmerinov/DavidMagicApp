@@ -33,7 +33,8 @@ class DiceActivity : RootActivity<DiceView>(), DiceView {
                 errorHandler = instance(),
                 view = this@DiceActivity,
                 setLifeCounter = instance(),
-                getLifeCounter = instance()
+                getLifeCounter = instance(),
+                executor = instance()
             )
 
         }

@@ -36,7 +36,8 @@ class CardListActivity : RootActivity<CardListView>(), CardListView {
             CardListPresenter(
                 view = this@CardListActivity,
                 errorHandler = instance(),
-                repository = instance()
+                repository = instance(),
+                executor = instance()
             )
         }
     }

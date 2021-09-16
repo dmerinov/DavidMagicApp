@@ -40,7 +40,8 @@ class ShopListActivity : RootActivity<ShopListView>(), ShopListView {
                 errorHandler = instance(),
                 view = this@ShopListActivity,
                 repository = instance(),
-                setFavouriteUseCase = instance()
+                setFavouriteUseCase = instance(),
+                executor = instance()
             )
         }
     }

@@ -1,16 +1,18 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.model.LocalPrice
 import com.davidmerino.domain.repository.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 
 class DetailBoosterPresenter(
     private val repository: Repository,
     errorHandler: ErrorHandler,
-    view: DetailBoosterView
+    view: DetailBoosterView,
+    executor: Executor
 ) :
-    Presenter<DetailBoosterView>(errorHandler, view) {
+    Presenter<DetailBoosterView>(executor, errorHandler, view) {
 
     override fun initialize() {
         getCardPrices(view.getIntentId())
@@ -29,15 +31,14 @@ class DetailBoosterPresenter(
     }
 
     private fun getCardPrices(multiverseId: String) {
-        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
-            val result = withContext(Dispatchers.IO) { repository.getCardMarketInfo(multiverseId) }
-            result.fold(
+        scope.launch {
+            execute { repository.getCardMarketInfo(multiverseId) }.fold(
                 error = { onError { } },
                 success = { view.drawPrices(it) }
             )
         }
-
     }
+    
 }
 
 interface DetailBoosterView : Presenter.View {

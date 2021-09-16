@@ -31,6 +31,7 @@ class BuyCardActivity : RootActivity<BuyCardView>(), BuyCardView {
         bind<BuyCardPresenter>() with provider {
             BuyCardPresenter(
                 errorHandler = instance(),
+                executor = instance(),
                 view = this@BuyCardActivity
             )
         }

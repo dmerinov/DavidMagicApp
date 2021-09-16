@@ -25,7 +25,8 @@ class LoginActivity : RootActivity<LoginView>(), LoginView {
         bind<LoginPresenter>() with provider {
             LoginPresenter(
                 view = this@LoginActivity,
-                errorHandler = instance()
+                errorHandler = instance(),
+                executor = instance()
             )
         }
     }

@@ -3,14 +3,16 @@ package com.davidmerino.davidmagicapp.presenter
 import com.davidmerino.davidmagicapp.error.ErrorHandler
 import com.davidmerino.davidmagicapp.mapper.toCardView
 import com.davidmerino.davidmagicapp.model.CardView
+import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.repository.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 
 class BoosterListPresenter(
     private val repository: Repository,
     private val expansion: String,
-    errorHandler: ErrorHandler, view: BoosterListPresenterView
-) : Presenter<BoosterListPresenterView>(errorHandler, view) {
+    errorHandler: ErrorHandler, view: BoosterListPresenterView,
+    executor: Executor
+) : Presenter<BoosterListPresenterView>(executor, errorHandler, view) {
 
     override fun initialize() {
         getBooster()
@@ -33,10 +35,8 @@ class BoosterListPresenter(
     }
 
     private fun getBooster() {
-
-        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
-            val result = withContext(Dispatchers.IO) { repository.getBoosterPack(expansion) }
-            result.fold(
+        scope.launch {
+            execute { repository.getBoosterPack(expansion) }.fold(
                 error = { onError { } },
                 success = { view.showCards(it.map { it.toCardView() }) }
             )

@@ -31,7 +31,7 @@ class MockBoosterCardActivity : RootActivity<MockBoosterCardView>(), MockBooster
     override val activityModule: Kodein.Module = Kodein.Module {
         bind<MockBoosterPresenter>() with provider {
             MockBoosterPresenter(
-                repository = instance(),
+                executor = instance(),
                 errorHandler = instance(),
                 view = this@MockBoosterCardActivity
             )

@@ -1,11 +1,13 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.domain.executor.Executor
 
 class BuyCardPresenter(
     errorHandler: ErrorHandler,
-    view: BuyCardView
-) : Presenter<BuyCardView>(errorHandler, view) {
+    view: BuyCardView,
+    executor: Executor
+) : Presenter<BuyCardView>(executor, errorHandler, view) {
 
     companion object {
         private const val BASE_URL =

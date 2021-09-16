@@ -1,9 +1,9 @@
 package com.davidmerino.data.datasource.network
 
-import android.util.Log
 import com.davidmerino.data.api.ApiScryfallService
 import com.davidmerino.data.api.ApiService
 import com.davidmerino.data.api.ApiShopService
+import com.davidmerino.data.datasource.execute
 import com.davidmerino.data.mapper.toCard
 import com.davidmerino.data.mapper.toLocalPrices
 import com.davidmerino.data.mapper.toLocations
@@ -43,14 +43,4 @@ class NetworkDataSource(
                 ?: throw Exception()
         }
     }
-
-    suspend fun <R> execute(f: suspend () -> R): Either<MagicError, R> =
-        try {
-            Either.Right(f())
-        } catch (t: Throwable) {
-            Log.e("boosterExc", t.toString())
-            Either.Left(MagicError.Default())
-        }
-
-
 }

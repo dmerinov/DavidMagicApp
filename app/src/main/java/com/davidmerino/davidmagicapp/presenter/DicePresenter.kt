@@ -1,6 +1,7 @@
 package com.davidmerino.davidmagicapp.presenter
 
 import com.davidmerino.davidmagicapp.error.ErrorHandler
+import com.davidmerino.domain.executor.Executor
 import com.davidmerino.domain.interactor.usecases.GetLifeCounter
 import com.davidmerino.domain.interactor.usecases.SetLifeCounter
 
@@ -8,8 +9,9 @@ class DicePresenter(
     private val setLifeCounter: SetLifeCounter,
     private val getLifeCounter: GetLifeCounter,
     errorHandler: ErrorHandler,
+    executor: Executor,
     view: DiceView,
-) : Presenter<DiceView>(errorHandler, view) {
+) : Presenter<DiceView>(executor, errorHandler, view) {
 
     companion object {
         private const val DEFAULT_LIFE = 20

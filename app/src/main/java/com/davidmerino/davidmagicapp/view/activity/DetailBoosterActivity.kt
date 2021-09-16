@@ -40,6 +40,7 @@ class DetailBoosterActivity : RootActivity<DetailBoosterView>(), DetailBoosterVi
             DetailBoosterPresenter(
                 repository = instance(),
                 errorHandler = instance(),
+                executor = instance(),
                 view = this@DetailBoosterActivity
             )
         }
