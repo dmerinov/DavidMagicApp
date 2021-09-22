@@ -42,7 +42,7 @@ val dataModule = Kodein.Module("dataModule") {
             preferences = instance(),
             cache = instance()
         )
-        
+
     }
     bind<Network>() with singleton {
         NetworkDataSource(
@@ -60,7 +60,7 @@ val dataModule = Kodein.Module("dataModule") {
     bind<ApiShopService>() with singleton {
         createService(endPoint = ApiShopService.END_POINT)
     }
-    bind<Local>() with singleton { RealmDatabase(context = instance()) }
+    bind<Local>() with singleton { RealmDatabase() }
     bind<CommonCache>() with singleton { CommonCache() }
     bind<Preferences>() with singleton { CommonPreferences(context = instance()) }
 }

@@ -4,6 +4,8 @@ import android.app.Application
 import com.davidmerino.davidmagicapp.di.appModule
 import com.davidmerino.davidmagicapp.di.dataModule
 import com.davidmerino.davidmagicapp.di.domainModule
+import io.realm.Realm
+import kotlinx.coroutines.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 
@@ -20,6 +22,11 @@ class App : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
+        CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+            withContext(Dispatchers.IO) {
+                Realm.init(this@App)
+            }
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package com.davidmerino.data.datasource.local
 
-import android.content.Context
 import com.davidmerino.data.mapper.toCard
 import com.davidmerino.data.mapper.toCardVO
 import com.davidmerino.data.model.cardVO.CardVO
@@ -9,22 +8,23 @@ import com.davidmerino.domain.MagicError
 import com.davidmerino.domain.model.Card
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.kotlin.executeTransactionAwait
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class RealmDatabase(context: Context) : Local {
+class RealmDatabase() : Local {
 
     private val realmName: String = "Database"
     private var config: RealmConfiguration
     private var backgroundThreadRealm: Realm
 
     init {
-        Realm.init(context)
         config = RealmConfiguration.Builder()
             .name(realmName)
             .allowWritesOnUiThread(true)
             .build()
         Realm.setDefaultConfiguration(config)
         backgroundThreadRealm = Realm.getInstance(config)
-        println(context.filesDir)
     }
 
 
@@ -34,20 +34,29 @@ class RealmDatabase(context: Context) : Local {
         return realmList != null
     }
 
-    override fun getCards(): List<Card> =
-        backgroundThreadRealm.where(CardVO::class.java)
-            .findAll().map {
-                it.toCard()
-            }
+    override suspend fun getCards(): List<Card> {
 
-    override fun setCards(cards: List<Card>) {
+        val cardList: List<Card>
+
+        withContext(Dispatchers.IO) {
+            cardList = backgroundThreadRealm.where(CardVO::class.java)
+                .findAll().map {
+                    it.toCard()
+                }
+        }
+        return cardList
+    }
+
+
+    override suspend fun setCards(cards: List<Card>) {
         val it = cards.map { it.toCardVO() }.iterator()
-        while (it.hasNext()) {
-            backgroundThreadRealm.executeTransaction { transactionRealm ->
-                transactionRealm.copyToRealmOrUpdate(it.next())
+        withContext(Dispatchers.IO) {
+            while (it.hasNext()) {
+                backgroundThreadRealm.executeTransactionAwait { transactionRealm ->
+                    transactionRealm.copyToRealmOrUpdate(it.next())
+                }
             }
         }
-
     }
 
     override fun getCardByID(id: String): Either<MagicError, Card> {
