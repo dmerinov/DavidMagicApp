@@ -19,10 +19,10 @@ class CommonRepository(
     private val cache: Cache
 ) : Repository {
 
-    override suspend fun getCards(): Either<MagicError, List<Card>> = network.getCards().flatMap {
+    override suspend fun getCards(): Either<MagicError, List<Card>> = network.getCards()/*.flatMap {
         local.setCards(it.success)
         it
-    }
+    }*/
 
     override fun getCardByID(id: String): Either<MagicError, Card> = local.getCardByID(id)
 

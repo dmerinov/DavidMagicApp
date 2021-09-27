@@ -18,7 +18,7 @@ class DetailCardPresenter(
 
     override fun initialize() {
         println(view.getCardId())
-        getCardByID(view.getCardId())
+        //   getCardByID(view.getCardId())
     }
 
     override fun resume() {
