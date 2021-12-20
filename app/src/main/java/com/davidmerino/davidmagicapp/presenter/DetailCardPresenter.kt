@@ -30,7 +30,7 @@ class DetailCardPresenter(
     }
 
     override fun destroy() {
-        // nothing to do
+        // nothing to be done
     }
 
     private fun getCardByID(id: String) {
